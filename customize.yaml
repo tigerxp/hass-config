@@ -1,0 +1,11 @@
+sensor.pressure_sensor_6_0:
+  unit_of_measurement: bar
+  friendly_name: 'Water Pressure'
+switch.bedroom_fan:
+  icon: mdi:fan
+switch.kids_fan:
+  icon: mdi:fan
+sensor.sunrise:
+  icon: mdi:weather-sunset-up
+sensor.sunset:
+  icon: mdi:weather-sunset-down

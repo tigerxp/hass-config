@@ -1,0 +1,112 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+homeassistant:
+  customize: !include customize.yaml
+  auth_providers:
+    - type: homeassistant
+    - type: legacy_api_password
+      api_password: !secret api_password
+
+http:
+  base_url: !secret site_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+# Record data to external MariaDB database
+recorder:
+  purge_keep_days: 365
+  db_url: !secret recorder_db_url
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+lovelace:
+  mode: yaml
+
+light:
+  platform: limitlessled
+  bridges:
+    - host: !secret milight_ip
+      version: 5
+      port: 8899
+      groups:
+      - number: 1
+        type: rgbw
+        name: Upstairs
+      - number: 2
+        type: rgbw
+        name: Downstairs
+      - number: 3
+        type: rgbw
+        name: Basement
+      - number: 4
+        type: rgbw
+        name: Office
+
+climate:
+  - platform: generic_thermostat
+    name: Thermostat
+    heater: switch.electric_boiler
+    target_sensor: sensor.house_average_temperature
+    min_temp: 14
+    max_temp: 25
+    ac_mode: false
+    target_temp: 18
+    cold_tolerance: 0.3
+    hot_tolerance: 0.3
+    min_cycle_duration:
+      seconds: 30
+    initial_hvac_mode: "off"
+    away_temp: 16
+    precision: 0.1
+
+mysensors:
+  gateways:
+    - device: !secret mysensors_gateway
+      persistence_file: 'mysensors/nodes.json'
+      tcp_port: 5003
+  optimistic: false
+  persistence: true
+  version: '2.0'
+
+sensor:
+  - platform: min_max
+    type: mean
+    name: "House Average Temperature"
+    round_digits: 1
+    entity_ids:
+      - sensor.bedroom_temperature
+      - sensor.masha_s_room_temperature
+      - sensor.klim_s_room_temperature
+
+  - platform: template
+    sensors:
+      sunrise:
+        friendly_name: 'Next Sunrize Time'
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%H:%M') }}"
+      sunset:
+        friendly_name: 'Next Sunset Time'
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_setting')) | timestamp_custom('%H:%M') }}"
+      atmospheric_pressure_mmhg:
+        friendly_name: "Atmospheric Pressure"
+        unit_of_measurement: mmHg
+        value_template: "{{ (states('sensor.atmospheric_pressure')|float * 0.75)|round(1) }}"
+
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  service_account: !include google_service_account.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+    - climate
+    - sensor
+  entity_config:
+    group.all_automations:
+      expose: false
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

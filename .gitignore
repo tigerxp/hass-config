@@ -1,0 +1,10 @@
+*
+!.gitignore
+!esphome/
+!esphome/*.yaml
+!automations.yaml
+!configuration.yaml
+!customize.yaml
+!groups.yaml
+!scripts.yaml
+!ui-lovelace.yaml

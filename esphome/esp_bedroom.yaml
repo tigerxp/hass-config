@@ -1,0 +1,59 @@
+esphome:
+  name: esp_bedroom
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Bedroom Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+sensor:
+  - platform: dht
+    pin: D4
+    model: DHT22
+    temperature:
+      name: "Bedroom Temperature"
+    humidity:
+      name: "Bedroom Humidity"
+    update_interval: 60s
+
+remote_transmitter:
+  pin: D2
+  carrier_duty_percent: 50%
+
+switch:
+  - platform: template
+    name: "Bedroom Fan"
+    assumed_state: true
+    id: fan_switch
+    turn_on_action:
+      - remote_transmitter.transmit_nec:
+          address: 0x00FF
+          command: 0xA25D
+      - switch.template.publish:
+          id: fan_switch
+          state: ON
+    turn_off_action:
+      - remote_transmitter.transmit_nec:
+          address: 0x00FF
+          command: 0x6897
+      - switch.template.publish:
+          id: fan_switch
+          state: OFF

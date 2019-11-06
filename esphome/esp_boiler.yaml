@@ -1,0 +1,50 @@
+esphome:
+  name: esp_boiler
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Boiler Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+  
+dallas:
+  - pin: D6
+    update_interval: 60s
+
+sensor:
+  - platform: dht
+    pin: D4
+    model: DHT22
+    temperature:
+      name: "Boiler Room Temperature"
+    humidity:
+      name: "Boiler Room Humidity"
+    update_interval: 60s
+  - platform: dallas
+    address: 0x140000060A914A28
+    name: "Boiler In Temperature"
+  - platform: dallas
+    address: 0xAC0000060A47F628
+    name: "Boiler Out Temperature"
+    
+switch:
+  - platform: gpio
+    pin: D1
+    name: "Electric Boiler"

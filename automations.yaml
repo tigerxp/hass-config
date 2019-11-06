@@ -1,0 +1,18 @@
+- id: '1571870005172'
+  alias: Morning lights off
+  trigger:
+  - event: sunrise
+    offset: 0:30
+    platform: sun
+  condition: []
+  action:
+    service: light.turn_off
+- id: '1572002912653'
+  alias: Evening - lights on
+  trigger:
+  - event: sunset
+    offset: -0:30
+    platform: sun
+  condition: []
+  action:
+  - service: light.turn_on

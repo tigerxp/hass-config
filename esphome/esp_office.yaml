@@ -1,0 +1,35 @@
+esphome:
+  name: esp_office
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Office Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+sensor:
+  - platform: dht
+    pin: D4
+    model: DHT22
+    temperature:
+      name: "Office Temperature"
+    humidity:
+      name: "Office Humidity"
+    update_interval: 60s

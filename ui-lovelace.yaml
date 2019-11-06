@@ -1,0 +1,218 @@
+title: Our Home
+views:
+
+  - title: Main
+    id: main
+    path: 'main'
+    icon: mdi:home-assistant
+
+    cards:
+
+      - type: vertical-stack
+        cards:
+
+          - type: weather-forecast
+            entity: weather.home
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: sensor.house_average_temperature
+                name: Average Temperature in the house
+                icon: mdi:home-thermometer
+              - sensor.sunrise
+              - sensor.sunset
+
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: gauge
+                    name: 'Air, mmHg'
+                    unit: ' '
+                    entity: sensor.atmospheric_pressure_mmhg
+                    min: 720
+                    max: 800
+                  - type: gauge
+                    name: "Water, bar"
+                    unit: ' '
+                    entity: sensor.pressure_sensor_6_0
+                    min: 0
+                    max: 5
+                    severity:
+                      green: 1
+                      yellow: 3
+                      red: 4
+
+          - type: glance
+            title: Temperature Overview
+            entities:
+              - entity: sensor.bedroom_temperature
+                name: Bedroom
+              - entity: sensor.masha_s_room_temperature
+                name: Masha
+              - entity: sensor.klim_s_room_temperature
+                name: Klim
+              - entity: sensor.office_temperature
+                name: Office
+              - entity: sensor.kitchen_temperature
+                name: Kitchen
+              - entity: sensor.gym_temperature
+                name: Gym
+              - entity: sensor.boiler_room_temperature
+                name: B. Room
+              - entity: sensor.boilder_in_temperature
+                name: Boiler In
+              - entity: sensor.boiler_out_temperature
+                name: Boiler Out
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Bedroom
+            entities:
+              - entity: sensor.bedroom_temperature
+                name: Temperature
+              - entity: sensor.bedroom_humidity
+                name: Humidity
+              - entity: switch.bedroom_fan
+                name: Fan
+
+          - type: entities
+            title: Klim's Room
+            entities:
+              - entity: sensor.klim_s_room_temperature
+                name: Temperature
+              - entity: sensor.klim_s_room_humidity
+                name: Humidity
+              - entity: switch.kids_fan
+                name: Fan
+
+          - type: entities
+            title: Masha's Room
+            show_header_toggle: false
+            entities:
+              - entity: sensor.masha_s_room_temperature
+                name: Temperature
+              - entity: sensor.masha_s_room_humidity
+                name: Humidity
+
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Office
+            show_header_toggle: false
+            entities:
+              - entity: sensor.office_temperature
+                name: Temperature
+              - entity: sensor.office_humidity
+                name: Humidity
+              - entity: light.office
+                name: "Light"
+
+          - type: entities
+            title: Zoo
+            show_header_toggle: false
+            entities:
+              - entity: sensor.zoo_temperature
+                name: "Temperature"
+              - entity: light.zoo_rgb_led
+                name: RGB LED
+              - entity: sensor.zoo_brightness
+                name: Brightness
+
+          - type: entities
+            title: Boiler Room
+            show_header_toggle: false
+            entities:
+              - entity: sensor.boiler_room_temperature
+                name: Temperature
+              - entity: sensor.boiler_room_humidity
+                name: Humidity
+              - switch.electric_boiler
+              - sensor.boilder_in_temperature
+              - sensor.boiler_out_temperature  
+
+  - title: Controls
+    id: controls
+    path: 'controls'
+    icon: mdi:dip-switch
+
+    cards:
+      - type: thermostat
+        entity: climate.thermostat
+        name: House
+
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.upstairs
+              - type: light
+                entity: light.downstairs
+
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.basement
+              - type: light
+                entity: light.office
+
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: switch.bedroom_fan
+
+          - type: entity-button
+            entity: switch.kids_fan
+
+  - title: Media
+    id: media
+    path: 'media'
+    icon: mdi:play-pause
+
+    cards:
+      - type: media-control
+        entity: media_player.home_group
+      - type: media-control
+        entity: media_player.kitchencast
+      - type: media-control
+        entity: media_player.bedroom_speaker
+      - type: media-control
+        entity: media_player.office_speaker
+      - type: media-control
+        entity: media_player.kitchen_speaker
+
+  - title: Graphs
+    id: graphs
+    path: 'graphs'
+    icon: mdi:chart-areaspline
+
+    cards:
+      - type: history-graph
+        hours_to_show: 12
+        refresh_interval: 300
+        title: Temperature (12h)
+        entities:
+          - entity: sensor.bedroom_temperature
+            name: Bedroom
+          - entity: sensor.masha_s_room_temperature
+            name: Masha's Room
+          - entity: sensor.klim_s_room_temperature
+            name: Klim's Room
+          - entity: sensor.office_temperature
+            name: Office
+
+      - type: history-graph
+        hours_to_show: 1
+        refresh_interval: 120
+        title: Atmospheric Pressure (1h)
+        entities:
+          - entity: sensor.atmospheric_pressure_mmhg
+      - type: history-graph
+        hours_to_show: 12
+        refresh_interval: 120
+        title: Water Pressure (12h)
+        entities:
+          - entity: sensor.pressure_sensor_6_0
