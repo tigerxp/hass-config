@@ -38,10 +38,10 @@ sensor:
       name: "Boiler Room Humidity"
     update_interval: 60s
   - platform: dallas
-    address: 0x140000060A914A28
+    address: 0xAC0000060A47F628
     name: "Boiler In Temperature"
   - platform: dallas
-    address: 0xAC0000060A47F628
+    address: 0x140000060A914A28
     name: "Boiler Out Temperature"
     
 switch:
