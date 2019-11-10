@@ -1,0 +1,28 @@
+- name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 100
+  icon: mdi:account-multiple
+
+- name: Home-1km
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 1000
+
+- name: School
+  latitude: 49.983404
+  longitude: 36.222854
+  radius: 150
+  icon: mdi:school
+
+- name: Work
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+  radius: 100
+  icon: mdi:office-building
+
+- name: IT Univer
+  latitude: 49.980975
+  longitude: 36.250621
+  radius: 100
+  icon: mdi:teach

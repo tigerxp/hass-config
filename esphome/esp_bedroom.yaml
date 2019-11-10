@@ -57,3 +57,22 @@ switch:
       - switch.template.publish:
           id: fan_switch
           state: OFF
+  - platform: template
+    name: "Bedroom TV"
+    assumed_state: true
+    id: bedroom_tv_switch
+    turn_on_action:
+      - remote_transmitter.transmit_lg:
+          data: 0x20DF10EF
+          nbits: 32
+      - switch.template.publish:
+          id: bedroom_tv_switch
+          state: ON
+    turn_off_action:
+      - remote_transmitter.transmit_lg:
+          data: 0x20DF10EF
+          nbits: 32
+      - switch.template.publish:
+          id: bedroom_tv_switch
+          state: OFF
+  

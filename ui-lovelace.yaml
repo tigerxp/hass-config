@@ -6,6 +6,12 @@ views:
     path: 'main'
     icon: mdi:home-assistant
 
+    badges:
+      - person.serhii
+      - person.olena
+      - person.masha
+      - person.klim
+
     cards:
 
       - type: vertical-stack
@@ -65,6 +71,8 @@ views:
                 name: Boiler In
               - entity: sensor.boiler_out_temperature
                 name: Boiler Out
+              - entity: sensor.lywsd02_1_temperature
+                name: LYWSD02-1 Temperature
 
       - type: vertical-stack
         cards:
@@ -210,6 +218,14 @@ views:
         title: Atmospheric Pressure (1h)
         entities:
           - entity: sensor.atmospheric_pressure_mmhg
+
+      - type: history-graph
+        hours_to_show: 12
+        refresh_interval: 120
+        title: Atmospheric Pressure (12h)
+        entities:
+          - entity: sensor.atmospheric_pressure
+
       - type: history-graph
         hours_to_show: 12
         refresh_interval: 120

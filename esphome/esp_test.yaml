@@ -29,9 +29,8 @@ remote_receiver:
     number: D1
     inverted: true
   dump:
-    - nec
+    - lg
 #  dump: all
-
 
 # i2c:
 #   sda: 4

@@ -6,5 +6,7 @@
 !configuration.yaml
 !customize.yaml
 !groups.yaml
+!includes/
+!includes/*.yaml
 !scripts.yaml
 !ui-lovelace.yaml

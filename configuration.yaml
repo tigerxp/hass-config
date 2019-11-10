@@ -107,6 +107,12 @@ google_assistant:
     group.all_automations:
       expose: false
 
+device_tracker:
+  - platform: google_maps
+    username: tigerxphass@gmail.com
+    max_gps_accuracy: 200
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+zone: !include includes/zones.yaml
