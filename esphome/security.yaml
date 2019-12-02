@@ -1,0 +1,90 @@
+esphome:
+  name: security
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D2
+    name: 'Arm Button'
+    id: arm_button
+    on_click:
+      then:
+        if:
+          condition:
+            switch.is_on: alarm
+          then:
+            switch.turn_off: alarm
+          else:
+            - switch.toggle: arm_status
+    
+output:
+  - platform: esp8266_pwm
+    pin: D6
+    id: 'buzzer'
+  - platform: gpio
+    pin: D5
+    id: red_led
+
+switch:
+  - platform: gpio
+    icon: mdi:server-security
+    pin: D1
+    name: "NVR Alarm"
+    id: nvr_alarm
+
+  - platform: output
+    icon: mdi:shield-home
+    name: "Arm Status"
+    output: red_led
+    id: arm_status
+    
+  - platform: template
+    icon: mdi:alarm-bell
+    name: "Alarm"
+    optimistic: yes
+    id: alarm
+    turn_on_action:
+      - switch.turn_on: nvr_alarm
+      - while:
+          condition:
+            binary_sensor.is_off: arm_button
+          then:
+            - output.turn_on: red_led
+            - output.set_level:
+                id: buzzer
+                level: 20%
+            - output.esp8266_pwm.set_frequency:
+                id: buzzer
+                frequency: 800Hz
+            - delay: 500ms 
+            - output.esp8266_pwm.set_frequency:
+                id: buzzer
+                frequency: 1000Hz
+            - output.turn_off: red_led
+            - delay: 500ms
+    turn_off_action:
+      - output.turn_off: buzzer
+      - switch.turn_off: nvr_alarm
+      - if:
+          condition: 
+            switch.is_on: arm_status
+          then:
+            output.turn_on: red_led
+          else:
+            output.turn_off: red_led
