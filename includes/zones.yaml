@@ -15,7 +15,7 @@
   radius: 150
   icon: mdi:school
 
-- name: Work
+- name: Work-Serhii
   latitude: !secret work_latitude
   longitude: !secret work_longitude
   radius: 100
@@ -26,3 +26,7 @@
   longitude: 36.250621
   radius: 100
   icon: mdi:teach
+
+- name: Work-Olena
+  latitude: !secret olena_work_latitude
+  longitude: !secret olena_work_longitude

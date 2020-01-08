@@ -1,5 +1,5 @@
 - id: '1571870005172'
-  alias: Morning lights off
+  alias: Morning - lights off
   trigger:
   - event: sunrise
     offset: 0:30
@@ -7,6 +7,7 @@
   condition: []
   action:
     service: light.turn_off
+
 - id: '1572002912653'
   alias: Evening - lights on
   trigger:
@@ -17,3 +18,16 @@
   action:
   - service: light.turn_on
     entity_id: light.upstairs
+
+- alias: Temperature drop
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.masha_s_room_temperature
+      below: 15
+  condition:
+    - condition: state
+      entity_id: switch.arm_status
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.alarm

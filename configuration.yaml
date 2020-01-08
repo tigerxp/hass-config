@@ -58,7 +58,7 @@ climate:
     hot_tolerance: 0.3
     min_cycle_duration:
       seconds: 30
-    initial_hvac_mode: "off"
+    initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
 
@@ -72,14 +72,29 @@ mysensors:
   version: '2.0'
 
 sensor:
+
   - platform: min_max
     type: mean
     name: "House Average Temperature"
     round_digits: 1
     entity_ids:
-      - sensor.bedroom_temperature
       - sensor.masha_s_room_temperature
       - sensor.klim_s_room_temperature
+
+  - platform: min_max
+    type: mean
+    name: "House Average Humidity"
+    round_digits: 1
+    entity_ids:
+      - sensor.bedroom_humidity
+      - sensor.masha_s_room_humidity
+      - sensor.klim_s_room_humidity
+
+  - platform: rest
+    name: "Outside PM2.5"
+    resource: https://air-pollution.ml/api/sensors.json
+    value_template: "{{ value_json[28].pollutants[0].value }}"
+    unit_of_measurement: 'mg/m3'
 
   - platform: template
     sensors:
@@ -93,6 +108,15 @@ sensor:
         friendly_name: "Atmospheric Pressure"
         unit_of_measurement: mmHg
         value_template: "{{ (states('sensor.atmospheric_pressure')|float * 0.75)|round(1) }}"
+      # pm25:
+      #   friendly_name_template: "{{ states('sensor.air_pollution25').pol }}"
+      #   value_template: "{{ states('sensor.air_pollution25').value }}"
+      # pm10:
+      #   friendly_name_template: "{{ states('sensor.air_pollution')[1].pol }}"
+      #   value_template: "{{ states('sensor.air_pollution')[1].value }}"
+      # pm1:
+      #   friendly_name_template: "{{ states('sensor.air_pollution')[2].pol }}"
+      #   value_template: "{{ states('sensor.air_pollution')[2].value }}"
 
 google_assistant:
   project_id: !secret google_assistant_project_id
@@ -107,10 +131,23 @@ google_assistant:
     group.all_automations:
       expose: false
 
+mikrotik:
+  - host: 192.168.1.1
+    login_method: token
+    username: homeassistant
+    password: !secret router_password
+#    track_devices: true
+
 device_tracker:
   - platform: google_maps
-    username: tigerxphass@gmail.com
+    username: !secret google_maps_email
     max_gps_accuracy: 200
+  - platform: mikrotik
+    interval_seconds: 60
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: false
 
 group: !include groups.yaml
 automation: !include automations.yaml

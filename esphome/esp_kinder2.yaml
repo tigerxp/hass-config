@@ -39,6 +39,9 @@ remote_transmitter:
   carrier_duty_percent: 50%
 
 switch:
+  - platform: restart
+    name: "Kinder2 Restart"
+
   - platform: template
     name: "Kids Fan"
     assumed_state: true
@@ -56,4 +59,23 @@ switch:
           command: 0x6897
       - switch.template.publish:
           id: kids_fan
+          state: OFF
+
+  - platform: template
+    name: "Kids Indicator"
+    assumed_state: true
+    id: kids_fan_led
+    turn_on_action:
+      - remote_transmitter.transmit_nec:
+          address: 0x00FF
+          command: 0x5AA5
+      - switch.template.publish:
+          id: kids_fan_led
+          state: ON
+    turn_off_action:
+      - remote_transmitter.transmit_nec:
+          address: 0x00FF
+          command: 0x10EF
+      - switch.template.publish:
+          id: kids_fan_led
           state: OFF

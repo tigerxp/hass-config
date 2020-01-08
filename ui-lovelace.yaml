@@ -26,6 +26,10 @@ views:
               - entity: sensor.house_average_temperature
                 name: Average Temperature in the house
                 icon: mdi:home-thermometer
+              - entity: sensor.house_average_humidity
+                name: Average Humidity in the house
+                icon: mdi:water-percent
+              - sensor.outside_pm2_5
               - sensor.sunrise
               - sensor.sunset
 
@@ -85,6 +89,8 @@ views:
                 name: Humidity
               - entity: switch.bedroom_fan
                 name: Fan
+              - entity: switch.bedroom_indicator
+                name: Fan Indicator
 
           - type: entities
             title: Klim's Room
@@ -95,6 +101,9 @@ views:
                 name: Humidity
               - entity: switch.kids_fan
                 name: Fan
+              - entity: switch.kids_indicator
+                name: Fan Indicator
+              - entity: switch.kinder2_restart
 
           - type: entities
             title: Masha's Room
@@ -174,6 +183,15 @@ views:
 
           - type: entity-button
             entity: switch.kids_fan
+
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            title: Other
+            show_header_toggle: false
+            entities:
+              - entity: fan.bedroom_speed_fan
+                name: Bedroom Speed Fan
 
   - title: Media
     id: media

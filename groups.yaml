@@ -1,0 +1,5 @@
+basement_path:
+  name: Downpath
+  entities:
+    - light.downstairs
+    - light.basement

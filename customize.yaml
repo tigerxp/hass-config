@@ -9,3 +9,5 @@ sensor.sunrise:
   icon: mdi:weather-sunset-up
 sensor.sunset:
   icon: mdi:weather-sunset-down
+sensor.outside_pm2_5:
+  icon: mdi:smog
