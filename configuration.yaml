@@ -53,11 +53,11 @@ climate:
     min_temp: 14
     max_temp: 25
     ac_mode: false
-    target_temp: 18
+    target_temp: 19.5
     cold_tolerance: 0.3
     hot_tolerance: 0.3
     min_cycle_duration:
-      seconds: 30
+      seconds: 120
     initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
@@ -127,6 +127,7 @@ google_assistant:
     - light
     - climate
     - sensor
+    - group
   entity_config:
     group.all_automations:
       expose: false
@@ -138,6 +139,11 @@ mikrotik:
     password: !secret router_password
 #    track_devices: true
 
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret xiaomi_gw1_key
+
 device_tracker:
   - platform: google_maps
     username: !secret google_maps_email
@@ -148,6 +154,50 @@ device_tracker:
     new_device_defaults:
       track_new_devices: true
       hide_if_away: false
+
+camera:
+  - platform: generic
+    name: Entrance
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/101/picture
+    stream_source: !secret cam_entrance_stream
+  - platform: generic
+    name: Cars
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/201/picture
+    stream_source: !secret cam_cars_stream
+  - platform: generic
+    name: Pavilion
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/301/picture
+    stream_source: !secret cam_pavilion_stream
+  - platform: generic
+    name: Front
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/401/picture
+    stream_source: !secret cam_front_stream
+  - platform: generic
+    name: Office
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/901/picture
+    stream_source: !secret cam_office_stream
+  - platform: generic
+    name: Hall
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/1001/picture
+    stream_source: !secret cam_hall_stream
 
 group: !include groups.yaml
 automation: !include automations.yaml

@@ -31,3 +31,120 @@
   action:
     - service: switch.turn_on
       entity_id: switch.alarm
+
+# Upstairs movement light
+- alias: Upstairs motion on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00042820c3
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.illumination_158d00042820c3
+    below: 300
+  action:
+    - service: light.turn_on
+      entity_id: light.gateway_light_7c49eb1d7f46
+      data:
+        brightness: 50
+        color_name: "lightgreen"
+- alias: Upstairs motion off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00042820c3
+    from: 'on'
+    to: 'off'
+    for:
+      minutes: 1
+  action:
+    - service: light.turn_off
+      entity_id: light.gateway_light_7c49eb1d7f46
+
+# Downstairs movement light
+- alias: Downstairs motion on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d000421ccd1
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.illumination_158d000421ccd1
+    below: 300
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.downstairs
+        - light.basement
+- alias: Downstairs motion off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d000421ccd1
+    from: 'on'
+    to: 'off'
+    for:
+      minutes: 2
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.basement
+        - light.downstairs
+
+# Cube automations
+- alias: Cube event flip90
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0002a71f01
+      action_type: flip90
+  action:
+    - service: light.toggle
+      entity_id: light.upstairs
+# - alias: Cube event flip180
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.cube_action
+#     event_data:
+#       entity_id: binary_sensor.cube_158d0002a71f01
+#       action_type: flip180
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.upstairs
+- alias: Cube event move
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0002a71f01
+      action_type: move
+  action:
+    - service: switch.toggle
+      entity_id:
+        - switch.bedroom_fan
+        - switch.kids_fan
+# - alias: Cube event tap_twice
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.cube_action
+#     event_data:
+#       entity_id: binary_sensor.cube_158d0002a71f01
+#       action_type: tap_twice
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.gateway_light_7c49eb1d7f46
+#       data:
+#         color_name: "deepskyblue"
+# - alias: Cube event shake_air
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.cube_action
+#     event_data:
+#       entity_id: binary_sensor.cube_158d0002a71f01
+#       action_type: shake_air
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.gateway_light_7c49eb1d7f46
+#       data:
+#         color_name: "blue"

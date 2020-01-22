@@ -11,3 +11,25 @@ sensor.sunset:
   icon: mdi:weather-sunset-down
 sensor.outside_pm2_5:
   icon: mdi:smog
+binary_sensor.motion_sensor_158d000421ccd1:
+  friendly_name: 'Downstairs Motion Sensor'
+binary_sensor.motion_sensor_158d00042820c3:
+  friendly_name: 'Upstairs Motion Sensor'
+sensor.illumination_158d000421ccd1:
+  friendly_name: 'Downstairs Illumination'
+sensor.illumination_158d00042820c3:
+  friendly_name: 'Upstairs Illumination'
+sensor.illumination_7c49eb1d7f46:
+  friendly_name: 'Gateway #1 Illumination'
+binary_sensor.door_window_sensor_158d0003d481a6:
+  friendly_name: 'Entrance Door'
+binary_sensor.water_leak_sensor_158d000405cec1:
+  friendly_name: 'Laundry Leak'
+binary_sensor.cube_158d0002a71f01:
+  friendly_name: 'Aqara Cube'
+switch.plug_158d000391fadc:
+  friendly_name: 'Mijia Plug #1'
+switch.plug_158d00039fcce4:
+  friendly_name: 'Mijia Plug #2'
+light.gateway_light_7c49eb1d7f46:
+  friendly_name: 'Main Gateway Light'

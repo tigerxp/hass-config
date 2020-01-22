@@ -193,6 +193,76 @@ views:
               - entity: fan.bedroom_speed_fan
                 name: Bedroom Speed Fan
 
+  - title: 'Zigbee'
+    id: zigbee
+    path: zigbee
+    icon: mdi:zigbee
+
+    cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - binary_sensor.motion_sensor_158d000421ccd1
+          - binary_sensor.motion_sensor_158d00042820c3
+          - binary_sensor.door_window_sensor_158d0003d481a6
+          - switch.plug_158d000391fadc
+          - switch.plug_158d00039fcce4
+          - binary_sensor.water_leak_sensor_158d000405cec1
+          - sensor.illumination_158d000421ccd1
+          - sensor.illumination_158d00042820c3
+          - sensor.illumination_7c49eb1d7f46
+          - light.gateway_light_7c49eb1d7f46
+          - binary_sensor.cube_158d0002a71f01
+
+  - title: Cameras
+    id: cameras
+    path: cameras
+    icon: mdi:cctv
+
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Entrance
+            entities: []
+            camera_image: camera.entrance
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Cars
+            entities: []
+            camera_image: camera.cars
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Pavilion
+            entities: []
+            camera_image: camera.pavilion
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Front
+            entities: []
+            camera_image: camera.front
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Hall
+            entities: []
+            camera_image: camera.hall
+          - type: picture-glance
+            state_filter:
+              - null
+            title: Office
+            entities: []
+            camera_image: camera.office
+
   - title: Media
     id: media
     path: 'media'
