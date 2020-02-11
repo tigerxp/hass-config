@@ -1,0 +1,47 @@
+  - platform: generic
+    name: Entrance
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/101/picture
+    stream_source: !secret cam_entrance_stream
+
+  - platform: generic
+    name: Cars
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/201/picture
+    stream_source: !secret cam_cars_stream
+
+  - platform: generic
+    name: Pavilion
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/301/picture
+    stream_source: !secret cam_pavilion_stream
+
+  - platform: generic
+    name: Front
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/401/picture
+    stream_source: !secret cam_front_stream
+
+  - platform: generic
+    name: Office
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/901/picture
+    stream_source: !secret cam_office_stream
+
+  - platform: generic
+    name: Hall
+    username: hass
+    password: !secret nvr_password
+    authentication: basic
+    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/1001/picture
+    stream_source: !secret cam_hall_stream

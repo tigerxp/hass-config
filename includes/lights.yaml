@@ -1,0 +1,18 @@
+  - platform: limitlessled
+    bridges:
+      - host: !secret milight_ip
+        version: 5
+        port: 8899
+        groups:
+        - number: 1
+          type: rgbw
+          name: Upstairs
+        - number: 2
+          type: rgbw
+          name: Downstairs
+        - number: 3
+          type: rgbw
+          name: Basement
+        - number: 4
+          type: rgbw
+          name: Office

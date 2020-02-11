@@ -1,23 +1,39 @@
-- id: '1571870005172'
-  alias: Morning - lights off
+- alias: Morning - lights off
   trigger:
-  - event: sunrise
-    offset: 0:30
-    platform: sun
-  condition: []
+    - event: sunrise
+      offset: 0:30
+      platform: sun
   action:
     service: light.turn_off
+    entity_id:
+      - light.upstairs
+      - light.downstairs
+      - light.basement
 
-- id: '1572002912653'
-  alias: Evening - lights on
+- alias: Evening - lights on
   trigger:
-  - event: sunset
-    offset: -0:30
-    platform: sun
-  condition: []
+    - event: sunset
+      offset: -0:30
+      platform: sun
   action:
   - service: light.turn_on
     entity_id: light.upstairs
+
+- alias: Turn off upstairs on sleep time
+  trigger:
+    - platform: time
+      at: "21:40:00"
+  action:
+    - service: light.turn_off
+      entity_id: light.upstairs
+
+- alias: Restore upstairs light after sleep time
+  trigger:
+    - platform: time
+      at: "22:20:00"
+  action:
+    - service: light.turn_on
+      entity_id: light.upstairs
 
 - alias: Temperature drop
   trigger:
@@ -39,16 +55,22 @@
     entity_id: binary_sensor.motion_sensor_158d00042820c3
     from: 'off'
     to: 'on'
-  condition:
-    condition: numeric_state
-    entity_id: sensor.illumination_158d00042820c3
-    below: 300
   action:
     - service: light.turn_on
       entity_id: light.gateway_light_7c49eb1d7f46
-      data:
-        brightness: 50
-        color_name: "lightgreen"
+      data_template:
+        brightness: >
+          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+            100
+          {% else %}
+            50
+          {% endif %}
+        color_name: >
+          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+            red
+          {% else %}
+            green
+          {% endif %}
 - alias: Upstairs motion off
   trigger:
     platform: state
@@ -71,7 +93,7 @@
   condition:
     condition: numeric_state
     entity_id: sensor.illumination_158d000421ccd1
-    below: 300
+    below: 50
   action:
     - service: light.turn_on
       entity_id:
@@ -112,30 +134,30 @@
 #   action:
 #     - service: light.turn_on
 #       entity_id: light.upstairs
-- alias: Cube event move
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0002a71f01
-      action_type: move
-  action:
-    - service: switch.toggle
-      entity_id:
-        - switch.bedroom_fan
-        - switch.kids_fan
-# - alias: Cube event tap_twice
+# - alias: Cube event move
 #   trigger:
 #     platform: event
 #     event_type: xiaomi_aqara.cube_action
 #     event_data:
 #       entity_id: binary_sensor.cube_158d0002a71f01
-#       action_type: tap_twice
+#       action_type: move
 #   action:
-#     - service: light.turn_on
-#       entity_id: light.gateway_light_7c49eb1d7f46
-#       data:
-#         color_name: "deepskyblue"
+#     - service: switch.toggle
+#       entity_id:
+#         - switch.bedroom_fan
+#         - switch.kids_fan
+- alias: Cube event tap_twice
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0002a71f01
+      action_type: tap_twice
+  action:
+    - service: switch.toggle
+      entity_id:
+        - switch.bedroom_fan
+        - switch.kids_fan
 # - alias: Cube event shake_air
 #   trigger:
 #     platform: event
@@ -148,3 +170,28 @@
 #       entity_id: light.gateway_light_7c49eb1d7f46
 #       data:
 #         color_name: "blue"
+
+- alias: Show locks status as gateway light
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0003d481a6
+  condition:
+    - condition: state
+      entity_id: light.gateway_light_7c49eb1d7f46
+      state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: light.gateway_light_7c49eb1d7f46
+      data_template:
+        brightness: >
+          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+            100
+          {% else %}
+            50
+          {% endif %}
+        color_name: >
+          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+            red
+          {% else %}
+            green
+          {% endif %}

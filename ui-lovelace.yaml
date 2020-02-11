@@ -82,6 +82,7 @@ views:
         cards:
           - type: entities
             title: Bedroom
+            state_color: true
             entities:
               - entity: sensor.bedroom_temperature
                 name: Temperature
@@ -94,6 +95,7 @@ views:
 
           - type: entities
             title: Klim's Room
+            state_color: true
             entities:
               - entity: sensor.klim_s_room_temperature
                 name: Temperature
@@ -107,6 +109,7 @@ views:
 
           - type: entities
             title: Masha's Room
+            state_color: true
             show_header_toggle: false
             entities:
               - entity: sensor.masha_s_room_temperature
@@ -118,6 +121,7 @@ views:
         cards:
           - type: entities
             title: Office
+            state_color: true
             show_header_toggle: false
             entities:
               - entity: sensor.office_temperature
@@ -129,6 +133,7 @@ views:
 
           - type: entities
             title: Zoo
+            state_color: true
             show_header_toggle: false
             entities:
               - entity: sensor.zoo_temperature
@@ -140,6 +145,7 @@ views:
 
           - type: entities
             title: Boiler Room
+            state_color: true
             show_header_toggle: false
             entities:
               - entity: sensor.boiler_room_temperature
@@ -201,10 +207,13 @@ views:
     cards:
       - type: entities
         show_header_toggle: false
+        state_color: true
         entities:
           - binary_sensor.motion_sensor_158d000421ccd1
           - binary_sensor.motion_sensor_158d00042820c3
           - binary_sensor.door_window_sensor_158d0003d481a6
+          - binary_sensor.door_window_sensor_158d0003d4434a
+          - binary_sensor.door_window_sensor_158d0003d4a2b2
           - switch.plug_158d000391fadc
           - switch.plug_158d00039fcce4
           - binary_sensor.water_leak_sensor_158d000405cec1

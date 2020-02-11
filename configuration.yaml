@@ -25,42 +25,23 @@ tts:
 lovelace:
   mode: yaml
 
-light:
-  platform: limitlessled
-  bridges:
-    - host: !secret milight_ip
-      version: 5
-      port: 8899
-      groups:
-      - number: 1
-        type: rgbw
-        name: Upstairs
-      - number: 2
-        type: rgbw
-        name: Downstairs
-      - number: 3
-        type: rgbw
-        name: Basement
-      - number: 4
-        type: rgbw
-        name: Office
 
-climate:
-  - platform: generic_thermostat
-    name: Thermostat
-    heater: switch.electric_boiler
-    target_sensor: sensor.house_average_temperature
-    min_temp: 14
-    max_temp: 25
-    ac_mode: false
-    target_temp: 19.5
-    cold_tolerance: 0.3
-    hot_tolerance: 0.3
-    min_cycle_duration:
-      seconds: 120
-    initial_hvac_mode: "heat"
-    away_temp: 16
-    precision: 0.1
+##### Includes
+
+# File includes
+light: !include includes/lights.yaml
+camera: !include includes/cameras.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+zone: !include includes/zones.yaml
+climate: !include includes/climate.yaml
+
+# Folder includes
+sensor: !include_dir_merge_list includes/sensors.d
+
+
+##### Integrations
 
 mysensors:
   gateways:
@@ -70,53 +51,6 @@ mysensors:
   optimistic: false
   persistence: true
   version: '2.0'
-
-sensor:
-
-  - platform: min_max
-    type: mean
-    name: "House Average Temperature"
-    round_digits: 1
-    entity_ids:
-      - sensor.masha_s_room_temperature
-      - sensor.klim_s_room_temperature
-
-  - platform: min_max
-    type: mean
-    name: "House Average Humidity"
-    round_digits: 1
-    entity_ids:
-      - sensor.bedroom_humidity
-      - sensor.masha_s_room_humidity
-      - sensor.klim_s_room_humidity
-
-  - platform: rest
-    name: "Outside PM2.5"
-    resource: https://air-pollution.ml/api/sensors.json
-    value_template: "{{ value_json[28].pollutants[0].value }}"
-    unit_of_measurement: 'mg/m3'
-
-  - platform: template
-    sensors:
-      sunrise:
-        friendly_name: 'Next Sunrize Time'
-        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%H:%M') }}"
-      sunset:
-        friendly_name: 'Next Sunset Time'
-        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_setting')) | timestamp_custom('%H:%M') }}"
-      atmospheric_pressure_mmhg:
-        friendly_name: "Atmospheric Pressure"
-        unit_of_measurement: mmHg
-        value_template: "{{ (states('sensor.atmospheric_pressure')|float * 0.75)|round(1) }}"
-      # pm25:
-      #   friendly_name_template: "{{ states('sensor.air_pollution25').pol }}"
-      #   value_template: "{{ states('sensor.air_pollution25').value }}"
-      # pm10:
-      #   friendly_name_template: "{{ states('sensor.air_pollution')[1].pol }}"
-      #   value_template: "{{ states('sensor.air_pollution')[1].value }}"
-      # pm1:
-      #   friendly_name_template: "{{ states('sensor.air_pollution')[2].pol }}"
-      #   value_template: "{{ states('sensor.air_pollution')[2].value }}"
 
 google_assistant:
   project_id: !secret google_assistant_project_id
@@ -133,73 +67,21 @@ google_assistant:
       expose: false
 
 mikrotik:
-  - host: 192.168.1.1
-    login_method: token
+  - name: Mikrotik
+    host: 192.168.1.1
     username: homeassistant
     password: !secret router_password
-#    track_devices: true
-
+    detection_time: 180
+    force_dhcp: true
+    
 xiaomi_aqara:
-  discovery_retry: 5
+  discovery_retry: 10
   gateways:
-    - key: !secret xiaomi_gw1_key
+    - mac: 7c49eb1d7f46
+      host: 192.168.1.17
+      key: !secret xiaomi_gw1_key
 
 device_tracker:
   - platform: google_maps
     username: !secret google_maps_email
     max_gps_accuracy: 200
-  - platform: mikrotik
-    interval_seconds: 60
-    consider_home: 180
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: false
-
-camera:
-  - platform: generic
-    name: Entrance
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/101/picture
-    stream_source: !secret cam_entrance_stream
-  - platform: generic
-    name: Cars
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/201/picture
-    stream_source: !secret cam_cars_stream
-  - platform: generic
-    name: Pavilion
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/301/picture
-    stream_source: !secret cam_pavilion_stream
-  - platform: generic
-    name: Front
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/401/picture
-    stream_source: !secret cam_front_stream
-  - platform: generic
-    name: Office
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/901/picture
-    stream_source: !secret cam_office_stream
-  - platform: generic
-    name: Hall
-    username: hass
-    password: !secret nvr_password
-    authentication: basic
-    still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/1001/picture
-    stream_source: !secret cam_hall_stream
-
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-zone: !include includes/zones.yaml

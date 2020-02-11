@@ -22,14 +22,21 @@ sensor.illumination_158d00042820c3:
 sensor.illumination_7c49eb1d7f46:
   friendly_name: 'Gateway #1 Illumination'
 binary_sensor.door_window_sensor_158d0003d481a6:
-  friendly_name: 'Entrance Door'
+  friendly_name: 'Entrance Lock'
+  device_class: lock
 binary_sensor.water_leak_sensor_158d000405cec1:
-  friendly_name: 'Laundry Leak'
+  friendly_name: 'Floor 1 Leak'
 binary_sensor.cube_158d0002a71f01:
   friendly_name: 'Aqara Cube'
 switch.plug_158d000391fadc:
   friendly_name: 'Mijia Plug #1'
 switch.plug_158d00039fcce4:
-  friendly_name: 'Mijia Plug #2'
+  friendly_name: 'Kitchen TV'
 light.gateway_light_7c49eb1d7f46:
   friendly_name: 'Main Gateway Light'
+binary_sensor.door_window_sensor_158d0003d4434a:
+  friendly_name: Zoo Door
+  device_class: door
+binary_sensor.door_window_sensor_158d0003d4a2b2:
+  friendly_name: Zoo Lock
+  device_class: lock

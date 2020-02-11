@@ -8,5 +8,7 @@
 !groups.yaml
 !includes/
 !includes/*.yaml
+!includes/*.d/
+!includes/*.d/*.yaml
 !scripts.yaml
 !ui-lovelace.yaml

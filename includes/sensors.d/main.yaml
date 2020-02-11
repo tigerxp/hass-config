@@ -1,0 +1,35 @@
+  - platform: min_max
+    type: mean
+    name: "House Average Temperature"
+    round_digits: 1
+    entity_ids:
+      - sensor.masha_s_room_temperature
+      - sensor.klim_s_room_temperature
+
+  - platform: min_max
+    type: mean
+    name: "House Average Humidity"
+    round_digits: 1
+    entity_ids:
+      - sensor.bedroom_humidity
+      - sensor.masha_s_room_humidity
+      - sensor.klim_s_room_humidity
+
+  - platform: rest
+    name: "Outside PM2.5"
+    resource: https://air-pollution.ml/api/sensors.json
+    value_template: "{{ value_json[28].pollutants[0].value }}"
+    unit_of_measurement: 'mg/m3'
+
+  - platform: template
+    sensors:
+      sunrise:
+        friendly_name: 'Next Sunrize Time'
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%H:%M') }}"
+      sunset:
+        friendly_name: 'Next Sunset Time'
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_setting')) | timestamp_custom('%H:%M') }}"
+      atmospheric_pressure_mmhg:
+        friendly_name: "Atmospheric Pressure"
+        unit_of_measurement: mmHg
+        value_template: "{{ (states('sensor.atmospheric_pressure')|float * 0.75)|round(1) }}"
