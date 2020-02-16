@@ -31,6 +31,6 @@ sensor:
   - platform: xiaomi_lywsd02
     mac_address: 3F:59:C8:82:78:A5
     temperature:
-      name: "LYWSD02-1 Temperature"
+      name: "Bedside Temperature"
     humidity:
-      name: "LYWSD02-1 Humidity"
+      name: "Bedside Humidity"

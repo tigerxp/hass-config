@@ -199,6 +199,15 @@ views:
               - entity: fan.bedroom_speed_fan
                 name: Bedroom Speed Fan
 
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - switch.bw1_relay
+          - switch.bw2_relay
+          - switch.neo1_relay
+          - switch.neo2_relay
+
   - title: 'Zigbee'
     id: zigbee
     path: zigbee
@@ -211,12 +220,16 @@ views:
         entities:
           - binary_sensor.motion_sensor_158d000421ccd1
           - binary_sensor.motion_sensor_158d00042820c3
-          - binary_sensor.door_window_sensor_158d0003d481a6
+          - binary_sensor.motion_sensor_158d000420092b
+          - binary_sensor.door_window_sensor_158d0003d41ce4
           - binary_sensor.door_window_sensor_158d0003d4434a
+          - binary_sensor.door_window_sensor_158d0003d481a6
           - binary_sensor.door_window_sensor_158d0003d4a2b2
+          - group.house_locks
           - switch.plug_158d000391fadc
           - switch.plug_158d00039fcce4
           - binary_sensor.water_leak_sensor_158d000405cec1
+          - binary_sensor.water_leak_sensor_158d00041f6a7a
           - sensor.illumination_158d000421ccd1
           - sensor.illumination_158d00042820c3
           - sensor.illumination_7c49eb1d7f46
@@ -329,3 +342,61 @@ views:
         title: Water Pressure (12h)
         entities:
           - entity: sensor.pressure_sensor_6_0
+
+  - title: 'Tests'
+    id: tests
+    path: tests
+    icon: mdi:bug-check-outline
+
+    cards:
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - binary_sensor.bw1_button
+          - sensor.bw1_voltage
+          - sensor.bw1_current
+          - sensor.bw1_power
+          - switch.bw1_led_blue
+          - switch.bw1_led_red
+          - switch.bw1_relay
+          - sensor.bw1_fw_version
+          - sensor.bw1_uptime
+          - sensor.bw1_wifi_signal
+
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - binary_sensor.bw2_button
+          - sensor.bw2_voltage
+          - sensor.bw2_current
+          - sensor.bw2_power
+          - switch.bw2_led_blue
+          - switch.bw2_led_red
+          - switch.bw2_relay
+          - sensor.bw2_fw_version
+          - sensor.bw2_uptime
+          - sensor.bw2_wifi_signal
+
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - binary_sensor.neo1_button
+          - switch.neo1_relay
+          - switch.neo1_led
+          - sensor.neo1_fw_version
+          - sensor.neo1_uptime
+          - sensor.neo1_wifi_signal
+
+      - type: entities
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - binary_sensor.neo2_button
+          - switch.neo2_relay
+          - switch.neo2_led
+          - sensor.neo2_fw_version
+          - sensor.neo2_uptime
+          - sensor.neo2_wifi_signal

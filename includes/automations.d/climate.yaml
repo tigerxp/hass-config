@@ -1,0 +1,30 @@
+- alias: Low Room Temperature
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.bedroom_temperature
+        - sensor.masha_s_room_temperature
+        - sensor.klim_s_room_temperature
+        - sensor.office_temperature
+        - sensor.kitchen_temperature
+      below: 15
+      for: "00:05:00"
+  action:
+    - service: notify.telegram_group
+      data_template:
+        message: '{{ trigger.to_state.name }} is too low: {{ trigger.to_state.state }}'
+
+- alias: High Room Temperature
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.bedroom_temperature
+        - sensor.masha_s_room_temperature
+        - sensor.klim_s_room_temperature
+        - sensor.office_temperature
+        - sensor.kitchen_temperature
+      above: 30
+  action:
+    - service: notify.telegram_group
+      data_template:
+        message: '{{ trigger.to_state.name }} is too high: {{ trigger.to_state.state }}'

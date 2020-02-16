@@ -12,31 +12,51 @@ sensor.sunset:
 sensor.outside_pm2_5:
   icon: mdi:smog
 binary_sensor.motion_sensor_158d000421ccd1:
-  friendly_name: 'Downstairs Motion Sensor'
+  friendly_name: Downstairs Motion
 binary_sensor.motion_sensor_158d00042820c3:
-  friendly_name: 'Upstairs Motion Sensor'
+  friendly_name: Upstairs Motion
 sensor.illumination_158d000421ccd1:
-  friendly_name: 'Downstairs Illumination'
+  friendly_name: Downstairs Illumination
 sensor.illumination_158d00042820c3:
-  friendly_name: 'Upstairs Illumination'
+  friendly_name: Upstairs Illumination
 sensor.illumination_7c49eb1d7f46:
-  friendly_name: 'Gateway #1 Illumination'
+  friendly_name: Main Gateway Illumination
 binary_sensor.door_window_sensor_158d0003d481a6:
-  friendly_name: 'Entrance Lock'
+  friendly_name: Entrance Lock
   device_class: lock
 binary_sensor.water_leak_sensor_158d000405cec1:
-  friendly_name: 'Floor 1 Leak'
+  friendly_name: Floor 1 Leak
+binary_sensor.water_leak_sensor_158d00041f6a7a:
+  friendly_name: Basement Leak
 binary_sensor.cube_158d0002a71f01:
-  friendly_name: 'Aqara Cube'
+  friendly_name: Aqara Cube
 switch.plug_158d000391fadc:
-  friendly_name: 'Mijia Plug #1'
+  friendly_name: Hall TV
 switch.plug_158d00039fcce4:
-  friendly_name: 'Kitchen TV'
+  friendly_name: WiFi Repeater
+  icon: mdi:wifi-strength-3
 light.gateway_light_7c49eb1d7f46:
-  friendly_name: 'Main Gateway Light'
+  friendly_name: Main Gateway Light
 binary_sensor.door_window_sensor_158d0003d4434a:
   friendly_name: Zoo Door
   device_class: door
 binary_sensor.door_window_sensor_158d0003d4a2b2:
   friendly_name: Zoo Lock
   device_class: lock
+switch.neo1_relay:
+  friendly_name: Controllers Plug
+  icon: mdi:antenna
+switch.neo2_relay:
+  friendly_name: Kitchen TV
+  icon: mdi:television
+switch.bw1_relay:
+  friendly_name: Bedroom Boiler
+  icon: mdi:water-boiler
+switch.bw2_relay:
+  friendly_name: Washing Machine
+  icon: mdi:washing-machine
+binary_sensor.door_window_sensor_158d0003d41ce4:
+  friendly_name: Boiler Room Door
+  device_class: door
+binary_sensor.motion_sensor_158d000420092b:
+  friendly_name: Basement Motion

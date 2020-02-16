@@ -32,13 +32,13 @@ lovelace:
 light: !include includes/lights.yaml
 camera: !include includes/cameras.yaml
 group: !include groups.yaml
-automation: !include automations.yaml
 script: !include scripts.yaml
 zone: !include includes/zones.yaml
 climate: !include includes/climate.yaml
 
 # Folder includes
 sensor: !include_dir_merge_list includes/sensors.d
+automation: !include_dir_merge_list includes/automations.d
 
 
 ##### Integrations
@@ -71,17 +71,34 @@ mikrotik:
     host: 192.168.1.1
     username: homeassistant
     password: !secret router_password
-    detection_time: 180
-    force_dhcp: true
-    
+
 xiaomi_aqara:
   discovery_retry: 10
   gateways:
     - mac: 7c49eb1d7f46
       host: 192.168.1.17
       key: !secret xiaomi_gw1_key
+    - mac: 04cf8caa9813
+      host: 192.168.1.18
+      key: !secret xiaomi_gw2_key
 
 device_tracker:
   - platform: google_maps
     username: !secret google_maps_email
     max_gps_accuracy: 200
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_token
+    allowed_chat_ids:
+      - !secret telegram_id_tiger
+      - !secret telegram_id_olena
+      - !secret telegram_id_group
+
+notify:
+  - name: telegram_group
+    platform: telegram
+    chat_id: !secret telegram_id_group
+  - name: telegram_tiger
+    platform: telegram
+    chat_id: !secret telegram_id_tiger

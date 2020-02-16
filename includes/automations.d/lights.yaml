@@ -35,19 +35,6 @@
     - service: light.turn_on
       entity_id: light.upstairs
 
-- alias: Temperature drop
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.masha_s_room_temperature
-      below: 15
-  condition:
-    - condition: state
-      entity_id: switch.arm_status
-      state: 'on'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.alarm
-
 # Upstairs movement light
 - alias: Upstairs motion on
   trigger:
@@ -113,68 +100,10 @@
         - light.basement
         - light.downstairs
 
-# Cube automations
-- alias: Cube event flip90
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0002a71f01
-      action_type: flip90
-  action:
-    - service: light.toggle
-      entity_id: light.upstairs
-# - alias: Cube event flip180
-#   trigger:
-#     platform: event
-#     event_type: xiaomi_aqara.cube_action
-#     event_data:
-#       entity_id: binary_sensor.cube_158d0002a71f01
-#       action_type: flip180
-#   action:
-#     - service: light.turn_on
-#       entity_id: light.upstairs
-# - alias: Cube event move
-#   trigger:
-#     platform: event
-#     event_type: xiaomi_aqara.cube_action
-#     event_data:
-#       entity_id: binary_sensor.cube_158d0002a71f01
-#       action_type: move
-#   action:
-#     - service: switch.toggle
-#       entity_id:
-#         - switch.bedroom_fan
-#         - switch.kids_fan
-- alias: Cube event tap_twice
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0002a71f01
-      action_type: tap_twice
-  action:
-    - service: switch.toggle
-      entity_id:
-        - switch.bedroom_fan
-        - switch.kids_fan
-# - alias: Cube event shake_air
-#   trigger:
-#     platform: event
-#     event_type: xiaomi_aqara.cube_action
-#     event_data:
-#       entity_id: binary_sensor.cube_158d0002a71f01
-#       action_type: shake_air
-#   action:
-#     - service: light.turn_on
-#       entity_id: light.gateway_light_7c49eb1d7f46
-#       data:
-#         color_name: "blue"
-
 - alias: Show locks status as gateway light
   trigger:
     platform: state
-    entity_id: binary_sensor.door_window_sensor_158d0003d481a6
+    entity_id: group.house_locks
   condition:
     - condition: state
       entity_id: light.gateway_light_7c49eb1d7f46
@@ -184,13 +113,13 @@
       entity_id: light.gateway_light_7c49eb1d7f46
       data_template:
         brightness: >
-          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+          {% if is_state("group.house_locks", "on") %}      
             100
           {% else %}
             50
           {% endif %}
         color_name: >
-          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+          {% if is_state("group.house_locks", "on") %}      
             red
           {% else %}
             green
