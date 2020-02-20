@@ -1,0 +1,19 @@
+# Night tariff
+night_tariff_begin:
+  name: Night Tariff Begins
+  has_date: false
+  has_time: true
+night_tariff_end:
+  name: Night Tariff Ends
+  has_date: false
+  has_time: true
+
+# Silent Mode
+silent_mode_begin:
+  name: Silent Mode Begins
+  has_date: false
+  has_time: true
+silent_mode_end:
+  name: Silent Mode Ends
+  has_date: false
+  has_time: true

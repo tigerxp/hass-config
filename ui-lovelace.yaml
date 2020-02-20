@@ -1,4 +1,9 @@
 title: Our Home
+
+resources:
+  - url: /local/multiple-entity-row.js?v=3.0.0
+    type: module
+
 views:
 
   - title: Main
@@ -400,3 +405,88 @@ views:
           - sensor.neo2_fw_version
           - sensor.neo2_uptime
           - sensor.neo2_wifi_signal
+
+
+  - title: 'Power'
+    id: power
+    path: power
+    icon: mdi:power-plug
+
+    cards:
+
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: utility_meter.um_daily_bw1
+            name: "Current Tariff"
+
+      - type: entities
+        entities:
+          - entity: sensor.money_daily_bw1
+            type: custom:multiple-entity-row
+            name: Бойлер у спальні - сьогодні
+            state_header: гроші
+            entities:
+              - entity: sensor.um_daily_bw1_day
+                name: день
+                unit: false
+              - entity: sensor.um_daily_bw1_night
+                name: ніч
+                unit: false
+              - entity: sensor.power_daily_bw1_total
+                name: загалом
+                unit: false
+          - entity: sensor.money_daily_bw2
+            type: custom:multiple-entity-row
+            name: Пральна машина - сьогодні
+            state_header: гроші
+            entities:
+              - entity: sensor.um_daily_bw2_day
+                name: день
+                unit: false
+              - entity: sensor.um_daily_bw2_night
+                name: ніч
+                unit: false
+              - entity: sensor.power_daily_bw2_total
+                name: загалом
+                unit: false
+
+
+
+  - title: 'Config'
+    id: config
+    path: config
+    icon: mdi:card-bulleted-settings
+
+    cards:
+      - type: entities
+        title: Тарифи
+        show_header_toggle: false
+        entities:
+          - input_number.tariff_day_price
+          - input_number.tariff_night_price
+
+      - type: entities
+        title: Нічний тариф
+        show_header_toggle: false
+        entities:
+          - input_datetime.night_tariff_begin
+          - input_datetime.night_tariff_end
+
+      - type: entities
+        title: Режим тиші
+        show_header_toggle: false
+        entities:
+          - input_datetime.silent_mode_begin
+          - input_datetime.silent_mode_end
+
+      - type: entities
+        title: 'Scripts'
+        show_header_toggle: false
+        entities:
+          - script.utility_next_tariff
+          - script.utility_day_tariff
+          - script.utility_night_tariff
+          - script.utility_clear_daily
+          - script.utility_clear_monthly
+          - script.utility_clear_yearly

@@ -32,13 +32,16 @@ lovelace:
 light: !include includes/lights.yaml
 camera: !include includes/cameras.yaml
 group: !include groups.yaml
-script: !include scripts.yaml
 zone: !include includes/zones.yaml
 climate: !include includes/climate.yaml
+utility_meter: !include includes/utility_meter.yaml
+input_number: !include includes/input_number.yaml
+input_datetime: !include includes/input_datetime.yaml
 
 # Folder includes
 sensor: !include_dir_merge_list includes/sensors.d
 automation: !include_dir_merge_list includes/automations.d
+script: !include_dir_merge_named includes/scripts.d
 
 
 ##### Integrations

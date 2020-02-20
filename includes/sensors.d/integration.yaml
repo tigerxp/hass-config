@@ -1,0 +1,15 @@
+- platform: integration
+  source: sensor.bw1_power
+  name: int_bw1_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+- platform: integration
+  source: sensor.bw2_power
+  name: int_bw2_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3

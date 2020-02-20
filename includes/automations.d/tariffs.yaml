@@ -1,0 +1,23 @@
+- alias: Turn on night tariff
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: "{{ states('sensor.time') == states('input_datetime.night_tariff_begin')[:5] }}"
+  action:
+    - service: utility_meter.select_tariff
+      data:
+        entity_id:
+          - group.utility_meters
+        tariff: night
+
+- alias: Turn off night tariff
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: "{{ states('sensor.time') == states('input_datetime.night_tariff_end')[:5] }}"
+  action:
+    - service: utility_meter.select_tariff
+      data:
+        entity_id:
+          - group.utility_meters
+        tariff: day

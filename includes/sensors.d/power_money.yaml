@@ -1,0 +1,45 @@
+# BlitzWolf #1 Costs
+- platform: template
+  sensors:
+    money_daily_bw1:
+      friendly_name: "BW #1 Daily Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_daily_bw1_day')|float * 1.68) + (states('sensor.um_daily_bw1_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+- platform: template
+  sensors:
+    money_monthly_bw1:
+      friendly_name: "BW #1 Monthly Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_monthly_bw1_day')|float * 1.68) + (states('sensor.um_monthly_bw1_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+- platform: template
+  sensors:
+    money_yearly_bw1:
+      friendly_name: "BW #1 Yearly Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_yearly_bw1_day')|float * 1.68) + (states('sensor.um_yearly_bw1_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #2 Costs
+- platform: template
+  sensors:
+    money_daily_bw2:
+      friendly_name: "BW #2 Daily Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_daily_bw2_day')|float * 1.68) + (states('sensor.um_daily_bw2_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+- platform: template
+  sensors:
+    money_monthly_bw2:
+      friendly_name: "BW #2 Monthly Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_monthly_bw2_day')|float * 1.68) + (states('sensor.um_monthly_bw2_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+- platform: template
+  sensors:
+    money_yearly_bw2:
+      friendly_name: "BW #2 Yearly Cost"
+      unit_of_measurement: 'грн'
+      value_template: "{{ ((states('sensor.um_yearly_bw2_day')|float * 1.68) + (states('sensor.um_yearly_bw2_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 

@@ -1,0 +1,15 @@
+# Electricity Tariffs (day/night)
+tariff_day_price:
+  name: Вартість 1кВт вдень, грн/кВт*г
+  initial: 1.68
+  min: 0.90
+  max: 5.00
+  step: 0.01
+  mode: box  
+tariff_night_price:
+  name: Вартість 1кВт вночі, грн/кВт*г
+  initial: 0.90
+  min: 0.90
+  max: 5.00
+  step: 0.01
+  mode: box

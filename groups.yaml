@@ -10,3 +10,14 @@ house_locks:
   entities:
     - binary_sensor.door_window_sensor_158d0003d481a6
     - binary_sensor.door_window_sensor_158d0003d4a2b2
+
+utility_meters:
+  name: Utility Meters
+  icon: mdi:counter
+  entities:
+    - utility_meter.um_daily_bw1
+    - utility_meter.um_daily_bw2
+    - utility_meter.um_monthly_bw1
+    - utility_meter.um_monthly_bw2
+    - utility_meter.um_yearly_bw1
+    - utility_meter.um_yearly_bw2

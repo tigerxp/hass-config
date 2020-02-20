@@ -1,0 +1,43 @@
+# BlitzWolf #1
+um_daily_bw1:
+  source: sensor.int_bw1_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw1:
+  source: sensor.int_bw1_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw1:
+  source: sensor.int_bw1_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+# BlitzWolf #2
+um_daily_bw2:
+  source: sensor.int_bw2_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw2:
+  source: sensor.int_bw2_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw2:
+  source: sensor.int_bw2_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
