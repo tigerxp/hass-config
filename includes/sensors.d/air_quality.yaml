@@ -1,0 +1,14 @@
+- platform: template
+  sensors:
+    aq_office_co2a:
+      friendly_name: "Office CO2a"
+      unit_of_measurement: 'ppm'
+      entity_id: air_quality.mi_air_monitor
+      value_template: "{{ state_attr('air_quality.mi_air_monitor', 'carbon_dioxide_equivalent') }}"
+      icon_template: mdi:periodic-table-co2
+    aq_office_tvoc:
+      friendly_name: "Office TVOC"
+      unit_of_measurement: 'mg/m3'
+      entity_id: air_quality.mi_air_monitor
+      value_template: "{{ state_attr('air_quality.mi_air_monitor', 'total_volatile_organic_compounds') }}"
+      icon_template: mdi:scatter-plot

@@ -9,8 +9,6 @@ sensor.sunrise:
   icon: mdi:weather-sunset-up
 sensor.sunset:
   icon: mdi:weather-sunset-down
-sensor.outside_pm2_5:
-  icon: mdi:smog
 binary_sensor.motion_sensor_158d000421ccd1:
   friendly_name: Downstairs Motion
 binary_sensor.motion_sensor_158d00042820c3:
@@ -31,9 +29,9 @@ binary_sensor.water_leak_sensor_158d00041f6a7a:
 binary_sensor.cube_158d0002a71f01:
   friendly_name: Aqara Cube
 switch.plug_158d000391fadc:
-  friendly_name: Hall TV
+  friendly_name: Hall TV Plug
 switch.plug_158d00039fcce4:
-  friendly_name: WiFi Repeater
+  friendly_name: Controllers Plug
   icon: mdi:wifi-strength-3
 light.gateway_light_7c49eb1d7f46:
   friendly_name: Main Gateway Light
@@ -44,19 +42,24 @@ binary_sensor.door_window_sensor_158d0003d4a2b2:
   friendly_name: Zoo Lock
   device_class: lock
 switch.neo1_relay:
-  friendly_name: Controllers Plug
+  friendly_name: WiFi Repeater Plug
   icon: mdi:antenna
 switch.neo2_relay:
-  friendly_name: Kitchen TV
+  friendly_name: Kitchen TV Plug
   icon: mdi:television
 switch.bw1_relay:
-  friendly_name: Bedroom Boiler
+  friendly_name: Bedroom Boiler Plug
   icon: mdi:water-boiler
 switch.bw2_relay:
-  friendly_name: Washing Machine
+  friendly_name: Washing Machine Plug
   icon: mdi:washing-machine
 binary_sensor.door_window_sensor_158d0003d41ce4:
   friendly_name: Boiler Room Door
   device_class: door
 binary_sensor.motion_sensor_158d000420092b:
   friendly_name: Basement Motion
+air_quality.mi_air_monitor:
+  friendly_name: Office PM2.5
+  icon: mdi:smog
+switch.electric_boiler:
+  icon: mdi:water-boiler

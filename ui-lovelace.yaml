@@ -28,138 +28,223 @@ views:
           - type: entities
             show_header_toggle: false
             entities:
-              - entity: sensor.house_average_temperature
-                name: Average Temperature in the house
-                icon: mdi:home-thermometer
-              - entity: sensor.house_average_humidity
-                name: Average Humidity in the house
-                icon: mdi:water-percent
-              - sensor.outside_pm2_5
               - sensor.sunrise
               - sensor.sunset
 
-          - type: vertical-stack
-            cards:
-              - type: horizontal-stack
-                cards:
-                  - type: gauge
-                    name: 'Air, mmHg'
-                    unit: ' '
-                    entity: sensor.atmospheric_pressure_mmhg
-                    min: 720
-                    max: 800
-                  - type: gauge
-                    name: "Water, bar"
-                    unit: ' '
-                    entity: sensor.pressure_sensor_6_0
-                    min: 0
-                    max: 5
-                    severity:
-                      green: 1
-                      yellow: 3
-                      red: 4
-
-          - type: glance
-            title: Temperature Overview
+          - type: entities
+            title: Air Quality
+            show_header_toggle: false
             entities:
+              - sensor.apm_pm2_5
+              - type: section
+              - air_quality.mi_air_monitor
+              - sensor.aq_office_tvoc
+              - sensor.aq_office_co2a
+
+      - type: vertical-stack
+        cards:
+
+          # House Climate
+          - type: entities
+            title: Climate
+            show_header_toggle: false
+            entities:
+              - entity: sensor.apm_temperature
+                type: custom:multiple-entity-row
+                name: Outside (Office Window)
+                icon: mdi:home-thermometer
+                entities:
+                  - entity: sensor.apm_humidity
+                    name: false
+              - type: section
+              - entity: sensor.house_average_temperature
+                type: custom:multiple-entity-row
+                name: House Averages
+                entities:
+                  - entity: sensor.house_average_humidity
+                    name: false
+              - type: section
               - entity: sensor.bedroom_temperature
+                type: custom:multiple-entity-row
                 name: Bedroom
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.bedroom_humidity
+                    name: false
               - entity: sensor.masha_s_room_temperature
-                name: Masha
+                type: custom:multiple-entity-row
+                name: Masha's Room
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.masha_s_room_humidity
+                    name: false
               - entity: sensor.klim_s_room_temperature
-                name: Klim
+                type: custom:multiple-entity-row
+                name: Klim's Room
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.klim_s_room_humidity
+                    name: false
               - entity: sensor.office_temperature
+                type: custom:multiple-entity-row
                 name: Office
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.office_humidity
+                    name: false
+              - type: section
+              - entity: sensor.hall_temperature
+                type: custom:multiple-entity-row
+                name: Hall
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.hall_humidity
+                    name: false
+              - entity: sensor.guestroom_temperature
+                type: custom:multiple-entity-row
+                name: Guest Room
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.guestroom_humidity
+                    name: false
               - entity: sensor.kitchen_temperature
+                type: custom:multiple-entity-row
                 name: Kitchen
-              - entity: sensor.gym_temperature
-                name: Gym
-              - entity: sensor.boiler_room_temperature
-                name: B. Room
-              - entity: sensor.boilder_in_temperature
-                name: Boiler In
-              - entity: sensor.boiler_out_temperature
-                name: Boiler Out
-              - entity: sensor.lywsd02_1_temperature
-                name: LYWSD02-1 Temperature
-
-      - type: vertical-stack
-        cards:
-          - type: entities
-            title: Bedroom
-            state_color: true
-            entities:
-              - entity: sensor.bedroom_temperature
-                name: Temperature
-              - entity: sensor.bedroom_humidity
-                name: Humidity
-              - entity: switch.bedroom_fan
-                name: Fan
-              - entity: switch.bedroom_indicator
-                name: Fan Indicator
-
-          - type: entities
-            title: Klim's Room
-            state_color: true
-            entities:
-              - entity: sensor.klim_s_room_temperature
-                name: Temperature
-              - entity: sensor.klim_s_room_humidity
-                name: Humidity
-              - entity: switch.kids_fan
-                name: Fan
-              - entity: switch.kids_indicator
-                name: Fan Indicator
-              - entity: switch.kinder2_restart
-
-          - type: entities
-            title: Masha's Room
-            state_color: true
-            show_header_toggle: false
-            entities:
-              - entity: sensor.masha_s_room_temperature
-                name: Temperature
-              - entity: sensor.masha_s_room_humidity
-                name: Humidity
-
-      - type: vertical-stack
-        cards:
-          - type: entities
-            title: Office
-            state_color: true
-            show_header_toggle: false
-            entities:
-              - entity: sensor.office_temperature
-                name: Temperature
-              - entity: sensor.office_humidity
-                name: Humidity
-              - entity: light.office
-                name: "Light"
-
-          - type: entities
-            title: Zoo
-            state_color: true
-            show_header_toggle: false
-            entities:
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.kitchen_humidity
+                    name: false
               - entity: sensor.zoo_temperature
-                name: "Temperature"
-              - entity: light.zoo_rgb_led
-                name: RGB LED
-              - entity: sensor.zoo_brightness
-                name: Brightness
-
-          - type: entities
-            title: Boiler Room
-            state_color: true
-            show_header_toggle: false
-            entities:
+                type: custom:multiple-entity-row
+                name: Zoo
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+              - type: section
+              - entity: sensor.gym_temperature
+                type: custom:multiple-entity-row
+                name: Gym
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.gym_humidity
+                    name: false
               - entity: sensor.boiler_room_temperature
-                name: Temperature
-              - entity: sensor.boiler_room_humidity
-                name: Humidity
-              - switch.electric_boiler
-              - sensor.boilder_in_temperature
-              - sensor.boiler_out_temperature  
+                type: custom:multiple-entity-row
+                name: Boiler room
+                icon: mdi:home-thermometer-outline
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.boiler_room_humidity
+                    name: false
+
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                name: 'Air, mmHg'
+                unit: ' '
+                entity: sensor.atmospheric_pressure_mmhg
+                min: 720
+                max: 800
+              - type: gauge
+                name: "Water, bar"
+                unit: ' '
+                entity: sensor.pressure_sensor_6_0
+                min: 0
+                max: 5
+                severity:
+                  green: 1
+                  yellow: 3
+                  red: 4
+          # Devices
+          - type: entities
+            title: Devices
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: switch.electric_boiler
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.boiler_out_temperature
+                    name: in
+                  - entity: sensor.boilder_in_temperature
+                    name: out
+              - type: section
+              - entity: switch.bedroom_fan
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: switch.bedroom_indicator
+                    icon: mdi:led-outline
+                    tap_action:
+                      action: toggle
+              - entity: switch.kids_fan
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: switch.kids_indicator
+                    icon: mdi:led-outline
+                    tap_action:
+                      action: toggle
+              - type: section
+              - entity: light.downstairs
+                name: Stairs Lights
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                state_header: downstairs
+                toggle: true
+                entities:
+                  - entity: light.upstairs
+                    toggle: true
+                    name: upstairs
+              - entity: light.basement
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                name: Basement
+                toggle: true
+              - type: section
+              - entity: switch.bw1_relay
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: sensor.bw1_power
+                    name: current power
+              - type: section
+              - entity: switch.bw2_relay
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: sensor.bw2_power
+                    name: current power
+              - type: section
+              - entity: switch.plug_158d000391fadc
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: sensor.plug_158d000391fadc_power
+                    name: current power
+              - entity: switch.plug_158d00039fcce4
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                toggle: true
+                entities:
+                  - entity: sensor.plug_158d00039fcce4_power
+                    name: current power
+
 
   - title: Controls
     id: controls
@@ -354,6 +439,83 @@ views:
     icon: mdi:bug-check-outline
 
     cards:
+
+      - type: entities
+        title: Bedroom
+        state_color: true
+        entities:
+          - entity: sensor.bedroom_temperature
+            name: Temperature
+          - entity: sensor.bedroom_humidity
+            name: Humidity
+          - entity: switch.bedroom_fan
+            name: Fan
+          - entity: switch.bedroom_indicator
+            name: Fan Indicator
+
+      - type: entities
+        title: Klim's Room
+        state_color: true
+        entities:
+          - entity: sensor.klim_s_room_temperature
+            name: Temperature
+          - entity: sensor.klim_s_room_humidity
+            name: Humidity
+          - entity: switch.kids_fan
+            name: Fan
+          - entity: switch.kids_indicator
+            name: Fan Indicator
+          - entity: switch.kinder2_restart
+
+      - type: entities
+        title: Masha's Room
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.masha_s_room_temperature
+            name: Temperature
+          - entity: sensor.masha_s_room_humidity
+            name: Humidity
+
+
+      - type: entities
+        title: Office
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.office_temperature
+            name: Temperature
+          - entity: sensor.office_humidity
+            name: Humidity
+          - entity: light.office
+            name: "Light"
+
+      - type: entities
+        title: Zoo
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.zoo_temperature
+            name: "Temperature"
+          - entity: light.zoo_rgb_led
+            name: RGB LED
+          - entity: sensor.zoo_brightness
+            name: Brightness
+
+      - type: entities
+        title: Boiler Room
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: sensor.boiler_room_temperature
+            name: Temperature
+          - entity: sensor.boiler_room_humidity
+            name: Humidity
+          - switch.electric_boiler
+          - sensor.boilder_in_temperature
+          - sensor.boiler_out_temperature  
+
+
       - type: entities
         show_header_toggle: false
         state_color: true

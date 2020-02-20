@@ -30,8 +30,10 @@ sensor:
     model: DHT22
     temperature:
       name: "Klim's Room Temperature"
+      accuracy_decimals: 1
     humidity:
       name: "Klim's Room Humidity"
+      accuracy_decimals: 1
     update_interval: 60s
 
 remote_transmitter:

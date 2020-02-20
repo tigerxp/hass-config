@@ -113,13 +113,13 @@
       entity_id: light.gateway_light_7c49eb1d7f46
       data_template:
         brightness: >
-          {% if is_state("group.house_locks", "on") %}      
+          {% if is_state("group.house_locks", "on") %}
             100
           {% else %}
             50
           {% endif %}
         color_name: >
-          {% if is_state("group.house_locks", "on") %}      
+          {% if is_state("group.house_locks", "on") %}
             red
           {% else %}
             green

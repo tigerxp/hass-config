@@ -1,15 +1,9 @@
-basement_path:
-  name: Downpath
-  entities:
-    - light.downstairs
-    - light.basement
-
 house_locks:
   name: House Locks
   icon: mdi:lock-reset
   entities:
     - binary_sensor.door_window_sensor_158d0003d481a6
-    - binary_sensor.door_window_sensor_158d0003d4a2b2
+#    - binary_sensor.door_window_sensor_158d0003d4a2b2
 
 utility_meters:
   name: Utility Meters

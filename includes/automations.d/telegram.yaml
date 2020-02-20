@@ -4,7 +4,7 @@
     platform: state
     entity_id: 
       - binary_sensor.door_window_sensor_158d0003d481a6
-      - binary_sensor.door_window_sensor_158d0003d4a2b2
+#      - binary_sensor.door_window_sensor_158d0003d4a2b2
   action:
     service: notify.telegram_group
     data_template:

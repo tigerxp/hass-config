@@ -30,9 +30,11 @@ sensor:
     model: DHT22
     temperature:
       name: "Gym Temperature"
+      accuracy_decimals: 1
       id: dht_temp
     humidity:
       name: "Gym Humidity"
+      accuracy_decimals: 1
       id: dht_hum
     update_interval: 60s
 

@@ -4,12 +4,12 @@ esphome:
   board: lolin32
 
 wifi:
-  ssid: "matrix"
+  ssid: "matrix_ext"
   password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Ble Gate Fallback"
+    ssid: "BLE Gate Fallback"
     password: !secret fallback_password
 
 captive_portal:
@@ -28,6 +28,34 @@ esp32_ble_tracker:
 
 
 sensor:
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:92:50:E2
+    temperature:
+      name: "Office Temperature 2"
+    humidity:
+      name: "Office Humidity 2"
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A0:8C:9F
+    temperature:
+      name: "Guestroom Temperature"
+    humidity:
+      name: "Guestroom Humidity"
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A1:A1:0F
+    temperature:
+      name: "Hall Temperature"
+    humidity:
+      name: "Hall Humidity"
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A3:68:F7
+    temperature:
+      name: "Kitchen Temperature 2"
+    humidity:
+      name: "Kitchen Humidity 2"
+
   - platform: xiaomi_lywsd02
     mac_address: 3F:59:C8:82:78:A5
     temperature:

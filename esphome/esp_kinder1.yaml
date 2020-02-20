@@ -30,6 +30,8 @@ sensor:
     model: DHT22
     temperature:
       name: "Masha's Room Temperature"
+      accuracy_decimals: 1
     humidity:
       name: "Masha's Room Humidity"
+      accuracy_decimals: 1
     update_interval: 60s

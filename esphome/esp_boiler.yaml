@@ -34,8 +34,10 @@ sensor:
     model: DHT22
     temperature:
       name: "Boiler Room Temperature"
+      accuracy_decimals: 1
     humidity:
       name: "Boiler Room Humidity"
+      accuracy_decimals: 1
     update_interval: 60s
   - platform: dallas
     address: 0xAC0000060A47F628

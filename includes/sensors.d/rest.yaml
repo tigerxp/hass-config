@@ -1,0 +1,55 @@
+# REST sensor for Air Pollution Monitor
+- platform: rest
+  name: "AirPM Rest Data"
+  resource: !secret air_pollution_url
+  scan_interval: 120
+  value_template: "{{ value_json[0].ts }}"
+  json_attributes:
+    - 'pm1.0'
+    - 'pm2.5'
+    - 'pm10'
+    - temperature
+    - humidity
+    - rssi
+    - fw
+    - ts
+
+# Outside Air Pollution Monitor (APM) sensors based on the REST above
+- platform: template
+  sensors:
+    apm_pm1_0:
+      friendly_name: 'Outside PM 1.0'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm1.0') }}"
+      unit_of_measurement: 'μg/m3'
+      icon_template: mdi:smog
+    apm_pm2_5:
+      friendly_name: 'Outside PM 2.5'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm2.5') }}"
+      unit_of_measurement: 'μg/m3'
+      icon_template: mdi:smog
+    apm_pm10:
+      friendly_name: 'Outside PM 10'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm10') }}"
+      unit_of_measurement: 'μg/m3'
+      icon_template: mdi:smog
+    apm_temperature:
+      friendly_name: 'Outside Temperature'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'temperature')|round(1) }}"
+      device_class: temperature
+      unit_of_measurement: '°C'
+    apm_humidity:
+      friendly_name: 'Outside Humidity'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'humidity')|round(1) }}"
+      device_class: humidity
+      unit_of_measurement: '%'
+    apm_wifi_level:
+      friendly_name: 'APM WiFi Strength (RSSI)'
+      entity_id: sensor.airpm_rest_data
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'rssi') }}"
+      icon_template: mdi:wifi-strength-3
+      unit_of_measurement: 'dBm'

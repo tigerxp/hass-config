@@ -30,6 +30,8 @@ sensor:
     model: DHT22
     temperature:
       name: "Office Temperature"
+      accuracy_decimals: 1
     humidity:
       name: "Office Humidity"
+      accuracy_decimals: 1
     update_interval: 60s
