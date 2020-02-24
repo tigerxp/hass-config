@@ -43,20 +43,6 @@ sensor:
       name: "Guestroom Humidity"
 
   - platform: xiaomi_lywsd02
-    mac_address: E7:2E:00:A1:A1:0F
-    temperature:
-      name: "Hall Temperature"
-    humidity:
-      name: "Hall Humidity"
-
-  - platform: xiaomi_lywsd02
-    mac_address: E7:2E:00:A3:68:F7
-    temperature:
-      name: "Kitchen Temperature 2"
-    humidity:
-      name: "Kitchen Humidity 2"
-
-  - platform: xiaomi_lywsd02
     mac_address: 3F:59:C8:82:78:A5
     temperature:
       name: "Bedside Temperature"

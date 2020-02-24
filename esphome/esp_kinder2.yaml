@@ -1,7 +1,7 @@
 esphome:
   name: esp_kinder2
-  platform: ESP8266
-  board: d1_mini
+  platform: ESP32
+  board: mhetesp32minikit
 
 wifi:
   ssid: "matrix"
@@ -23,10 +23,12 @@ api:
 
 ota:
   password: !secret ota_password
+  
+esp32_ble_tracker:
 
 sensor:
   - platform: dht
-    pin: D4
+    pin: GPIO16
     model: DHT22
     temperature:
       name: "Klim's Room Temperature"
@@ -35,9 +37,24 @@ sensor:
       name: "Klim's Room Humidity"
       accuracy_decimals: 1
     update_interval: 60s
+    
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A1:A1:0F
+    temperature:
+      name: "Hall Temperature"
+    humidity:
+      name: "Hall Humidity"
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A3:68:F7
+    temperature:
+      name: "Kitchen Temperature 2"
+    humidity:
+      name: "Kitchen Humidity 2"
+    
 
 remote_transmitter:
-  pin: D2
+  pin: GPIO21
   carrier_duty_percent: 50%
 
 switch:

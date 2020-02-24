@@ -59,7 +59,7 @@ binary_sensor.door_window_sensor_158d0003d41ce4:
 binary_sensor.motion_sensor_158d000420092b:
   friendly_name: Basement Motion
 air_quality.mi_air_monitor:
-  friendly_name: Office PM2.5
+  friendly_name: Office PM 2.5
   icon: mdi:smog
 switch.electric_boiler:
   icon: mdi:water-boiler

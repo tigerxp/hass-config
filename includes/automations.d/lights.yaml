@@ -74,7 +74,9 @@
 - alias: Downstairs motion on
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d000421ccd1
+    entity_id:
+      - binary_sensor.motion_sensor_158d000421ccd1
+      - binary_sensor.motion_sensor_158d000420092b
     from: 'off'
     to: 'on'
   condition:

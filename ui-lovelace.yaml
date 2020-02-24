@@ -297,6 +297,8 @@ views:
           - switch.bw2_relay
           - switch.neo1_relay
           - switch.neo2_relay
+          - switch.plug_158d000391fadc
+          - switch.plug_158d00039fcce4
 
   - title: 'Zigbee'
     id: zigbee
@@ -568,7 +570,6 @@ views:
           - sensor.neo2_uptime
           - sensor.neo2_wifi_signal
 
-
   - title: 'Power'
     id: power
     path: power
@@ -583,37 +584,70 @@ views:
             name: "Current Tariff"
 
       - type: entities
+        title: Today
+        show_header_toggle: false
         entities:
           - entity: sensor.money_daily_bw1
             type: custom:multiple-entity-row
-            name: Бойлер у спальні - сьогодні
-            state_header: гроші
+            name: Bedroom Boiler
+            state_header: cost
             entities:
               - entity: sensor.um_daily_bw1_day
-                name: день
+                name: day
                 unit: false
               - entity: sensor.um_daily_bw1_night
-                name: ніч
+                name: night
                 unit: false
               - entity: sensor.power_daily_bw1_total
-                name: загалом
+                name: total
                 unit: false
           - entity: sensor.money_daily_bw2
             type: custom:multiple-entity-row
-            name: Пральна машина - сьогодні
-            state_header: гроші
+            name: Washing Machine
+            state_header: cost
             entities:
               - entity: sensor.um_daily_bw2_day
-                name: день
+                name: day
                 unit: false
               - entity: sensor.um_daily_bw2_night
-                name: ніч
+                name: night
                 unit: false
               - entity: sensor.power_daily_bw2_total
-                name: загалом
+                name: total
                 unit: false
 
-
+      - type: entities
+        title: This Month
+        show_header_toggle: false
+        entities:
+          - entity: sensor.money_monthly_bw1
+            type: custom:multiple-entity-row
+            name: Bedroom Boiler
+            state_header: cost
+            entities:
+              - entity: sensor.um_monthly_bw1_day
+                name: day
+                unit: false
+              - entity: sensor.um_monthly_bw1_night
+                name: night
+                unit: false
+              - entity: sensor.power_monthly_bw1_total
+                name: total
+                unit: false
+          - entity: sensor.money_monthly_bw2
+            type: custom:multiple-entity-row
+            name: Washing Machine
+            state_header: cost
+            entities:
+              - entity: sensor.um_monthly_bw2_day
+                name: day
+                unit: false
+              - entity: sensor.um_monthly_bw2_night
+                name: night
+                unit: false
+              - entity: sensor.power_monthly_bw2_total
+                name: total
+                unit: false
 
   - title: 'Config'
     id: config
@@ -622,21 +656,21 @@ views:
 
     cards:
       - type: entities
-        title: Тарифи
+        title: Tariffs
         show_header_toggle: false
         entities:
           - input_number.tariff_day_price
           - input_number.tariff_night_price
 
       - type: entities
-        title: Нічний тариф
+        title: Night Tariff
         show_header_toggle: false
         entities:
           - input_datetime.night_tariff_begin
           - input_datetime.night_tariff_end
 
       - type: entities
-        title: Режим тиші
+        title: Silent Mode
         show_header_toggle: false
         entities:
           - input_datetime.silent_mode_begin
