@@ -4,8 +4,17 @@ esphome:
   board: mhetesp32minikit
 
 wifi:
-  ssid: "matrix"
-  password: !secret wifi_password
+  power_save_mode: none
+  
+  networks:
+    - ssid: matrix
+      bssid: CC:2D:E0:09:70:B9 # Hall
+      password: !secret wifi_password
+    - ssid: matrix
+      bssid: CC:2F:E0:0E:1C:6E # Office
+      password: !secret wifi_password
+    - ssid: matrix_ext
+      password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -27,17 +36,6 @@ ota:
 esp32_ble_tracker:
 
 sensor:
-  - platform: dht
-    pin: GPIO16
-    model: DHT22
-    temperature:
-      name: "Klim's Room Temperature"
-      accuracy_decimals: 1
-    humidity:
-      name: "Klim's Room Humidity"
-      accuracy_decimals: 1
-    update_interval: 60s
-    
   - platform: xiaomi_lywsd02
     mac_address: E7:2E:00:A1:A1:0F
     temperature:
@@ -51,7 +49,24 @@ sensor:
       name: "Kitchen Temperature 2"
     humidity:
       name: "Kitchen Humidity 2"
-    
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:92:50:E2
+    temperature:
+      name: "Masha's Room Temperature"
+    humidity:
+      name: "Masha's Room Humidity"
+
+  - platform: dht
+    pin: GPIO16
+    model: DHT22
+    temperature:
+      name: "Klim's Room Temperature"
+      accuracy_decimals: 1
+    humidity:
+      name: "Klim's Room Humidity"
+      accuracy_decimals: 1
+    update_interval: 60s
 
 remote_transmitter:
   pin: GPIO21

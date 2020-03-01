@@ -13,3 +13,43 @@
   unit_prefix: k
   unit_time: h
   round: 3
+
+- platform: integration
+  source: sensor.bw3_power
+  name: int_bw3_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+- platform: integration
+  source: sensor.bw4_power
+  name: int_bw4_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+- platform: integration
+  source: sensor.bw5_power
+  name: int_bw5_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+- platform: integration
+  source: sensor.bw6_power
+  name: int_bw6_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+- platform: integration
+  source: sensor.bw7_power
+  name: int_bw7_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3

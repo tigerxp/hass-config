@@ -30,6 +30,11 @@ utility_clear_daily:
       entity_id:
         - utility_meter.um_daily_bw1
         - utility_meter.um_daily_bw2
+        - utility_meter.um_daily_bw3
+        - utility_meter.um_daily_bw4
+        - utility_meter.um_daily_bw5
+        - utility_meter.um_daily_bw6
+        - utility_meter.um_daily_bw7
 
 utility_clear_monthly:
   alias: "Clear Monthly"
@@ -38,6 +43,11 @@ utility_clear_monthly:
       entity_id:
         - utility_meter.um_monthly_bw1
         - utility_meter.um_monthly_bw2
+        - utility_meter.um_monthly_bw3
+        - utility_meter.um_monthly_bw4
+        - utility_meter.um_monthly_bw5
+        - utility_meter.um_monthly_bw6
+        - utility_meter.um_monthly_bw7
 
 utility_clear_yearly:
   alias: "Clear Yearly"
@@ -46,3 +56,8 @@ utility_clear_yearly:
       entity_id:
         - utility_meter.um_yearly_bw1
         - utility_meter.um_yearly_bw2
+        - utility_meter.um_yearly_bw3
+        - utility_meter.um_yearly_bw4
+        - utility_meter.um_yearly_bw5
+        - utility_meter.um_yearly_bw6
+        - utility_meter.um_yearly_bw7

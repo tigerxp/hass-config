@@ -1,0 +1,9 @@
+- platform: tod
+  name: Silent mode
+  after: '23:00'
+  before: '09:00'
+
+- platform: tod
+  name: Night tariff
+  after: '23:00'
+  before: '07:00'

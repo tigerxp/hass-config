@@ -1,14 +1,14 @@
 # Cube automations
-- alias: Cube event flip90
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0002a71f01
-      action_type: flip90
-  action:
-    - service: light.toggle
-      entity_id: light.upstairs
+# - alias: Cube event flip90
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.cube_action
+#     event_data:
+#       entity_id: binary_sensor.cube_158d0002a71f01
+#       action_type: flip90
+#   action:
+#     - service: light.toggle
+#       entity_id: light.upstairs
 # - alias: Cube event flip180
 #   trigger:
 #     platform: event
@@ -31,18 +31,18 @@
 #       entity_id:
 #         - switch.bedroom_fan
 #         - switch.kids_fan
-- alias: Cube event tap_twice
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0002a71f01
-      action_type: tap_twice
-  action:
-    - service: switch.toggle
-      entity_id:
-        - switch.bedroom_fan
-        - switch.kids_fan
+# - alias: Cube event tap_twice
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.cube_action
+#     event_data:
+#       entity_id: binary_sensor.cube_158d0002a71f01
+#       action_type: tap_twice
+#   action:
+#     - service: switch.toggle
+#       entity_id:
+#         - switch.bedroom_fan
+#         - switch.kids_fan
 # - alias: Cube event shake_air
 #   trigger:
 #     platform: event

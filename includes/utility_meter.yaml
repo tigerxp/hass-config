@@ -41,3 +41,113 @@ um_yearly_bw2:
   tariffs:
     - day
     - night
+
+# BlitzWolf #3
+um_daily_bw3:
+  source: sensor.int_bw3_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw3:
+  source: sensor.int_bw3_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw3:
+  source: sensor.int_bw3_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+# BlitzWolf #4
+um_daily_bw4:
+  source: sensor.int_bw4_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw4:
+  source: sensor.int_bw4_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw4:
+  source: sensor.int_bw4_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+# BlitzWolf #5
+um_daily_bw5:
+  source: sensor.int_bw5_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw5:
+  source: sensor.int_bw5_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw5:
+  source: sensor.int_bw5_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+# BlitzWolf #6
+um_daily_bw6:
+  source: sensor.int_bw6_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw6:
+  source: sensor.int_bw6_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw6:
+  source: sensor.int_bw6_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+# BlitzWolf #7
+um_daily_bw7:
+  source: sensor.int_bw7_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw7:
+  source: sensor.int_bw7_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw7:
+  source: sensor.int_bw7_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night

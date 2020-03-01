@@ -36,6 +36,101 @@
       value_template: "{{ (states('sensor.um_yearly_bw2_day')|float + states('sensor.um_yearly_bw2_night')|float)|round(3) }}"
       icon_template: mdi:counter
 
+# BlitzWolf #3 Totals
+- platform: template
+  sensors:
+    power_daily_bw3_total:
+      friendly_name: "Total Daily BW #3"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_daily_bw3_day')|float + states('sensor.um_daily_bw3_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_monthly_bw3_total:
+      friendly_name: "Total Monthly BW #3"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_monthly_bw3_day')|float + states('sensor.um_monthly_bw3_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_yearly_bw3_total:
+      friendly_name: "Total Yearly BW #3"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_yearly_bw3_day')|float + states('sensor.um_yearly_bw3_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+
+# BlitzWolf #4 Totals
+- platform: template
+  sensors:
+    power_daily_bw4_total:
+      friendly_name: "Total Daily BW #4"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_daily_bw4_day')|float + states('sensor.um_daily_bw4_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_monthly_bw4_total:
+      friendly_name: "Total Monthly BW #4"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_monthly_bw4_day')|float + states('sensor.um_monthly_bw4_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_yearly_bw4_total:
+      friendly_name: "Total Yearly BW #4"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_yearly_bw4_day')|float + states('sensor.um_yearly_bw4_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+
+# BlitzWolf #5 Totals
+- platform: template
+  sensors:
+    power_daily_bw5_total:
+      friendly_name: "Total Daily BW #5"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_daily_bw5_day')|float + states('sensor.um_daily_bw5_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_monthly_bw5_total:
+      friendly_name: "Total Monthly BW #5"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_monthly_bw5_day')|float + states('sensor.um_monthly_bw5_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_yearly_bw5_total:
+      friendly_name: "Total Yearly BW #5"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_yearly_bw5_day')|float + states('sensor.um_yearly_bw5_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+
+# BlitzWolf #6 Totals
+- platform: template
+  sensors:
+    power_daily_bw6_total:
+      friendly_name: "Total Daily BW #6"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_daily_bw6_day')|float + states('sensor.um_daily_bw6_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_monthly_bw6_total:
+      friendly_name: "Total Monthly BW #6"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_monthly_bw6_day')|float + states('sensor.um_monthly_bw6_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_yearly_bw6_total:
+      friendly_name: "Total Yearly BW #6"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_yearly_bw6_day')|float + states('sensor.um_yearly_bw6_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+
+# BlitzWolf #7 Totals
+- platform: template
+  sensors:
+    power_daily_bw7_total:
+      friendly_name: "Total Daily BW #7"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_daily_bw7_day')|float + states('sensor.um_daily_bw7_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_monthly_bw7_total:
+      friendly_name: "Total Monthly BW #7"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_monthly_bw7_day')|float + states('sensor.um_monthly_bw7_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+    power_yearly_bw7_total:
+      friendly_name: "Total Yearly BW #7"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ (states('sensor.um_yearly_bw7_day')|float + states('sensor.um_yearly_bw7_night')|float)|round(3) }}"
+      icon_template: mdi:counter
+
 # Xiaomi Zigbee load power
 - platform: template
   sensors:
@@ -43,6 +138,7 @@
       icon_template: mdi:flash-outline
       value_template: "{{ state_attr('switch.plug_158d000391fadc', 'load_power')}}"
       unit_of_measurement: 'W'
+
     plug_158d00039fcce4_power:
       icon_template: mdi:flash-outline
       value_template: "{{ state_attr('switch.plug_158d00039fcce4', 'load_power')}}"

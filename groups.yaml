@@ -1,17 +1,64 @@
+# DO NOT EDIT this auto-generated file - edit template: config_templates/groups.yaml.jinja2
 house_locks:
   name: House Locks
   icon: mdi:lock-reset
   entities:
-    - binary_sensor.door_window_sensor_158d0003d481a6
-    - binary_sensor.door_window_sensor_158d0003d4a2b2
+    - binary_sensor.0x00158d0003d481a6_contact
+    - binary_sensor.0x00158d0003d4a2b2_contact
+
+downstairs_motion:
+  name: Downstairs Motion Group
+  entities:
+    - binary_sensor.0x00158d000421ccd1_occupancy
+#    - binary_sensor.0x00158d000420092b_occupancy
+    - binary_sensor.motion_sensor_158d000420092b
 
 utility_meters:
   name: Utility Meters
   icon: mdi:counter
   entities:
     - utility_meter.um_daily_bw1
-    - utility_meter.um_daily_bw2
     - utility_meter.um_monthly_bw1
-    - utility_meter.um_monthly_bw2
     - utility_meter.um_yearly_bw1
+    - utility_meter.um_daily_bw2
+    - utility_meter.um_monthly_bw2
     - utility_meter.um_yearly_bw2
+    - utility_meter.um_daily_bw3
+    - utility_meter.um_monthly_bw3
+    - utility_meter.um_yearly_bw3
+    - utility_meter.um_daily_bw4
+    - utility_meter.um_monthly_bw4
+    - utility_meter.um_yearly_bw4
+    - utility_meter.um_daily_bw5
+    - utility_meter.um_monthly_bw5
+    - utility_meter.um_yearly_bw5
+    - utility_meter.um_daily_bw6
+    - utility_meter.um_monthly_bw6
+    - utility_meter.um_yearly_bw6
+    - utility_meter.um_daily_bw7
+    - utility_meter.um_monthly_bw7
+    - utility_meter.um_yearly_bw7
+
+house_fans:
+  name: House Fans
+  icon: mdi:fan
+  entities:
+    - switch.bedroom_fan
+    - switch.kids_fan
+
+kitchen_lights:
+  name: Kitchen Lights
+  icon: mdi:lightbulb
+  entities:
+    - switch.0xec1bbdfffe6c12f2_switch_left
+    - switch.0xec1bbdfffe6c12f2_switch_right
+
+all_sprinklers:
+  name: All Sprinklers
+  entities:
+    - switch.sprinkler_zone_1
+    - switch.sprinkler_zone_2
+    - switch.sprinkler_zone_3
+    - switch.sprinkler_zone_4
+    - switch.sprinkler_zone_5
+    - switch.sprinkler_zone_6

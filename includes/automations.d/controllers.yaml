@@ -1,0 +1,33 @@
+# Mijia button automations
+
+# Turn on fans on long click
+- alias: Bedroom Button Long Click
+  trigger:
+    platform: state
+    entity_id: sensor.0x00158d000122cc7a_click
+    to: long
+  action:
+    - service: switch.turn_on
+      entity_id: group.house_fans
+
+#  Turn off fans on a single click
+- alias: Bedroom Button Click
+  trigger:
+    platform: state
+    entity_id: sensor.0x00158d000122cc7a_click
+    to: single
+  action:
+    - service: switch.turn_off
+      entity_id: group.house_fans
+
+#  Toggle indicators on double click
+# - alias: Bedroom Button Double Click
+#   trigger:
+#     platform: state
+#     entity_id: sensor.0x00158d000122cc7a_click
+#     to: double
+#   action:
+#     - service: switch.toggle
+#       entity_id: 
+#         - switch.bedroom_indicator
+#         - switch.kids_indicator

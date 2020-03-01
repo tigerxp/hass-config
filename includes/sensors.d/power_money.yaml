@@ -53,3 +53,143 @@
         - sensor.um_yearly_bw2_night
       value_template: "{{ ((states('sensor.um_yearly_bw2_day')|float * 1.68) + (states('sensor.um_yearly_bw2_night')|float * 0.9)) |round(2) }}"
       icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #3 Costs
+- platform: template
+  sensors:
+    money_daily_bw3:
+      friendly_name: "BW #3 Daily Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_daily_bw3_day
+        - sensor.um_daily_bw3_night
+      value_template: "{{ ((states('sensor.um_daily_bw3_day')|float * 1.68) + (states('sensor.um_daily_bw3_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_monthly_bw3:
+      friendly_name: "BW #3 Monthly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_monthly_bw3_day
+        - sensor.um_monthly_bw3_night
+      value_template: "{{ ((states('sensor.um_monthly_bw3_day')|float * 1.68) + (states('sensor.um_monthly_bw3_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_yearly_bw3:
+      friendly_name: "BW #3 Yearly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_yearly_bw3_day
+        - sensor.um_yearly_bw3_night
+      value_template: "{{ ((states('sensor.um_yearly_bw3_day')|float * 1.68) + (states('sensor.um_yearly_bw3_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #4 Costs
+- platform: template
+  sensors:
+    money_daily_bw4:
+      friendly_name: "BW #4 Daily Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_daily_bw4_day
+        - sensor.um_daily_bw4_night
+      value_template: "{{ ((states('sensor.um_daily_bw4_day')|float * 1.68) + (states('sensor.um_daily_bw4_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_monthly_bw4:
+      friendly_name: "BW #4 Monthly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_monthly_bw4_day
+        - sensor.um_monthly_bw4_night
+      value_template: "{{ ((states('sensor.um_monthly_bw4_day')|float * 1.68) + (states('sensor.um_monthly_bw4_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_yearly_bw4:
+      friendly_name: "BW #4 Yearly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_yearly_bw4_day
+        - sensor.um_yearly_bw4_night
+      value_template: "{{ ((states('sensor.um_yearly_bw4_day')|float * 1.68) + (states('sensor.um_yearly_bw4_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #5 Costs
+- platform: template
+  sensors:
+    money_daily_bw5:
+      friendly_name: "BW #5 Daily Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_daily_bw5_day
+        - sensor.um_daily_bw5_night
+      value_template: "{{ ((states('sensor.um_daily_bw5_day')|float * 1.68) + (states('sensor.um_daily_bw5_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_monthly_bw5:
+      friendly_name: "BW #5 Monthly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_monthly_bw5_day
+        - sensor.um_monthly_bw5_night
+      value_template: "{{ ((states('sensor.um_monthly_bw5_day')|float * 1.68) + (states('sensor.um_monthly_bw5_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_yearly_bw5:
+      friendly_name: "BW #5 Yearly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_yearly_bw5_day
+        - sensor.um_yearly_bw5_night
+      value_template: "{{ ((states('sensor.um_yearly_bw5_day')|float * 1.68) + (states('sensor.um_yearly_bw5_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #6 Costs
+- platform: template
+  sensors:
+    money_daily_bw6:
+      friendly_name: "BW #6 Daily Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_daily_bw6_day
+        - sensor.um_daily_bw6_night
+      value_template: "{{ ((states('sensor.um_daily_bw6_day')|float * 1.68) + (states('sensor.um_daily_bw6_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_monthly_bw6:
+      friendly_name: "BW #6 Monthly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_monthly_bw6_day
+        - sensor.um_monthly_bw6_night
+      value_template: "{{ ((states('sensor.um_monthly_bw6_day')|float * 1.68) + (states('sensor.um_monthly_bw6_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_yearly_bw6:
+      friendly_name: "BW #6 Yearly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_yearly_bw6_day
+        - sensor.um_yearly_bw6_night
+      value_template: "{{ ((states('sensor.um_yearly_bw6_day')|float * 1.68) + (states('sensor.um_yearly_bw6_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+
+# BlitzWolf #7 Costs
+- platform: template
+  sensors:
+    money_daily_bw7:
+      friendly_name: "BW #7 Daily Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_daily_bw7_day
+        - sensor.um_daily_bw7_night
+      value_template: "{{ ((states('sensor.um_daily_bw7_day')|float * 1.68) + (states('sensor.um_daily_bw7_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_monthly_bw7:
+      friendly_name: "BW #7 Monthly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_monthly_bw7_day
+        - sensor.um_monthly_bw7_night
+      value_template: "{{ ((states('sensor.um_monthly_bw7_day')|float * 1.68) + (states('sensor.um_monthly_bw7_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 
+    money_yearly_bw7:
+      friendly_name: "BW #7 Yearly Cost"
+      unit_of_measurement: 'грн'
+      entity_id:
+        - sensor.um_yearly_bw7_day
+        - sensor.um_yearly_bw7_night
+      value_template: "{{ ((states('sensor.um_yearly_bw7_day')|float * 1.68) + (states('sensor.um_yearly_bw7_night')|float * 0.9)) |round(2) }}"
+      icon_template: mdi:square-inc-cash 

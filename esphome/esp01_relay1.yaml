@@ -1,0 +1,23 @@
+esphome:
+  name: esp01_relay1
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+switch:
+  - platform: gpio
+    pin: 2
+    name: "ESP-01 Relay 1"

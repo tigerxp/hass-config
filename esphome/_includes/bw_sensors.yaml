@@ -1,0 +1,47 @@
+# Power Sensor
+- platform: hlw8012
+  sel_pin: 
+    number: GPIO12
+    inverted: True
+  cf_pin: GPIO04
+  cf1_pin: GPIO05
+  current_resistor: ${current_res}
+  voltage_divider: ${voltage_div}
+  current:
+    name: ${plug_name}_current
+    icon: mdi:current-ac
+    unit_of_measurement: A
+  voltage:
+    name: ${plug_name}_voltage
+    icon: mdi:flash-circle
+    unit_of_measurement: V
+  power:
+    name: ${plug_name}_power
+    icon: mdi:flash-outline
+    unit_of_measurement: W
+    on_value:
+      then:
+        - lambda: |-
+            if (id(relay).state) {
+              // Relay is ON, check the power
+              if (x > 10) {
+                if (id(blue_led).state) id(blue_led).turn_off();
+                if (!id(red_led).state) id(red_led).turn_on();
+              } else {
+                if (id(red_led).state) id(red_led).turn_off();
+                if (!id(blue_led).state) id(blue_led).turn_on();
+              }
+            }
+  initial_mode: CURRENT
+  change_mode_every: 6
+  update_interval: 10s
+
+# Uptime
+- platform: uptime
+  name: ${plug_name}_uptime
+  update_interval: 300s
+
+# WiFi Strength
+- platform: wifi_signal
+  name: ${plug_name}_wifi_signal
+  update_interval: 60s

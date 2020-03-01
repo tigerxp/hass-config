@@ -1,0 +1,25 @@
+{% set count = 7 -%}
+{% for i in range(1,count+1) -%}
+# BlitzWolf #{{ i }}
+um_daily_bw{{ i }}:
+  source: sensor.int_bw{{ i }}_power
+  cycle: daily
+  tariffs:
+    - day
+    - night
+
+um_monthly_bw{{ i }}:
+  source: sensor.int_bw{{ i }}_power
+  cycle: monthly
+  tariffs:
+    - day
+    - night
+
+um_yearly_bw{{ i }}:
+  source: sensor.int_bw{{ i }}_power
+  cycle: yearly
+  tariffs:
+    - day
+    - night
+
+{% endfor -%}

@@ -1,0 +1,33 @@
+{% set count = 7 -%}
+{% for i in range(1,count+1) -%}
+# BlitzWolf #{{ i }} Totals
+- platform: template
+  sensors:
+    power_daily_bw{{ i }}_total:
+      friendly_name: "Total Daily BW #{{ i }}"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ '{{' }} (states('sensor.um_daily_bw{{ i }}_day')|float + states('sensor.um_daily_bw{{ i }}_night')|float)|round(3) {{ '}}' }}"
+      icon_template: mdi:counter
+    power_monthly_bw{{ i }}_total:
+      friendly_name: "Total Monthly BW #{{ i }}"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ '{{' }} (states('sensor.um_monthly_bw{{ i }}_day')|float + states('sensor.um_monthly_bw{{ i }}_night')|float)|round(3) {{ '}}' }}"
+      icon_template: mdi:counter
+    power_yearly_bw{{ i }}_total:
+      friendly_name: "Total Yearly BW #{{ i }}"
+      unit_of_measurement: 'kWh'
+      value_template: "{{ '{{' }} (states('sensor.um_yearly_bw{{ i }}_day')|float + states('sensor.um_yearly_bw{{ i }}_night')|float)|round(3) {{ '}}' }}"
+      icon_template: mdi:counter
+
+{% endfor -%}
+
+# Xiaomi Zigbee load power
+- platform: template
+  sensors:
+{%- set xiaomi_plugs = ['158d000391fadc', '158d00039fcce4'] -%}
+{%- for a in xiaomi_plugs %}
+    plug_{{ a }}_power:
+      icon_template: mdi:flash-outline
+      value_template: "{{ '{{' }} state_attr('switch.plug_{{ a }}', 'load_power'){{ '}}' }}"
+      unit_of_measurement: 'W'
+{% endfor -%}

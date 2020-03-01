@@ -1,0 +1,30 @@
+# Relay
+- platform: gpio
+  name: ${plug_name}_switch
+  pin: GPIO14
+  id: relay
+  restore_mode: RESTORE_DEFAULT_ON
+  on_turn_on:
+    - switch.turn_on: blue_led
+    - switch.turn_off: red_led
+  on_turn_off:
+    - switch.turn_off: blue_led
+    - switch.turn_off: red_led
+
+# Blue led
+- platform: gpio
+  id: blue_led
+  internal: true
+  restore_mode: RESTORE_DEFAULT_OFF
+  pin: 
+    number: GPIO1
+    inverted: True
+
+# Red led
+- platform: gpio
+  id: red_led
+  internal: true
+  restore_mode: RESTORE_DEFAULT_OFF
+  pin: 
+    number: GPIO13
+    inverted: True

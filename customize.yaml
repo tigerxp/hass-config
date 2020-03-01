@@ -1,4 +1,4 @@
-sensor.pressure_sensor_6_0:
+sensor.water_pressure_sensor_6_0:
   unit_of_measurement: bar
   friendly_name: 'Water Pressure'
 switch.bedroom_fan:
@@ -9,57 +9,140 @@ sensor.sunrise:
   icon: mdi:weather-sunset-up
 sensor.sunset:
   icon: mdi:weather-sunset-down
-binary_sensor.motion_sensor_158d000421ccd1:
-  friendly_name: Downstairs Motion
-binary_sensor.motion_sensor_158d00042820c3:
-  friendly_name: Upstairs Motion
-sensor.illumination_158d000421ccd1:
-  friendly_name: Downstairs Illumination
-sensor.illumination_158d00042820c3:
-  friendly_name: Upstairs Illumination
-sensor.illumination_7c49eb1d7f46:
-  friendly_name: Main Gateway Illumination
-binary_sensor.door_window_sensor_158d0003d481a6:
-  friendly_name: Entrance Lock
-  device_class: lock
-binary_sensor.water_leak_sensor_158d000405cec1:
-  friendly_name: Floor 1 Leak
-binary_sensor.water_leak_sensor_158d00041f6a7a:
-  friendly_name: Basement Leak
-binary_sensor.cube_158d0002a71f01:
-  friendly_name: Aqara Cube
-switch.plug_158d000391fadc:
-  friendly_name: Hall TV Plug
-switch.plug_158d00039fcce4:
-  friendly_name: Controllers Plug
-  icon: mdi:wifi-strength-3
-light.gateway_light_7c49eb1d7f46:
-  friendly_name: Main Gateway Light
-binary_sensor.door_window_sensor_158d0003d4434a:
-  friendly_name: Zoo Door
-  device_class: door
-binary_sensor.door_window_sensor_158d0003d4a2b2:
-  friendly_name: Zoo Lock
-  device_class: lock
-switch.neo1_relay:
-  friendly_name: WiFi Repeater Plug
-  icon: mdi:antenna
-switch.neo2_relay:
-  friendly_name: Kitchen TV Plug
-  icon: mdi:television
-switch.bw1_relay:
-  friendly_name: Bedroom Boiler Plug
-  icon: mdi:water-boiler
-switch.bw2_relay:
-  friendly_name: Washing Machine Plug
-  icon: mdi:washing-machine
-binary_sensor.door_window_sensor_158d0003d41ce4:
-  friendly_name: Boiler Room Door
-  device_class: door
-binary_sensor.motion_sensor_158d000420092b:
-  friendly_name: Basement Motion
+
 air_quality.mi_air_monitor:
   friendly_name: Office PM 2.5
   icon: mdi:smog
+
+# Switches
 switch.electric_boiler:
   icon: mdi:water-boiler
+switch.neo1_relay:
+  friendly_name: NEO1 Plug
+  icon: mdi:power-socket-eu
+switch.neo2_relay:
+  friendly_name: Kitchen TV Plug
+  icon: mdi:television
+switch.bw1_switch:
+  friendly_name: Bedroom Boiler Plug
+  icon: mdi:water-boiler
+switch.bw2_switch:
+  friendly_name: Kids Boiler Plug
+  icon: mdi:water-boiler
+switch.bw4_switch:
+  friendly_name: Kitchenware Plug
+  icon: mdi:blender
+switch.bw5_switch:
+  friendly_name: Dehumidifier Plug
+  icon: mdi:air-humidifier
+switch.bw7_switch:
+  friendly_name: Philips Vacuum Plug
+  icon: mdi:squeegee
+switch.0x00158d0001717a37_switch:
+  friendly_name: Bedroom TV Plug
+  icon: mdi:television
+switch.0x00158d000391fadc_switch:
+  friendly_name: Wi-Fi Repeater Plug
+  icon: mdi:wifi-strength-3
+switch.plug_158d00039fcce4:
+  friendly_name: Washing Machine Plug
+  icon: mdi:washing-machine
+switch.0x00158d00039c1bc3_switch:
+  friendly_name: Office Kettle Plug
+  icon: mdi:coffee-maker
+switch.0xec1bbdfffe6c12f2_switch_left:
+  friendly_name: Kitchen Left Light
+  icon: mdi:page-layout-sidebar-left
+switch.0xec1bbdfffe6c12f2_switch_right:
+  friendly_name: Kitchen Right Light
+  icon: mdi:page-layout-sidebar-right
+switch.0xec1bbdfffe68841d_switch:
+  friendly_name: Bathroom Light
+  icon: mdi:lightbulb
+switch.0x00158d00035341d7_switch:
+  friendly_name: Hall TV Plug
+  icon: mdi:television
+switch.temp_tank_valve:
+  friendly_name: Tank Valve
+  icon: mdi:valve
+
+# Gateways
+light.gateway_light_04cf8caa9813:
+  friendly_name: Stairs Gateway Light
+sensor.illumination_04cf8caa9813:
+  friendly_name: Stairs Gateway Illumination
+light.gateway_light_7c49eb1d7f46:
+  friendly_name: Basement Gateway Light
+sensor.illumination_7c49eb1d7f46:
+  friendly_name: Basement Gateway Illumination  
+
+# Upstairs Motion Sensor
+binary_sensor.motion_sensor_158d00042820c3:
+  friendly_name: Upstairs Motion
+# binary_sensor.0x00158d00042820c3_occupancy:
+#   friendly_name: Upstairs Motion
+# sensor.0x00158d00042820c3_illuminance:
+#   friendly_name: Upstairs Illuminance
+#   unit_of_measurement: lux
+# sensor.0x00158d00042820c3_battery:
+#   friendly_name: Upstairs Motion Battery
+
+# Downstairs Motion Sensor
+binary_sensor.0x00158d000421ccd1_occupancy:
+  friendly_name: Downstairs Motion
+sensor.0x00158d000421ccd1_illuminance:
+  friendly_name: Downstairs Illuminance
+  unit_of_measurement: lux
+sensor.0x00158d000421ccd1_battery:
+  friendly_name: Downstairs Motion Battery
+
+# Kitchen Motion Sensor
+binary_sensor.0x00158d00042024f3_occupancy:
+  friendly_name: Kitchen Motion
+sensor.0x00158d00042024f3_illuminance:
+  friendly_name: Kitchen Illuminance
+  unit_of_measurement: lux
+sensor.0x00158d00042024f3_battery:
+  friendly_name: Kitchen Motion Battery
+
+# Basement Motion
+# binary_sensor.motion_sensor_158d000420092b:
+#   friendly_name: Basement Motion
+
+# Basement Motion Sensor
+binary_sensor.0x00158d000420092b_occupancy:
+  friendly_name: Basement Motion
+sensor.0x00158d000420092b_illuminance:
+  friendly_name: Basement Illuminance  
+  unit_of_measurement: lux
+sensor.0x00158d000420092b_battery:
+  friendly_name: Basement Motion Battery
+
+# Doors/Locks
+binary_sensor.0x00158d0003d4434a_contact:
+  friendly_name: Zoo Door
+  device_class: door
+binary_sensor.0x00158d0003d481a6_contact:
+  friendly_name: Entrance Lock
+  device_class: lock
+binary_sensor.0x00158d0003d4a2b2_contact:
+  friendly_name: Zoo Lock
+  device_class: lock
+binary_sensor.0x00158d0003d41ce4_contact:
+  friendly_name: Boiler Room Door
+  device_class: door
+
+# Leak Sensors
+binary_sensor.0x00158d000405cec1_water_leak:
+  friendly_name: Guest Bathroom Leak
+binary_sensor.water_leak_sensor_158d00041f6a7a:
+  friendly_name: Basement Leak
+
+# Controllers
+sensor.0x00158d0002a71f01_action:
+  friendly_name: Aqara Cube Action
+sensor.0x04cf8cdf3c75bca9_action:
+  friendly_name: Aqara Opple 2-key
+sensor.0x00158d000122cc7a_click:
+  friendly_name: Mijia Button
+  icon: mdi:radiobox-marked

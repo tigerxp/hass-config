@@ -9,18 +9,16 @@ homeassistant:
       api_password: !secret api_password
 
 http:
-  base_url: !secret site_url
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
 
 # Record data to external MariaDB database
-recorder:
-  purge_keep_days: 365
-  db_url: !secret recorder_db_url
+recorder: !include includes/recorder.yaml
 
 # Text to speech
 tts:
   - platform: google_translate
+    language: uk
 
 lovelace:
   mode: yaml
@@ -37,10 +35,14 @@ climate: !include includes/climate.yaml
 utility_meter: !include includes/utility_meter.yaml
 input_number: !include includes/input_number.yaml
 input_datetime: !include includes/input_datetime.yaml
+input_select: !include includes/input_select.yaml
 air_quality: !include includes/air_quality.yaml
+# switch: !include includes/switches.yaml
+rest_command: !include includes/rest_commands.yaml
 
 # Folder includes
 sensor: !include_dir_merge_list includes/sensors.d
+binary_sensor: !include_dir_merge_list includes/binary_sensors.d
 automation: !include_dir_merge_list includes/automations.d
 script: !include_dir_merge_named includes/scripts.d
 
@@ -54,7 +56,12 @@ mysensors:
       tcp_port: 5003
   optimistic: false
   persistence: true
-  version: '2.0'
+  version: '2.3'
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.23
+    token: !secret roborock_token
 
 google_assistant:
   project_id: !secret google_assistant_project_id
@@ -70,21 +77,11 @@ google_assistant:
     group.all_automations:
       expose: false
 
-mikrotik:
-  - name: Mikrotik
-    host: 192.168.1.1
-    username: homeassistant
-    password: !secret router_password
-
-xiaomi_aqara:
-  discovery_retry: 10
-  gateways:
-    - mac: 7c49eb1d7f46
-      host: 192.168.1.17
-      key: !secret xiaomi_gw1_key
-    - mac: 04cf8caa9813
-      host: 192.168.1.18
-      key: !secret xiaomi_gw2_key
+# mikrotik:
+#   - name: Mikrotik
+#     host: 192.168.1.1
+#     username: homeassistant
+#     password: !secret router_password
 
 device_tracker:
   - platform: google_maps
@@ -106,3 +103,20 @@ notify:
   - name: telegram_tiger
     platform: telegram
     chat_id: !secret telegram_id_tiger
+
+webhook:
+
+# zigbee2mqtt_networkmap:
+#   #topic: your topic (optional, default zigbee2mqtt)
+# panel_iframe:
+#   networkmap:
+#     title: 'Zigbee Map'
+#     url: '/local/community/zigbee2mqtt_networkmap/map.html'
+#     icon: 'mdi:graphql'
+
+# Broadlink remote
+# remote:
+#   - platform: broadlink
+#     host: !secret broadlink1_ip
+#     mac: !secret broadlink1_mac
+#     name: bedroom

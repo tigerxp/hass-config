@@ -10,6 +10,6 @@
     hot_tolerance: 0.3
     min_cycle_duration:
       seconds: 120
-    initial_hvac_mode: "heat"
+    initial_hvac_mode: "off"
     away_temp: 16
     precision: 0.1

@@ -1,0 +1,104 @@
+esphome:
+  name: esp_sprinkler
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "matrix_ext"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Kinder1 Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+i2c:
+  sda: D3
+  scl: D4
+  
+display:
+  - platform: lcd_pcf8574
+    dimensions: 20x4
+    address: 0x27
+    lambda: |-
+      it.backlight();
+      it.print("Zones: 1 2 3 4 5 6 T");
+      it.printf(7, 1, "%d %d %d %d %d %d %d", 
+        id(zone1).state, id(zone2).state, id(zone3).state,
+        id(zone4).state, id(zone5).state, id(zone6).state,
+        id(tank_valve).state);
+      
+switch:
+  - platform: gpio
+    pin: D0 # Red
+    inverted: true
+    name: "Sprinkler Zone 1"
+    icon: mdi:sprinkler-variant
+    id: zone1
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: &interlock_group [zone1, zone2, zone3, zone4, zone5, zone6]
+  - platform: gpio
+    pin: D5 # Orange
+    inverted: true
+    name: "Sprinkler Zone 2"
+    icon: mdi:sprinkler-variant
+    id: zone2
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: *interlock_group
+  - platform: gpio
+    pin: D7 # Yellow
+    inverted: true
+    name: "Sprinkler Zone 3"
+    icon: mdi:sprinkler-variant
+    id: zone3
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: *interlock_group
+  - platform: gpio
+    pin: D6 # Green
+    inverted: true
+    name: "Sprinkler Zone 4"
+    icon: mdi:sprinkler-variant
+    id: zone4
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: *interlock_group
+  - platform: gpio
+    pin: D1 # Blue
+    inverted: true
+    name: "Sprinkler Zone 5"
+    icon: mdi:sprinkler-variant
+    id: zone5
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: *interlock_group
+  - platform: gpio
+    pin: D2 # Magenta
+    inverted: true
+    name: "Sprinkler Zone 6"
+    icon: mdi:sprinkler-variant
+    id: zone6
+    restore_mode: RESTORE_DEFAULT_OFF
+    interlock: *interlock_group
+  - platform: gpio
+    pin: GPIO3 # Grey
+    inverted: true
+    name: "Tank Valve"
+    icon: mdi:valve
+    id: tank_valve
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    pin: GPIO1 # White
+    inverted: true
+    name: "Sprinkler Reserved"
+    icon: mdi:lifebuoy
+    restore_mode: RESTORE_DEFAULT_OFF

@@ -1,0 +1,9 @@
+# Button
+- platform: gpio
+  id: button
+  pin:
+    number: GPIO3
+    mode: INPUT_PULLUP
+    inverted: True
+  on_click:
+    - switch.toggle: relay
