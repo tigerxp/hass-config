@@ -1,9 +1,13 @@
 title: Our Home
 
 resources:
-  - url: /local/multiple-entity-row.js?v=3.0.0
+  - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
-
+  - url: /hacsfiles/banner-card/banner-card.js
+    type: module
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+    type: module
+    
 views:
 
   - title: Main
@@ -157,7 +161,7 @@ views:
               - type: gauge
                 name: "Water, bar"
                 unit: ' '
-                entity: sensor.pressure_sensor_6_0
+                entity: sensor.water_pressure_sensor_6_0
                 min: 0
                 max: 5
                 severity:
@@ -185,7 +189,9 @@ views:
                 toggle: true
                 entities:
                   - entity: switch.bedroom_indicator
+                    name: false
                     icon: mdi:led-outline
+                    state_color: true
                     tap_action:
                       action: toggle
               - entity: switch.kids_fan
@@ -194,7 +200,9 @@ views:
                 toggle: true
                 entities:
                   - entity: switch.kids_indicator
+                    name: false
                     icon: mdi:led-outline
+                    state_color: true
                     tap_action:
                       action: toggle
               - type: section
@@ -214,7 +222,14 @@ views:
                 name: Basement
                 toggle: true
               - type: section
-              - entity: switch.bw1_relay
+              - entity: switch.0x00158d0001717a37_switch
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                toggle: true
+                entities:
+                  - entity: sensor.0x00158d0001717a37_power
+                    name: current power
+              - entity: switch.bw1_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 toggle: true
@@ -222,7 +237,7 @@ views:
                   - entity: sensor.bw1_power
                     name: current power
               - type: section
-              - entity: switch.bw2_relay
+              - entity: switch.bw2_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 toggle: true
@@ -230,12 +245,12 @@ views:
                   - entity: sensor.bw2_power
                     name: current power
               - type: section
-              - entity: switch.plug_158d000391fadc
+              - entity: switch.0x00158d000391fadc_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 toggle: true
                 entities:
-                  - entity: sensor.plug_158d000391fadc_power
+                  - entity: sensor.0x00158d000391fadc_power
                     name: current power
               - entity: switch.plug_158d00039fcce4
                 secondary_info: last-changed
@@ -244,7 +259,6 @@ views:
                 entities:
                   - entity: sensor.plug_158d00039fcce4_power
                     name: current power
-
 
   - title: Controls
     id: controls
@@ -280,25 +294,122 @@ views:
           - type: entity-button
             entity: switch.kids_fan
 
-      - type: horizontal-stack
-        cards:
-          - type: entities
-            title: Other
-            show_header_toggle: false
-            entities:
-              - entity: fan.bedroom_speed_fan
-                name: Bedroom Speed Fan
-
       - type: entities
+        title: Lights
         show_header_toggle: false
         state_color: true
         entities:
-          - switch.bw1_relay
-          - switch.bw2_relay
+          - switch.0xec1bbdfffe6c12f2_switch_left
+          - switch.0xec1bbdfffe6c12f2_switch_right
+          - switch.0xec1bbdfffe68841d_switch
+
+      - type: entities
+        title: Switches
+        show_header_toggle: false
+        state_color: true
+        entities:
           - switch.neo1_relay
           - switch.neo2_relay
-          - switch.plug_158d000391fadc
+          - switch.0x00158d000391fadc_switch
+          - switch.0x00158d0001717a37_switch
+          - switch.0x00158d00035341d7_switch
           - switch.plug_158d00039fcce4
+          - entity: switch.bw1_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw1_voltage
+                name: U
+              - entity: sensor.bw1_current
+                name: I
+              - entity: sensor.bw1_power
+                name: P
+          - entity: switch.bw2_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw2_voltage
+                name: U
+              - entity: sensor.bw2_current
+                name: I
+              - entity: sensor.bw2_power
+                name: P
+          - entity: switch.bw3_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw3_voltage
+                name: U
+              - entity: sensor.bw3_current
+                name: I
+              - entity: sensor.bw3_power
+                name: P
+          - entity: switch.bw4_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw4_voltage
+                name: U
+              - entity: sensor.bw4_current
+                name: I
+              - entity: sensor.bw4_power
+                name: P
+          - entity: switch.bw5_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw5_voltage
+                name: U
+              - entity: sensor.bw5_current
+                name: I
+              - entity: sensor.bw5_power
+                name: P
+          - entity: switch.bw6_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw6_voltage
+                name: U
+              - entity: sensor.bw6_current
+                name: I
+              - entity: sensor.bw6_power
+                name: P
+          - entity: switch.bw7_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.bw7_voltage
+                name: U
+              - entity: sensor.bw7_current
+                name: I
+              - entity: sensor.bw7_power
+                name: P
+          - switch.esp_01_relay_1
+          - switch.esp_01_relay_2
+
+      - type: entities
+        title: Lawn Watering
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - input_number.sprinkler_quick
+          - script.quick_sprinkle_all
+          - type: divider
+          - input_select.sprinkler_zone
+          - input_number.sprinkler_single
+          - script.sprinkle_one_zone
+          # - type: divider
+          # - entity: input_number.sprinkler_single
+          #   type: custom:multiple-entity-row
+          #   entities:
+          #     - entity: input_select.sprinkler_zone
 
   - title: 'Zigbee'
     id: zigbee
@@ -306,27 +417,235 @@ views:
     icon: mdi:zigbee
 
     cards:
-      - type: entities
-        show_header_toggle: false
-        state_color: true
-        entities:
-          - binary_sensor.motion_sensor_158d000421ccd1
-          - binary_sensor.motion_sensor_158d00042820c3
-          - binary_sensor.motion_sensor_158d000420092b
-          - binary_sensor.door_window_sensor_158d0003d41ce4
-          - binary_sensor.door_window_sensor_158d0003d4434a
-          - binary_sensor.door_window_sensor_158d0003d481a6
-          - binary_sensor.door_window_sensor_158d0003d4a2b2
-          - group.house_locks
-          - switch.plug_158d000391fadc
-          - switch.plug_158d00039fcce4
-          - binary_sensor.water_leak_sensor_158d000405cec1
-          - binary_sensor.water_leak_sensor_158d00041f6a7a
-          - sensor.illumination_158d000421ccd1
-          - sensor.illumination_158d00042820c3
-          - sensor.illumination_7c49eb1d7f46
-          - light.gateway_light_7c49eb1d7f46
-          - binary_sensor.cube_158d0002a71f01
+      - type: vertical-stack
+        cards:
+
+        # Gateways
+        - type: entities
+          title: Gateways
+          show_header_toggle: false
+          state_color: true
+          entities:
+            - entity: light.gateway_light_04cf8caa9813
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.illumination_04cf8caa9813
+                  name: lum
+            - entity: light.gateway_light_7c49eb1d7f46
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.illumination_7c49eb1d7f46
+                  name: lum
+        # Door/Window
+        - type: entities
+          title: Doors
+          show_header_toggle: false
+          state_color: true
+          entities:
+            - entity: binary_sensor.0x00158d0003d481a6_contact
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d0003d481a6_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003d481a6_battery
+                  name: bat
+
+            - entity: binary_sensor.0x00158d0003d4a2b2_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003d4a2b2_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003d4a2b2_battery
+                  name: bat
+
+            - entity: binary_sensor.0x00158d0003d4434a_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003d4434a_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003d4434a_battery
+                  name: bat
+
+            - entity: binary_sensor.0x00158d0003d41ce4_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003d41ce4_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003d41ce4_battery
+                  name: bat
+
+      - type: vertical-stack
+        cards:
+
+        # Leak
+        - type: entities
+          title: Leak
+          show_header_toggle: false
+          state_color: true
+          entities:
+            - entity: binary_sensor.0x00158d000405cec1_water_leak
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000405cec1_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000405cec1_battery
+                  name: bat
+
+            - entity: binary_sensor.water_leak_sensor_158d00041f6a7a
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+
+        # Motion
+        - type: entities
+          title: Motion
+          show_header_toggle: false
+          state_color: true
+          entities:
+            - entity: binary_sensor.motion_sensor_158d00042820c3
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+            #   entities:
+            #     - entity: sensor.0x00158d00042820c3_linkquality
+            #       name: lqi
+            #     - entity: sensor.0x00158d00042820c3_battery
+            #       name: bat
+            #     - entity: sensor.0x00158d00042820c3_illuminance
+            #       name: lum
+            - entity: binary_sensor.0x00158d000421ccd1_occupancy
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000421ccd1_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000421ccd1_battery
+                  name: bat
+                - entity: sensor.0x00158d000421ccd1_illuminance
+                  name: lum
+            - entity: binary_sensor.0x00158d00042024f3_occupancy
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d00042024f3_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d00042024f3_battery
+                  name: bat
+                - entity: sensor.0x00158d00042024f3_illuminance
+                  name: lum
+            # - entity: binary_sensor.motion_sensor_158d000420092b
+              # type: custom:multiple-entity-row
+              # secondary_info: last-changed
+
+            - entity: binary_sensor.0x00158d000420092b_occupancy
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000420092b_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000420092b_battery
+                  name: bat
+                - entity: sensor.0x00158d000420092b_illuminance
+                  name: lum
+
+      - type: vertical-stack
+        cards:
+
+          # Plugs
+          - type: entities
+            title: Plugs
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: switch.0x00158d0001717a37_switch
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.0x00158d0001717a37_linkquality
+                    name: lqi
+                  - entity: sensor.0x00158d0001717a37_power
+                    name: power
+
+              - entity: switch.0x00158d000391fadc_switch
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.0x00158d000391fadc_linkquality
+                    name: lqi
+                  - entity: sensor.0x00158d000391fadc_power
+                    name: power
+
+              - switch.plug_158d00039fcce4
+
+
+          # Controllers
+          - type: entities
+            title: Controllers
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: sensor.0x00158d0002a71f01_action
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.0x00158d0002a71f01_linkquality
+                    name: lqi
+                  - entity: sensor.0x00158d0002a71f01_battery
+                    name: bat
+              - entity: sensor.0x04cf8cdf3c75bca9_action
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.0x04cf8cdf3c75bca9_linkquality
+                    name: lqi
+                  - entity: sensor.0x04cf8cdf3c75bca9_battery
+                    name: bat
+              - entity: sensor.0x00158d000122cc7a_click
+                type: custom:multiple-entity-row
+                secondary_info: last-changed
+                entities:
+                  - entity: sensor.0x00158d000122cc7a_linkquality
+                    name: lqi
+                  - entity: sensor.0x00158d000122cc7a_battery
+                    name: bat
+
+          # Switches
+          - type: entities
+            title: Switches
+            show_header_toggle: true
+            state_color: true
+            entities:
+              - entity: switch.0xec1bbdfffe68841d_switch
+                toggle: true
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                entities:
+                  - entity: sensor.0xec1bbdfffe68841d_linkquality
+                    name: lqi
+              - entity: group.kitchen_lights
+                toggle: true
+                secondary_info: last-changed
+                type: custom:multiple-entity-row
+                entities:
+                  - entity: sensor.0xec1bbdfffe6c12f2_linkquality
+                    name: lqi
+                  - entity: switch.0xec1bbdfffe6c12f2_switch_left
+                    name: false
+                    state_color: true
+                    icon: mdi:code-less-than
+                    tap_action:
+                      action: toggle
+                  - entity: switch.0xec1bbdfffe6c12f2_switch_right
+                    name: false
+                    state_color: true
+                    icon: mdi:code-greater-than
+                    tap_action:
+                      action: toggle
 
   - title: Cameras
     id: cameras
@@ -433,7 +752,20 @@ views:
         refresh_interval: 120
         title: Water Pressure (12h)
         entities:
-          - entity: sensor.pressure_sensor_6_0
+          - entity: sensor.water_pressure_sensor_6_0
+
+      - type: history-graph
+        hours_to_show: 12
+        refresh_interval: 60
+        title: Voltage
+        entities:
+          - entity: sensor.bw1_voltage
+          - entity: sensor.bw2_voltage
+          - entity: sensor.bw3_voltage
+          - entity: sensor.bw4_voltage
+          - entity: sensor.bw5_voltage
+          - entity: sensor.bw6_voltage
+          - entity: sensor.bw7_voltage
 
   - title: 'Tests'
     id: tests
@@ -441,134 +773,165 @@ views:
     icon: mdi:bug-check-outline
 
     cards:
-
-      - type: entities
-        title: Bedroom
-        state_color: true
+      - type: custom:banner-card
+        background: "#EDE7B0"
+        heading: "\U0001F6CF Bedroom"
+        link: /lovelace/tests
+        row_size: 4
         entities:
           - entity: sensor.bedroom_temperature
-            name: Temperature
+            name: Temp
           - entity: sensor.bedroom_humidity
             name: Humidity
           - entity: switch.bedroom_fan
             name: Fan
           - entity: switch.bedroom_indicator
-            name: Fan Indicator
+            name: LED
 
-      - type: entities
-        title: Klim's Room
-        state_color: true
-        entities:
-          - entity: sensor.klim_s_room_temperature
-            name: Temperature
-          - entity: sensor.klim_s_room_humidity
-            name: Humidity
-          - entity: switch.kids_fan
-            name: Fan
-          - entity: switch.kids_indicator
-            name: Fan Indicator
-          - entity: switch.kinder2_restart
-
-      - type: entities
-        title: Masha's Room
-        state_color: true
-        show_header_toggle: false
+      - type: custom:banner-card
+        background: "#FFAAAA"
+        heading: "\U0001F6CF Masha's Room"
+        link: /lovelace/tests
+        row_size: 2
         entities:
           - entity: sensor.masha_s_room_temperature
-            name: Temperature
+            name: Temp
           - entity: sensor.masha_s_room_humidity
             name: Humidity
 
+      - type: custom:banner-card
+        heading: "\U0001F6CF Klim's Room"
+        background: "#AAAAFF"
+        link: /lovelace/tests
+        row_size: 5
+        entities:
+          - entity: sensor.klim_s_room_temperature
+            name: Temp
+            when:
+              state: ['!=', 'unavailable']
+          - entity: sensor.klim_s_room_humidity
+            name: Humidity
+            when:
+              state: ['!=', 'unavailable']
+          - entity: switch.kids_fan
+            name: Fan
+            when:
+              state: ['!=', 'unavailable']
+          - entity: switch.kids_indicator
+            name: LED
+            when:
+              state: ['!=', 'unavailable']
+          - entity: switch.kinder2_restart
+            name: Restart
+            value: mdi:restart
+            action:
+              service: switch.turn_on
 
-      - type: entities
-        title: Office
-        state_color: true
-        show_header_toggle: false
+      - type: custom:banner-card
+        heading: "\U0001F5A8 Office"
+        background: "#CCCCCC"
+        link: /lovelace/tests
+        row_size: 3
         entities:
           - entity: sensor.office_temperature
-            name: Temperature
+            name: Temp
           - entity: sensor.office_humidity
             name: Humidity
           - entity: light.office
             name: "Light"
+            image: True
 
-      - type: entities
-        title: Zoo
-        state_color: true
-        show_header_toggle: false
+      - type: custom:banner-card
+        heading: "\U0001F408 Zoo"
+        background: "#CCFFCC"
+        link: /lovelace/tests
+        row_size: 3
         entities:
           - entity: sensor.zoo_temperature
-            name: "Temperature"
-          - entity: light.zoo_rgb_led
-            name: RGB LED
+            name: Temp
           - entity: sensor.zoo_brightness
             name: Brightness
+          - entity: light.zoo_rgb_led
+            name: "LED"
+            image: True
 
-      - type: entities
-        title: Boiler Room
-        state_color: true
-        show_header_toggle: false
+      - type: custom:banner-card
+        heading: "\U000026F2 Sprinklers"
+        background: "#CCCCFF"
+        link: /lovelace/tests
+        row_size: 6
         entities:
+          - entity: switch.sprinkler_zone_1
+            name: Zone 1
+            image: True
+          - entity: switch.sprinkler_zone_2
+            name: Zone 2
+          - entity: switch.sprinkler_zone_3
+            name: Zone 3
+          - entity: switch.sprinkler_zone_4
+            name: Zone 4
+          - entity: switch.sprinkler_zone_5
+            name: Zone 5
+          - entity: switch.sprinkler_zone_6
+            name: Zone 6
+
+      - type: custom:banner-card
+        heading: "\U00002668 Boiler Room"
+        background: "#CCCCFF"
+        link: /lovelace/tests
+        row_size: 5
+        entities:
+          - entity: sensor.boiler_out_temperature  
+            name: In
+          - entity: sensor.boilder_in_temperature
+            name: Out
+          - entity: switch.electric_boiler
+            name: Heater
+            image: True
           - entity: sensor.boiler_room_temperature
-            name: Temperature
+            name: Room T
           - entity: sensor.boiler_room_humidity
-            name: Humidity
-          - switch.electric_boiler
-          - sensor.boilder_in_temperature
-          - sensor.boiler_out_temperature  
+            name: Room H
 
+      - type: custom:banner-card
+        heading: "\U00002668 Watering"
+        background: "#CCCCFF"
+        link: /lovelace/tests
+        row_size: 3
+        entities:
+          - entity: input_number.sprinkler_quick
+            name: Time
+          - entity: script.quick_sprinkle_all
+            name: Start All
+          - entity: input_select.sprinkler_zone
+            name: Time
+          - entity: input_number.sprinkler_single
+            name: Time
+          - entity: script.quick_sprinkle_all
+            name: Start One
 
       - type: entities
+        title: In Progress
         show_header_toggle: false
-        state_color: true
         entities:
-          - binary_sensor.bw1_button
-          - sensor.bw1_voltage
-          - sensor.bw1_current
-          - sensor.bw1_power
-          - switch.bw1_led_blue
-          - switch.bw1_led_red
-          - switch.bw1_relay
-          - sensor.bw1_fw_version
-          - sensor.bw1_uptime
-          - sensor.bw1_wifi_signal
+          - entity: fan.bedroom_speed_fan
+            name: Bedroom Speed Fan
+          - sensor.distance_sensor_1_0
+          - sensor.distance_sensor_1_2
+          - sensor.distance_sensor_1_3
 
-      - type: entities
-        show_header_toggle: false
-        state_color: true
-        entities:
-          - binary_sensor.bw2_button
-          - sensor.bw2_voltage
-          - sensor.bw2_current
-          - sensor.bw2_power
-          - switch.bw2_led_blue
-          - switch.bw2_led_red
-          - switch.bw2_relay
-          - sensor.bw2_fw_version
-          - sensor.bw2_uptime
-          - sensor.bw2_wifi_signal
-
-      - type: entities
-        show_header_toggle: false
-        state_color: true
-        entities:
-          - binary_sensor.neo1_button
-          - switch.neo1_relay
-          - switch.neo1_led
-          - sensor.neo1_fw_version
-          - sensor.neo1_uptime
-          - sensor.neo1_wifi_signal
-
-      - type: entities
-        show_header_toggle: false
-        state_color: true
-        entities:
-          - binary_sensor.neo2_button
-          - switch.neo2_relay
-          - switch.neo2_led
-          - sensor.neo2_fw_version
-          - sensor.neo2_uptime
-          - sensor.neo2_wifi_signal
+      - type: custom:auto-entities
+        show_empty: false
+        card:
+          type: entities
+          title: Lights on
+          show_header_toggle: false
+        filter:
+          include:
+            - domain: light
+          exclude:
+          - state: "off"
+          - state: "unavailable"    
 
   - title: 'Power'
     id: power
@@ -603,7 +966,7 @@ views:
                 unit: false
           - entity: sensor.money_daily_bw2
             type: custom:multiple-entity-row
-            name: Washing Machine
+            name: Kids Boiler
             state_header: cost
             entities:
               - entity: sensor.um_daily_bw2_day
@@ -613,6 +976,34 @@ views:
                 name: night
                 unit: false
               - entity: sensor.power_daily_bw2_total
+                name: total
+                unit: false
+          - entity: sensor.money_daily_bw4
+            type: custom:multiple-entity-row
+            name: Kitchenware
+            state_header: cost
+            entities:
+              - entity: sensor.um_daily_bw4_day
+                name: day
+                unit: false
+              - entity: sensor.um_daily_bw4_night
+                name: night
+                unit: false
+              - entity: sensor.power_daily_bw4_total
+                name: total
+                unit: false
+          - entity: sensor.money_daily_bw6
+            type: custom:multiple-entity-row
+            name: Office Kettle
+            state_header: cost
+            entities:
+              - entity: sensor.um_daily_bw6_day
+                name: day
+                unit: false
+              - entity: sensor.um_daily_bw6_night
+                name: night
+                unit: false
+              - entity: sensor.power_daily_bw6_total
                 name: total
                 unit: false
 
@@ -636,7 +1027,7 @@ views:
                 unit: false
           - entity: sensor.money_monthly_bw2
             type: custom:multiple-entity-row
-            name: Washing Machine
+            name: Kids Boiler
             state_header: cost
             entities:
               - entity: sensor.um_monthly_bw2_day
@@ -646,6 +1037,34 @@ views:
                 name: night
                 unit: false
               - entity: sensor.power_monthly_bw2_total
+                name: total
+                unit: false
+          - entity: sensor.money_monthly_bw4
+            type: custom:multiple-entity-row
+            name: Kitchenware
+            state_header: cost
+            entities:
+              - entity: sensor.um_monthly_bw4_day
+                name: day
+                unit: false
+              - entity: sensor.um_monthly_bw4_night
+                name: night
+                unit: false
+              - entity: sensor.power_monthly_bw4_total
+                name: total
+                unit: false
+          - entity: sensor.money_monthly_bw6
+            type: custom:multiple-entity-row
+            name: Office Kettle
+            state_header: cost
+            entities:
+              - entity: sensor.um_monthly_bw6_day
+                name: day
+                unit: false
+              - entity: sensor.um_monthly_bw6_night
+                name: night
+                unit: false
+              - entity: sensor.power_monthly_bw6_total
                 name: total
                 unit: false
 
@@ -686,3 +1105,36 @@ views:
           - script.utility_clear_daily
           - script.utility_clear_monthly
           - script.utility_clear_yearly
+
+      - type: entities
+        title: Automations
+        entities:
+          - automation.washing_started
+          - automation.washing_finished
+          - automation.vacuum_charging
+          - automation.vacuum_charged
+          - automation.low_water_pressure
+          - automation.restore_tank_valve
+
+      - type: entities
+        title: Sprinkler Settings
+        entities:
+          - input_number.sprinkler_quick
+          - input_number.sprinkler_zone1
+          - input_number.sprinkler_zone2
+          - input_number.sprinkler_zone3
+          - input_number.sprinkler_zone4
+          - input_number.sprinkler_zone5
+          - input_number.sprinkler_zone6
+
+  - title: 'Info'
+    id: info
+    path: info
+    icon: mdi:information-outline
+
+    cards:
+      - type: entities
+        title: System Information
+        show_header_toggle: false
+        entities:
+          - sensor.recorder_db_size

@@ -1,0 +1,11 @@
+{% set count = 7 -%}
+{% for i in range(1,count+1) -%}
+- platform: integration
+  source: sensor.bw{{ i }}_power
+  name: int_bw{{ i }}_power
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
+{% endfor -%}

@@ -12,3 +12,15 @@
       entity_id: air_quality.mi_air_monitor
       value_template: "{{ state_attr('air_quality.mi_air_monitor', 'total_volatile_organic_compounds') }}"
       icon_template: mdi:scatter-plot
+    aq_office_temperature:
+      friendly_name: "Office Temperature 3"
+      device_class: temperature
+      unit_of_measurement: '°C'
+      entity_id: air_quality.mi_air_monitor
+      value_template: "{{ state_attr('air_quality.mi_air_monitor', 'temperature') }}"
+    aq_office_humidity:
+      friendly_name: "Office Humidity 3"
+      device_class: temperature
+      unit_of_measurement: '%'
+      entity_id: air_quality.mi_air_monitor
+      value_template: "{{ state_attr('air_quality.mi_air_monitor', 'humidity') }}"

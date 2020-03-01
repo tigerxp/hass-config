@@ -1,0 +1,8 @@
+- id: update_networkmap
+  alias: 'Actualize Zigbee Map'
+  trigger:
+    platform: time_pattern
+    minutes: '/15'
+    seconds: 00
+  action:
+    service: zigbee2mqtt_networkmap.update

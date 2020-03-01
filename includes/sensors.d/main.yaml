@@ -3,6 +3,7 @@
   name: "House Average Temperature"
   round_digits: 1
   entity_ids:
+    - sensor.bedroom_temperature
     - sensor.masha_s_room_temperature
     - sensor.klim_s_room_temperature
 

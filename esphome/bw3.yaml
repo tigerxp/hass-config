@@ -1,6 +1,6 @@
 # Variables
 substitutions:
-  plug_name: bw2
+  plug_name: bw3
   current_res: "0.00222"
   voltage_div: "965"
 

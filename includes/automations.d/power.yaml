@@ -1,0 +1,43 @@
+- alias: Vacuum Charging
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.bw7_power
+    above: 10
+    for: '00:1:00'
+  condition:
+    condition: state
+    entity_id: automation.vacuum_charged
+    state: 'off'
+  # condition:
+  #   condition: time
+  #   after: '8:00:00'
+  #   before: '22:00:00'
+  action:
+    - service: notify.telegram_group
+      data_template:
+        message: 'Philips Vacuum is charging'
+    - service: automation.turn_on
+      entity_id: automation.vacuum_charged
+
+- alias: Washing Started
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.plug_158d00039fcce4_power
+    above: 100
+    for: '00:05:00'
+  condition:
+    condition: state
+    entity_id: automation.vacuum_charged
+    state: 'off'
+  # condition:
+  #   condition: time
+  #   after: '8:00:00'
+  #   before: '22:00:00'
+  action:
+    - service: notify.telegram_group
+      data_template:
+        message: 'Washing Started'
+    - service: automation.turn_on
+      entity_id: automation.washing_finished

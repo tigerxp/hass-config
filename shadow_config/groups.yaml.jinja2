@@ -1,0 +1,46 @@
+house_locks:
+  name: House Locks
+  icon: mdi:lock-reset
+  entities:
+    - binary_sensor.0x00158d0003d481a6_contact
+    - binary_sensor.0x00158d0003d4a2b2_contact
+
+downstairs_motion:
+  name: Downstairs Motion Group
+  entities:
+    - binary_sensor.0x00158d000421ccd1_occupancy
+#    - binary_sensor.0x00158d000420092b_occupancy
+    - binary_sensor.motion_sensor_158d000420092b
+
+utility_meters:
+  name: Utility Meters
+  icon: mdi:counter
+  entities:
+{%- set count = 7 -%}
+{%- for i in range(1,count+1) %}
+    - utility_meter.um_daily_bw{{ i }}
+    - utility_meter.um_monthly_bw{{ i }}
+    - utility_meter.um_yearly_bw{{ i }}
+{%- endfor %}
+
+house_fans:
+  name: House Fans
+  icon: mdi:fan
+  entities:
+    - switch.bedroom_fan
+    - switch.kids_fan
+
+kitchen_lights:
+  name: Kitchen Lights
+  icon: mdi:lightbulb
+  entities:
+    - switch.0xec1bbdfffe6c12f2_switch_left
+    - switch.0xec1bbdfffe6c12f2_switch_right
+
+all_sprinklers:
+  name: All Sprinklers
+  entities:
+{%- set count = 6 -%}
+{%- for i in range(1,count+1) %}
+    - switch.sprinkler_zone_{{ i }}
+{%- endfor %}

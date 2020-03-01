@@ -2,6 +2,7 @@
 !.gitignore
 !esphome/
 !esphome/*.yaml
+!esphome/_includes/*.yaml
 !automations.yaml
 !configuration.yaml
 !customize.yaml
@@ -12,3 +13,6 @@
 !includes/*.d/*.yaml
 !scripts.yaml
 !ui-lovelace.yaml
+!make_config.py
+!shadow_config
+!shadow_config/*

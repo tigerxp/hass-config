@@ -44,16 +44,16 @@
     to: 'on'
   action:
     - service: light.turn_on
-      entity_id: light.gateway_light_7c49eb1d7f46
+      entity_id: light.gateway_light_04cf8caa9813
       data_template:
         brightness: >
-          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+          {% if is_state("group.house_locks", "on") %}      
             100
           {% else %}
             50
           {% endif %}
         color_name: >
-          {% if is_state("binary_sensor.door_window_sensor_158d0003d481a6", "on") %}      
+          {% if is_state("group.house_locks", "on") %}      
             red
           {% else %}
             green
@@ -68,20 +68,22 @@
       minutes: 1
   action:
     - service: light.turn_off
-      entity_id: light.gateway_light_7c49eb1d7f46
+      entity_id: light.gateway_light_04cf8caa9813
 
 # Downstairs movement light
 - alias: Downstairs motion on
   trigger:
     platform: state
-    entity_id:
-      - binary_sensor.motion_sensor_158d000421ccd1
-      - binary_sensor.motion_sensor_158d000420092b
+    entity_id: group.downstairs_motion
+      # - binary_sensor.0x00158d000421ccd1_occupancy
+      # - binary_sensor.0x00158d000420092b_occupancy
+      # - binary_sensor.motion_sensor_158d000421ccd1
+      # - binary_sensor.motion_sensor_158d000420092b
     from: 'off'
     to: 'on'
   condition:
     condition: numeric_state
-    entity_id: sensor.illumination_158d000421ccd1
+    entity_id: sensor.0x00158d000421ccd1_illuminance
     below: 50
   action:
     - service: light.turn_on
@@ -91,7 +93,7 @@
 - alias: Downstairs motion off
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d000421ccd1
+    entity_id: group.downstairs_motion
     from: 'on'
     to: 'off'
     for:
@@ -108,11 +110,11 @@
     entity_id: group.house_locks
   condition:
     - condition: state
-      entity_id: light.gateway_light_7c49eb1d7f46
+      entity_id: light.gateway_light_04cf8caa9813
       state: 'on'
   action:
     - service: light.turn_on
-      entity_id: light.gateway_light_7c49eb1d7f46
+      entity_id: light.gateway_light_04cf8caa9813
       data_template:
         brightness: >
           {% if is_state("group.house_locks", "on") %}

@@ -1,0 +1,4 @@
+# TODO: get rid of these
+wifi_iot_gpio:
+    url: http://{{ ip }}/gpio?pin={{ gpio }}&st={{ state }}{{ extra }}
+    method: GET

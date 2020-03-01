@@ -1,0 +1,24 @@
+learn_tv_commands:
+  sequence:
+    - service: remote.learn_command
+      data:
+        entity_id: remote.bedroom
+        device: television
+        command:
+          - turn on
+          - turn off
+          - volume up
+          - volume down
+
+learn_fan_commands:
+  sequence:
+    - service: remote.learn_command
+      data:
+        entity_id: remote.bedroom
+        device: fan
+        command:
+          - turn on
+          - turn off
+          - low speed
+          - medium speed
+          - high speed
