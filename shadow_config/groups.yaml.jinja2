@@ -36,11 +36,3 @@ kitchen_lights:
   entities:
     - switch.0xec1bbdfffe6c12f2_switch_left
     - switch.0xec1bbdfffe6c12f2_switch_right
-
-all_sprinklers:
-  name: All Sprinklers
-  entities:
-{%- set count = 6 -%}
-{%- for i in range(1,count+1) %}
-    - switch.sprinkler_zone_{{ i }}
-{%- endfor %}

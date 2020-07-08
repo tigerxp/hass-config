@@ -52,13 +52,3 @@ kitchen_lights:
   entities:
     - switch.0xec1bbdfffe6c12f2_switch_left
     - switch.0xec1bbdfffe6c12f2_switch_right
-
-all_sprinklers:
-  name: All Sprinklers
-  entities:
-    - switch.sprinkler_zone_1
-    - switch.sprinkler_zone_2
-    - switch.sprinkler_zone_3
-    - switch.sprinkler_zone_4
-    - switch.sprinkler_zone_5
-    - switch.sprinkler_zone_6

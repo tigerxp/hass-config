@@ -7,6 +7,7 @@ homeassistant:
     - type: homeassistant
     - type: legacy_api_password
       api_password: !secret api_password
+  packages: !include_dir_named includes/packages.d
 
 http:
   ssl_certificate: /ssl/fullchain.pem
@@ -35,9 +36,7 @@ climate: !include includes/climate.yaml
 utility_meter: !include includes/utility_meter.yaml
 input_number: !include includes/input_number.yaml
 input_datetime: !include includes/input_datetime.yaml
-input_select: !include includes/input_select.yaml
 air_quality: !include includes/air_quality.yaml
-# switch: !include includes/switches.yaml
 rest_command: !include includes/rest_commands.yaml
 
 # Folder includes

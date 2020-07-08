@@ -1,0 +1,211 @@
+# Manual one zone select
+input_select:
+  sprinkler_zone:
+    icon: mdi:sprinkler-variant
+    name: Manual One Zone
+    options:
+      - Zone 1
+      - Zone 2
+      - Zone 3
+      - Zone 4
+      - Zone 5
+      - Zone 6
+
+# Sprinkler Times
+input_number:
+  sprinkler_quick:
+    name: Quick sprinkling time, min
+    icon: mdi:timer-sand
+    initial: 5
+    min: 1
+    max: 30
+    step: 1
+    mode: slider
+  sprinkler_zone1:
+    icon: mdi:timer-outline
+    name: Zone 1 time
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_zone2:
+    name: Zone 2 time
+    icon: mdi:timer-outline
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_zone3:
+    name: Zone 3 time
+    icon: mdi:timer-outline
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_zone4:
+    name: Zone 4 time
+    icon: mdi:timer-outline
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_zone5:
+    name: Zone 5 time
+    icon: mdi:timer-outline
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_zone6:
+    name: Zone 6 time
+    icon: mdi:timer-outline
+    min: 1
+    max: 30
+    step: 1
+    mode: box
+  sprinkler_single:
+    name: Single zone time
+    icon: mdi:timer-sand
+    min: 1
+    max: 40
+    step: 1
+    mode: slider
+
+group:
+  all_sprinklers:
+    name: All Sprinklers
+    entities:
+      - switch.sprinkler_zone_1
+      - switch.sprinkler_zone_2
+      - switch.sprinkler_zone_3
+      - switch.sprinkler_zone_4
+      - switch.sprinkler_zone_5
+      - switch.sprinkler_zone_6
+
+automation:
+  # Automatic morning/evening watering
+  - alias: Morning Watering
+    id: morning_watering
+    trigger:
+      platform: time
+      at: "08:00:00"
+    action:
+      - service: script.morning_sprinkling
+  - alias: Evening Watering
+    id: evening_watering
+    trigger:
+      platform: time
+      at: "21:00:00"
+    action:
+      - service: script.evening_sprinkling
+  
+  # Turn off tank valve when water pressure is low and then turn back on when pressure restored
+  - alias: Low Water Pressure
+    id: low_water_pressure
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_pressure_sensor_6_0
+        below: 1
+        for: "00:00:10" # 20s
+    condition:
+      - condition: state
+        entity_id: switch.tank_valve
+        state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.tank_valve
+  - alias: Restore Tank Valve
+    id: restore_tank_valve
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_pressure_sensor_6_0
+        above: 2
+        for: "00:20:00" # Above 2ATM for 20m
+    condition:
+      - condition: state
+        entity_id: switch.tank_valve
+        state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.tank_valve
+
+script:
+  quick_sprinkle_all:
+    alias: "Quick Sprinkle All"
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_1
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_2
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_3
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_4
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_5
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_6
+      - delay: "00:{{ states('input_number.sprinkler_quick') | int }}"
+      - service: switch.turn_off
+        entity_id: group.all_sprinklers
+
+  morning_sprinkling:
+    alias: "Morning Sprinkling"
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_1
+      - delay: '00:15'
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_2
+      - delay: '00:15'
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_6
+      - delay: '00:15'
+      - service: switch.turn_off
+        entity_id: group.all_sprinklers
+
+  evening_sprinkling:
+    alias: "Evening Sprinkling"
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_3
+      - delay: '00:15'
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_4
+      - delay: '00:15'
+      - service: switch.turn_on
+        entity_id: switch.sprinkler_zone_5
+      - delay: '00:15'
+      - service: switch.turn_off
+        entity_id: group.all_sprinklers
+
+  sprinkle_one_zone:
+    alias: Sprinkle Selected Zone
+    sequence:
+      - service: switch.turn_on
+        data_template:
+          entity_id: >
+            {% set zone = states('input_select.sprinkler_zone') %}
+            {% if zone == 'Zone 1' %}
+            switch.sprinkler_zone_1
+            {% elif zone == 'Zone 2' %}
+            switch.sprinkler_zone_2
+            {% elif zone == 'Zone 3' %}
+            switch.sprinkler_zone_3
+            {% elif zone == 'Zone 4' %}
+            switch.sprinkler_zone_4
+            {% elif zone == 'Zone 5' %}
+            switch.sprinkler_zone_5
+            {% elif zone == 'Zone 6' %}
+            switch.sprinkler_zone_6
+            {% else %}
+            Invalid zone
+            {% endif %}
+      - delay: "00:{{ states('input_number.sprinkler_single') | int }}"
+      - service: switch.turn_off
+        entity_id: group.all_sprinklers

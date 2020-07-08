@@ -393,6 +393,7 @@ views:
                 name: P
           - switch.esp_01_relay_1
           - switch.esp_01_relay_2
+          - switch.tank_valve
 
       - type: entities
         title: Lawn Watering
@@ -1115,6 +1116,8 @@ views:
           - automation.vacuum_charged
           - automation.low_water_pressure
           - automation.restore_tank_valve
+          - automation.morning_watering
+          - automation.evening_watering
 
       - type: entities
         title: Sprinkler Settings
