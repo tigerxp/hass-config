@@ -23,8 +23,8 @@
     data_template:
       message: "*{{ now().hour }}:00*"
 
-- alias: Vacuum charged
-  id: a_vacuum_charged
+- alias: Vacuum Charged
+#  id: vacuum_charged
   trigger:
     platform: numeric_state
     entity_id: sensor.bw7_power
@@ -38,11 +38,13 @@
     - service: notify.telegram_group
       data_template:
         message: 'Philips Vacuum is fully charged'
+    - service: switch.turn_off
+      entity_id: switch.bw7_switch
     - service: automation.turn_off
-      entity_id: automation.a_vacuum_charged
+      entity_id: automation.vacuum_charged
 
-- alias: Washing finished
-  id: a_washing_finished
+- alias: Washing Finished
+#  id: washing_finished
   trigger:
     platform: numeric_state
     entity_id: sensor.plug_158d00039fcce4_power
@@ -57,4 +59,4 @@
       data_template:
         message: 'Washing finished'
     - service: automation.turn_off
-      entity_id: automation.a_washing_finished
+      entity_id: automation.washing_finished

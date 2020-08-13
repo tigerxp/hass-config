@@ -83,19 +83,23 @@ group:
       - switch.sprinkler_zone_6
 
 automation:
-  # Automatic morning/evening watering
+  # Scheduled watering
   - alias: Morning Watering
-    id: morning_watering
     trigger:
       platform: time
-      at: "08:00:00"
+      at: "04:00:00"
     action:
       - service: script.morning_sprinkling
-  - alias: Evening Watering
-    id: evening_watering
+  - alias: Day Watering
     trigger:
       platform: time
-      at: "21:00:00"
+      at: "17:00:00"
+    action:
+      - service: script.quick_sprinkle_all
+  - alias: Evening Watering
+    trigger:
+      platform: time
+      at: "23:00:00"
     action:
       - service: script.evening_sprinkling
   
@@ -105,8 +109,8 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.water_pressure_sensor_6_0
-        below: 1
-        for: "00:00:10" # 20s
+        below: 1.4
+        for: "00:00:10" # 10s
     condition:
       - condition: state
         entity_id: switch.tank_valve
@@ -120,7 +124,7 @@ automation:
       - platform: numeric_state
         entity_id: sensor.water_pressure_sensor_6_0
         above: 2
-        for: "00:20:00" # Above 2ATM for 20m
+        for: "00:40:00" # Above 2ATM for 40m
     condition:
       - condition: state
         entity_id: switch.tank_valve

@@ -24,10 +24,10 @@ switch.neo2_relay:
   friendly_name: Kitchen TV Plug
   icon: mdi:television
 switch.bw1_switch:
-  friendly_name: Bedroom Boiler Plug
+  friendly_name: Bedroom Water Heater
   icon: mdi:water-boiler
 switch.bw2_switch:
-  friendly_name: Kids Boiler Plug
+  friendly_name: Kids Water Heater
   icon: mdi:water-boiler
 switch.bw4_switch:
   friendly_name: Kitchenware Plug

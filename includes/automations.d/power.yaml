@@ -41,3 +41,67 @@
         message: 'Washing Started'
     - service: automation.turn_on
       entity_id: automation.washing_finished
+
+# Saving on water heaters
+- alias: Kids Water Heater On
+  trigger:
+    - platform: time
+      at: "03:00:00"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw2_switch
+- alias: Kids Water Heater Off
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bw2_switch
+
+- alias: Bedroom Water Heater On
+  trigger:
+    - platform: time
+      at: "00:00:00"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw1_switch
+- alias: Bedroom Water Heater Off
+  trigger:
+    - platform: time
+      at: "03:00:00"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bw1_switch
+
+# Enable Xiaomi plugs that should stay on
+- alias: WiFi Repeater should stay on
+  trigger:
+    platform: state
+    entity_id: switch.0x00158d000391fadc_switch
+    to: 'off'
+    for: '00:00:30'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.0x00158d000391fadc_switch
+
+- alias: Office plug should stay on
+  trigger:
+    platform: state
+    entity_id: switch.0x00158d00039c1bc3_switch
+    to: 'off'
+    for: '00:00:30'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.0x00158d00039c1bc3_switch
+
+# Turn off dehumidifier when it's not working (full)
+- alias: Full dehumidifier off
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.bw5_power
+    below: 10
+    for: '00:00:10' # 10s
+  action:
+    - service: switch.turn_off
+      entity_id: switch.bw5_switch

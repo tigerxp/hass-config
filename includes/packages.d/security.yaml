@@ -1,0 +1,56 @@
+automation:
+  # Upstairs movement - light
+  - alias: Upstairs Motion Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_158d00042820c3
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: light.gateway_light_04cf8caa9813
+        data_template:
+          brightness: >
+            {% if is_state("group.house_locks", "on") %}      
+              100
+            {% else %}
+              50
+            {% endif %}
+          color_name: >
+            {% if is_state("group.house_locks", "on") %}      
+              red
+            {% else %}
+              green
+            {% endif %}
+  # Upstairs motion sound when locks are open
+  - alias: Upstairs Motion Sound
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_158d00042820c3
+      from: 'off'
+      to: 'on'
+    condition:
+      - condition: state
+        entity_id: group.house_locks
+        state:  'on'
+      - condition: time
+        after: '10:00:00' # TODO: get silent mode settings from config
+        before: '22:00:00'
+    action:
+      - service: xiaomi_aqara.play_ringtone
+        data:
+          gw_mac: !secret xiaomi_gw2_mac
+          ringtone_id: 11
+          ringtone_vol: 10
+
+  - alias: Upstairs motion off
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_158d00042820c3
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 1
+    action:
+      - service: light.turn_off
+        entity_id: light.gateway_light_04cf8caa9813
