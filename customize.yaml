@@ -29,6 +29,9 @@ switch.bw1_switch:
 switch.bw2_switch:
   friendly_name: Kids Water Heater
   icon: mdi:water-boiler
+switch.bw3_switch:
+  friendly_name: 3D Printer
+  icon: mdi:printer-3d
 switch.bw4_switch:
   friendly_name: Kitchenware Plug
   icon: mdi:blender
@@ -65,6 +68,9 @@ switch.0x00158d00035341d7_switch:
 switch.temp_tank_valve:
   friendly_name: Tank Valve
   icon: mdi:valve
+switch.pow1_switch:
+  friendly_name: Main Pump
+  icon: mdi:pump
 
 # Gateways
 light.gateway_light_04cf8caa9813:
@@ -109,6 +115,12 @@ sensor.0x00158d00042024f3_battery:
 # binary_sensor.motion_sensor_158d000420092b:
 #   friendly_name: Basement Motion
 
+# Office Motion
+binary_sensor.0x00158d0004200940_occupancy:
+  friendly_name: Office Motion
+binary_sensor.motion_sensor_158d0004200940:
+  friendly_name: Office Motion
+
 # Basement Motion Sensor
 binary_sensor.0x00158d000420092b_occupancy:
   friendly_name: Basement Motion
@@ -131,12 +143,27 @@ binary_sensor.0x00158d0003d4a2b2_contact:
 binary_sensor.0x00158d0003d41ce4_contact:
   friendly_name: Boiler Room Door
   device_class: door
+binary_sensor.0x00158d0003031abc_contact:
+  friendly_name: Entrance Door
+binary_sensor.0x00158d0003d41c27_contact:
+  friendly_name: Wardrobe Door
+binary_sensor.0x00158d0003031c30_contact:
+  friendly_name: Garage Gate
+  icon: mdi:garage
+binary_sensor.0x00158d0003033e26_contact:
+  friendly_name: Kitchen Shutter
+  icon: mdi:garage
+binary_sensor.0x00158d0003033ec6_contact:
+  friendly_name: Garage Door
+
 
 # Leak Sensors
 binary_sensor.0x00158d000405cec1_water_leak:
   friendly_name: Guest Bathroom Leak
 binary_sensor.water_leak_sensor_158d00041f6a7a:
   friendly_name: Basement Leak
+binary_sensor.water_leak_sensor_158d000484bff9:
+  friendly_name: Water Entrance Leak
 
 # Controllers
 sensor.0x00158d0002a71f01_action:
@@ -146,3 +173,21 @@ sensor.0x04cf8cdf3c75bca9_action:
 sensor.0x00158d000122cc7a_click:
   friendly_name: Mijia Button
   icon: mdi:radiobox-marked
+
+# Hikvision NVR
+binary_sensor.network_video_recorder_line_crossing_1:
+  friendly_name: Entance Line Cross
+binary_sensor.network_video_recorder_motion_1:
+  friendly_name: Entance Motion
+binary_sensor.network_video_recorder_line_crossing_2:
+  friendly_name: Gate Line Cross
+binary_sensor.network_video_recorder_motion_2:
+  friendly_name: Cars Motion
+binary_sensor.network_video_recorder_line_crossing_3:
+  friendly_name: Pavilion Line Cross
+binary_sensor.network_video_recorder_motion_3:
+  friendly_name: Pavilion Motion
+binary_sensor.network_video_recorder_line_crossing_4:
+    friendly_name: Front Line Cross
+binary_sensor.network_video_recorder_motion_4:
+  friendly_name: Front Motion

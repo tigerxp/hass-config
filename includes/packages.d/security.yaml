@@ -1,12 +1,20 @@
-automation:
-  # Upstairs movement - light
-  - alias: Upstairs Motion Light
-    trigger:
-      platform: state
-      entity_id: binary_sensor.motion_sensor_158d00042820c3
-      from: 'off'
-      to: 'on'
-    action:
+# Hikvision NVR sensors
+binary_sensor:
+  - platform: hikvision
+    host: 192.168.1.80
+    port: 80
+    ssl: false
+    username: hass
+    password: !secret nvr_password
+    # customize:
+    #   motion:
+    #     delay: 30
+    #   line_crossing:
+    #     ignored: false
+
+script:
+  set_upstairs_gw_color:
+    sequence:
       - service: light.turn_on
         entity_id: light.gateway_light_04cf8caa9813
         data_template:
@@ -17,11 +25,32 @@ automation:
               50
             {% endif %}
           color_name: >
-            {% if is_state("group.house_locks", "on") %}      
-              red
+            {% if is_state("group.house_locks", "on") %}
+              {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                orangered
+              {% else %}
+                red
+              {% endif %}
             {% else %}
-              green
+              {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                yellow
+              {% else %}
+                green
+              {% endif %}
             {% endif %}
+
+automation:
+
+  # Upstairs movement - light
+  - alias: Upstairs Motion Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.motion_sensor_158d00042820c3
+      from: 'off'
+      to: 'on'
+    action:
+      - service: script.set_upstairs_gw_color
+
   # Upstairs motion sound when locks are open
   - alias: Upstairs Motion Sound
     trigger:
@@ -54,3 +83,14 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.gateway_light_04cf8caa9813
+
+  - alias: Update Gateway color on changes
+    trigger:
+      platform: state
+      entity_id: group.house_locks, binary_sensor.0x00158d0003033e26_contact
+    condition:
+      - condition: state
+        entity_id: light.gateway_light_04cf8caa9813
+        state: 'on'
+    action:
+      - service: script.set_upstairs_gw_color

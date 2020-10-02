@@ -1,3 +1,14 @@
+# Trends
+binary_sensor:
+  - platform: trend
+    sensors:
+      water_pressure_falling:
+        friendly_name: Water Pressure Falling
+        entity_id: sensor.water_pressure_sensor_6_0
+        invert: true
+        max_samples: 30
+        sample_duration: 60
+
 # Manual one zone select
 input_select:
   sprinkler_zone:

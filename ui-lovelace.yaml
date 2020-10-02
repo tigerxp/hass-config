@@ -394,6 +394,18 @@ views:
           - switch.esp_01_relay_1
           - switch.esp_01_relay_2
           - switch.tank_valve
+          - entity: switch.pow1_switch
+            type: custom:multiple-entity-row
+            secondary_info: last-changed
+            toggle: true
+            entities:
+              - entity: sensor.pow1_voltage
+                name: U
+              - entity: sensor.pow1_current
+                name: I
+              - entity: sensor.pow1_power
+                name: P
+
 
       - type: entities
         title: Lawn Watering
@@ -445,6 +457,16 @@ views:
           show_header_toggle: false
           state_color: true
           entities:
+            # Wardrobe Door
+            - entity: binary_sensor.0x00158d0003d41c27_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003d41c27_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003d41c27_battery
+                  name: bat
+            # Entrance Lock
             - entity: binary_sensor.0x00158d0003d481a6_contact
               type: custom:multiple-entity-row
               secondary_info: last-changed
@@ -453,7 +475,16 @@ views:
                   name: lqi
                 - entity: sensor.0x00158d0003d481a6_battery
                   name: bat
-
+            # Entrance Door
+            - entity: binary_sensor.0x00158d0003031abc_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003031abc_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003031abc_battery
+                  name: bat
+            # Zoo Lock
             - entity: binary_sensor.0x00158d0003d4a2b2_contact
               secondary_info: last-changed
               type: custom:multiple-entity-row
@@ -462,7 +493,7 @@ views:
                   name: lqi
                 - entity: sensor.0x00158d0003d4a2b2_battery
                   name: bat
-
+            # Zoo Door
             - entity: binary_sensor.0x00158d0003d4434a_contact
               secondary_info: last-changed
               type: custom:multiple-entity-row
@@ -471,7 +502,7 @@ views:
                   name: lqi
                 - entity: sensor.0x00158d0003d4434a_battery
                   name: bat
-
+            # Boiler Room Door
             - entity: binary_sensor.0x00158d0003d41ce4_contact
               secondary_info: last-changed
               type: custom:multiple-entity-row
@@ -479,6 +510,33 @@ views:
                 - entity: sensor.0x00158d0003d41ce4_linkquality
                   name: lqi
                 - entity: sensor.0x00158d0003d41ce4_battery
+                  name: bat
+            # Garage Door
+            - entity: binary_sensor.0x00158d0003033ec6_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003033ec6_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003033ec6_battery
+                  name: bat
+            # Garage Gate
+            - entity: binary_sensor.0x00158d0003031c30_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003031c30_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003031c30_battery
+                  name: bat
+            # Kitchen Shutter
+            - entity: binary_sensor.0x00158d0003033e26_contact
+              secondary_info: last-changed
+              type: custom:multiple-entity-row
+              entities:
+                - entity: sensor.0x00158d0003033e26_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0003033e26_battery
                   name: bat
 
       - type: vertical-stack
@@ -490,7 +548,8 @@ views:
           show_header_toggle: false
           state_color: true
           entities:
-            - entity: binary_sensor.0x00158d000405cec1_water_leak
+            # Z2M entities have details
+            - entity: binary_sensor.0x00158d000405cec1_water_leak # Guest room leak
               type: custom:multiple-entity-row
               secondary_info: last-changed
               entities:
@@ -498,8 +557,24 @@ views:
                   name: lqi
                 - entity: sensor.0x00158d000405cec1_battery
                   name: bat
-
-            - entity: binary_sensor.water_leak_sensor_158d00041f6a7a
+            - entity: binary_sensor.0x00158d00041f6a7a_water_leak # Basement Leak
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000405cec1_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000405cec1_battery
+                  name: bat
+            - entity: binary_sensor.0x00158d000484bffb_water_leak
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000405cec1_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000405cec1_battery
+                  name: bat
+            # No details for Xiaomi GW items
+            - entity: binary_sensor.water_leak_sensor_158d000484bff9
               type: custom:multiple-entity-row
               secondary_info: last-changed
 
@@ -509,6 +584,7 @@ views:
           show_header_toggle: false
           state_color: true
           entities:
+            # Upstairs Motion
             - entity: binary_sensor.motion_sensor_158d00042820c3
               type: custom:multiple-entity-row
               secondary_info: last-changed
@@ -519,6 +595,7 @@ views:
             #       name: bat
             #     - entity: sensor.0x00158d00042820c3_illuminance
             #       name: lum
+            # Downstairs Motion
             - entity: binary_sensor.0x00158d000421ccd1_occupancy
               type: custom:multiple-entity-row
               secondary_info: last-changed
@@ -529,6 +606,7 @@ views:
                   name: bat
                 - entity: sensor.0x00158d000421ccd1_illuminance
                   name: lum
+            # Kitchen Motion
             - entity: binary_sensor.0x00158d00042024f3_occupancy
               type: custom:multiple-entity-row
               secondary_info: last-changed
@@ -542,7 +620,7 @@ views:
             # - entity: binary_sensor.motion_sensor_158d000420092b
               # type: custom:multiple-entity-row
               # secondary_info: last-changed
-
+            # Basement Motion
             - entity: binary_sensor.0x00158d000420092b_occupancy
               type: custom:multiple-entity-row
               secondary_info: last-changed
@@ -553,6 +631,20 @@ views:
                   name: bat
                 - entity: sensor.0x00158d000420092b_illuminance
                   name: lum
+            # Office Motion
+            # - entity: binary_sensor.0x00158d0004200940_occupancy
+            #   type: custom:multiple-entity-row
+            #   secondary_info: last-changed
+            #   entities:
+            #     - entity: sensor.0x00158d0004200940_linkquality
+            #       name: lqi
+            #     - entity: sensor.0x00158d0004200940_battery
+            #       name: bat
+            #     - entity: sensor.0x00158d0004200940_illuminance
+            #       name: lum
+            - entity: binary_sensor.motion_sensor_158d0004200940
+              type: custom:multiple-entity-row
+              secondary_info: last-changed
 
       - type: vertical-stack
         cards:
@@ -654,6 +746,20 @@ views:
     icon: mdi:cctv
 
     cards:
+      # - type: glance
+      #   title: NVR Motion
+      #   entities:
+      #     - binary_sensor.network_video_recorder_motion_1
+      #     - binary_sensor.network_video_recorder_motion_2
+      #     - binary_sensor.network_video_recorder_motion_3
+      #     - binary_sensor.network_video_recorder_motion_4
+      # - type: glance
+      #   title: NVR Line Cross
+      #   entities:
+      #     - binary_sensor.network_video_recorder_line_crossing_1
+      #     - binary_sensor.network_video_recorder_line_crossing_2
+      #     - binary_sensor.network_video_recorder_line_crossing_3
+      #     - binary_sensor.network_video_recorder_line_crossing_4
       - type: vertical-stack
         cards:
           - type: picture-glance
@@ -920,6 +1026,8 @@ views:
           - sensor.distance_sensor_1_0
           - sensor.distance_sensor_1_2
           - sensor.distance_sensor_1_3
+          - sensor.water_pressure_sensor_6_0
+          - binary_sensor.water_pressure_falling
 
       - type: custom:auto-entities
         show_empty: false
@@ -1007,7 +1115,21 @@ views:
               - entity: sensor.power_daily_bw6_total
                 name: total
                 unit: false
-
+          - entity: sensor.money_daily_bw3
+            type: custom:multiple-entity-row
+            name: 3D Printer
+            state_header: cost
+            entities:
+              - entity: sensor.um_daily_bw3_day
+                name: day
+                unit: false
+              - entity: sensor.um_daily_bw3_night
+                name: night
+                unit: false
+              - entity: sensor.power_daily_bw3_total
+                name: total
+                unit: false
+    
       - type: entities
         title: This Month
         show_header_toggle: false
