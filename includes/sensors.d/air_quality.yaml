@@ -5,7 +5,7 @@
       unit_of_measurement: 'ppm'
       entity_id: air_quality.mi_air_monitor
       value_template: "{{ state_attr('air_quality.mi_air_monitor', 'carbon_dioxide_equivalent') }}"
-      icon_template: mdi:periodic-table-co2
+      icon_template: mdi:molecule-co2
     aq_office_tvoc:
       friendly_name: "Office TVOC"
       unit_of_measurement: 'mg/m3'

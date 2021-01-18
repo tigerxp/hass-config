@@ -10,8 +10,8 @@ downstairs_motion:
   name: Downstairs Motion Group
   entities:
     - binary_sensor.0x00158d000421ccd1_occupancy
-#    - binary_sensor.0x00158d000420092b_occupancy
     - binary_sensor.motion_sensor_158d000420092b
+    - binary_sensor.0x00158d000420092b_occupancy
 
 utility_meters:
   name: Utility Meters

@@ -7,8 +7,7 @@
     service: light.turn_off
     entity_id:
       - light.upstairs
-      - light.downstairs
-      - light.basement
+      - light.downpath_lights
 
 - alias: Evening - lights on
   trigger:
@@ -49,8 +48,8 @@
   action:
     - service: light.turn_on
       entity_id:
-        - light.downstairs
-        - light.basement
+        - light.downpath_lights
+
 - alias: Downstairs motion off
   trigger:
     platform: state
@@ -62,5 +61,4 @@
   action:
     - service: light.turn_off
       entity_id:
-        - light.basement
-        - light.downstairs
+        - light.downpath_lights

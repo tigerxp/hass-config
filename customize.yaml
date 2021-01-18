@@ -1,20 +1,13 @@
-sensor.water_pressure_sensor_6_0:
-  unit_of_measurement: bar
-  friendly_name: 'Water Pressure'
-switch.bedroom_fan:
-  icon: mdi:fan
-switch.kids_fan:
-  icon: mdi:fan
-sensor.sunrise:
-  icon: mdi:weather-sunset-up
-sensor.sunset:
-  icon: mdi:weather-sunset-down
-
+# Air Quality
 air_quality.mi_air_monitor:
   friendly_name: Office PM 2.5
   icon: mdi:smog
 
 # Switches
+switch.bedroom_fan:
+  icon: mdi:fan
+switch.kids_fan:
+  icon: mdi:fan
 switch.electric_boiler:
   icon: mdi:water-boiler
 switch.neo1_relay:
@@ -72,6 +65,12 @@ switch.pow1_switch:
   friendly_name: Main Pump
   icon: mdi:pump
 
+# Lights
+light.0x00158d0005433223_light:
+  friendly_name: Workshop Light
+light.0x00158d00052100e1_light:
+  friendly_name: Basement Light
+
 # Gateways
 light.gateway_light_04cf8caa9813:
   friendly_name: Stairs Gateway Light
@@ -115,11 +114,14 @@ sensor.0x00158d00042024f3_battery:
 # binary_sensor.motion_sensor_158d000420092b:
 #   friendly_name: Basement Motion
 
-# Office Motion
+# Workshop Motion Sensor
 binary_sensor.0x00158d0004200940_occupancy:
-  friendly_name: Office Motion
-binary_sensor.motion_sensor_158d0004200940:
-  friendly_name: Office Motion
+  friendly_name: Workshop Motion
+sensor.0x00158d0004200940_illuminance:
+  friendly_name: Workshop Illuminance
+  unit_of_measurement: lux
+sensor.0x00158d0004200940_battery:
+  friendly_name: Workshop Motion Battery
 
 # Basement Motion Sensor
 binary_sensor.0x00158d000420092b_occupancy:
@@ -191,3 +193,23 @@ binary_sensor.network_video_recorder_line_crossing_4:
     friendly_name: Front Line Cross
 binary_sensor.network_video_recorder_motion_4:
   friendly_name: Front Motion
+
+# 3D Printer
+sensor.3d_printer_bed_temperature:
+  icon: mdi:pot-steam-outline
+sensor.3d_printer_tool_temperature:
+  icon: mdi:printer-3d-nozzle-outline
+sensor.3d_printer_state:
+
+  icon: mdi:information-outline
+
+
+
+# Other
+sensor.water_pressure_sensor_6_0:
+  unit_of_measurement: bar
+  friendly_name: 'Water Pressure'
+sensor.sunrise:
+  icon: mdi:weather-sunset-up
+sensor.sunset:
+  icon: mdi:weather-sunset-down

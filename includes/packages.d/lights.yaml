@@ -1,0 +1,31 @@
+light:
+  - platform: limitlessled
+    bridges:
+      - host: !secret milight_ip
+        version: 5
+        port: 8899
+        groups:
+        - number: 1
+          type: rgbw
+          name: Upstairs
+        - number: 2
+          type: rgbw
+          name: Downstairs
+        - number: 3
+          type: rgbw
+          name: Backup
+        - number: 4
+          type: rgbw
+          name: Office
+
+  - platform: group
+    name: Stairs Lights
+    entities:
+      - light.upstairs
+      - light.downstairs
+
+  - platform: group
+    name: Downpath Lights
+    entities:
+      - light.downstairs
+      - light.0x00158d00052100e1_light

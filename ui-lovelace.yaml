@@ -7,11 +7,11 @@ resources:
     type: module
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
-    
+  - url: /hacsfiles/restriction-card/restriction-card.js
+    type: module  
 views:
 
   - title: Main
-    id: main
     path: 'main'
     icon: mdi:home-assistant
 
@@ -177,6 +177,7 @@ views:
               - entity: switch.electric_boiler
                 type: custom:multiple-entity-row
                 secondary_info: last-changed
+                state_color: true
                 entities:
                   - entity: sensor.boiler_out_temperature
                     name: in
@@ -186,6 +187,7 @@ views:
               - entity: switch.bedroom_fan
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 entities:
                   - entity: switch.bedroom_indicator
@@ -197,6 +199,7 @@ views:
               - entity: switch.kids_fan
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 entities:
                   - entity: switch.kids_indicator
@@ -210,20 +213,23 @@ views:
                 name: Stairs Lights
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 state_header: downstairs
                 toggle: true
                 entities:
                   - entity: light.upstairs
                     toggle: true
                     name: upstairs
-              - entity: light.basement
+              - entity: light.0x00158d00052100e1_light
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
-                name: Basement
+                state_color: true
+                name: Basement Light
                 toggle: true
               - type: section
               - entity: switch.0x00158d0001717a37_switch
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 toggle: true
                 entities:
@@ -232,6 +238,7 @@ views:
               - entity: switch.bw1_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 entities:
                   - entity: sensor.bw1_power
@@ -240,6 +247,7 @@ views:
               - entity: switch.bw2_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 entities:
                   - entity: sensor.bw2_power
@@ -248,12 +256,14 @@ views:
               - entity: switch.0x00158d000391fadc_switch
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 entities:
                   - entity: sensor.0x00158d000391fadc_power
                     name: current power
               - entity: switch.plug_158d00039fcce4
                 secondary_info: last-changed
+                state_color: true
                 type: custom:multiple-entity-row
                 toggle: true
                 entities:
@@ -261,7 +271,6 @@ views:
                     name: current power
 
   - title: Controls
-    id: controls
     path: 'controls'
     icon: mdi:dip-switch
 
@@ -282,16 +291,16 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity: light.basement
+                entity: light.0x00158d00052100e1_light
               - type: light
                 entity: light.office
 
       - type: horizontal-stack
         cards:
-          - type: entity-button
+          - type: button
             entity: switch.bedroom_fan
 
-          - type: entity-button
+          - type: button
             entity: switch.kids_fan
 
       - type: entities
@@ -301,7 +310,7 @@ views:
         entities:
           - switch.0xec1bbdfffe6c12f2_switch_left
           - switch.0xec1bbdfffe6c12f2_switch_right
-          - switch.0xec1bbdfffe68841d_switch
+          - switch.bathroom_light_switch
 
       - type: entities
         title: Switches
@@ -316,6 +325,7 @@ views:
           - switch.plug_158d00039fcce4
           - entity: switch.bw1_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -327,6 +337,7 @@ views:
                 name: P
           - entity: switch.bw2_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -338,6 +349,7 @@ views:
                 name: P
           - entity: switch.bw3_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -349,6 +361,7 @@ views:
                 name: P
           - entity: switch.bw4_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -360,6 +373,7 @@ views:
                 name: P
           - entity: switch.bw5_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -371,6 +385,7 @@ views:
                 name: P
           - entity: switch.bw6_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -382,6 +397,7 @@ views:
                 name: P
           - entity: switch.bw7_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -396,6 +412,7 @@ views:
           - switch.tank_valve
           - entity: switch.pow1_switch
             type: custom:multiple-entity-row
+            state_color: true
             secondary_info: last-changed
             toggle: true
             entities:
@@ -425,7 +442,6 @@ views:
           #     - entity: input_select.sprinkler_zone
 
   - title: 'Zigbee'
-    id: zigbee
     path: zigbee
     icon: mdi:zigbee
 
@@ -459,8 +475,9 @@ views:
           entities:
             # Wardrobe Door
             - entity: binary_sensor.0x00158d0003d41c27_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003d41c27_linkquality
                   name: lqi
@@ -469,6 +486,7 @@ views:
             # Entrance Lock
             - entity: binary_sensor.0x00158d0003d481a6_contact
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003d481a6_linkquality
@@ -477,8 +495,9 @@ views:
                   name: bat
             # Entrance Door
             - entity: binary_sensor.0x00158d0003031abc_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003031abc_linkquality
                   name: lqi
@@ -486,8 +505,9 @@ views:
                   name: bat
             # Zoo Lock
             - entity: binary_sensor.0x00158d0003d4a2b2_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003d4a2b2_linkquality
                   name: lqi
@@ -495,8 +515,9 @@ views:
                   name: bat
             # Zoo Door
             - entity: binary_sensor.0x00158d0003d4434a_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003d4434a_linkquality
                   name: lqi
@@ -504,8 +525,9 @@ views:
                   name: bat
             # Boiler Room Door
             - entity: binary_sensor.0x00158d0003d41ce4_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003d41ce4_linkquality
                   name: lqi
@@ -513,8 +535,9 @@ views:
                   name: bat
             # Garage Door
             - entity: binary_sensor.0x00158d0003033ec6_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003033ec6_linkquality
                   name: lqi
@@ -522,8 +545,9 @@ views:
                   name: bat
             # Garage Gate
             - entity: binary_sensor.0x00158d0003031c30_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003031c30_linkquality
                   name: lqi
@@ -531,8 +555,9 @@ views:
                   name: bat
             # Kitchen Shutter
             - entity: binary_sensor.0x00158d0003033e26_contact
-              secondary_info: last-changed
               type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d0003033e26_linkquality
                   name: lqi
@@ -551,6 +576,7 @@ views:
             # Z2M entities have details
             - entity: binary_sensor.0x00158d000405cec1_water_leak # Guest room leak
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d000405cec1_linkquality
@@ -559,6 +585,7 @@ views:
                   name: bat
             - entity: binary_sensor.0x00158d00041f6a7a_water_leak # Basement Leak
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d000405cec1_linkquality
@@ -567,6 +594,7 @@ views:
                   name: bat
             - entity: binary_sensor.0x00158d000484bffb_water_leak
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d000405cec1_linkquality
@@ -576,6 +604,7 @@ views:
             # No details for Xiaomi GW items
             - entity: binary_sensor.water_leak_sensor_158d000484bff9
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
 
         # Motion
@@ -587,6 +616,7 @@ views:
             # Upstairs Motion
             - entity: binary_sensor.motion_sensor_158d00042820c3
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
             #   entities:
             #     - entity: sensor.0x00158d00042820c3_linkquality
@@ -598,6 +628,7 @@ views:
             # Downstairs Motion
             - entity: binary_sensor.0x00158d000421ccd1_occupancy
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d000421ccd1_linkquality
@@ -609,6 +640,7 @@ views:
             # Kitchen Motion
             - entity: binary_sensor.0x00158d00042024f3_occupancy
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d00042024f3_linkquality
@@ -623,6 +655,7 @@ views:
             # Basement Motion
             - entity: binary_sensor.0x00158d000420092b_occupancy
               type: custom:multiple-entity-row
+              state_color: true
               secondary_info: last-changed
               entities:
                 - entity: sensor.0x00158d000420092b_linkquality
@@ -631,20 +664,21 @@ views:
                   name: bat
                 - entity: sensor.0x00158d000420092b_illuminance
                   name: lum
-            # Office Motion
-            # - entity: binary_sensor.0x00158d0004200940_occupancy
+            # Workshop Motion
+            - entity: binary_sensor.0x00158d0004200940_occupancy
+              type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d0004200940_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d0004200940_battery
+                  name: bat
+                - entity: sensor.0x00158d0004200940_illuminance
+                  name: lum
+            # - entity: binary_sensor.motion_sensor_158d0004200940
             #   type: custom:multiple-entity-row
             #   secondary_info: last-changed
-            #   entities:
-            #     - entity: sensor.0x00158d0004200940_linkquality
-            #       name: lqi
-            #     - entity: sensor.0x00158d0004200940_battery
-            #       name: bat
-            #     - entity: sensor.0x00158d0004200940_illuminance
-            #       name: lum
-            - entity: binary_sensor.motion_sensor_158d0004200940
-              type: custom:multiple-entity-row
-              secondary_info: last-changed
 
       - type: vertical-stack
         cards:
@@ -657,6 +691,7 @@ views:
             entities:
               - entity: switch.0x00158d0001717a37_switch
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 entities:
                   - entity: sensor.0x00158d0001717a37_linkquality
@@ -666,6 +701,7 @@ views:
 
               - entity: switch.0x00158d000391fadc_switch
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 entities:
                   - entity: sensor.0x00158d000391fadc_linkquality
@@ -684,6 +720,7 @@ views:
             entities:
               - entity: sensor.0x00158d0002a71f01_action
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 entities:
                   - entity: sensor.0x00158d0002a71f01_linkquality
@@ -692,6 +729,7 @@ views:
                     name: bat
               - entity: sensor.0x04cf8cdf3c75bca9_action
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 entities:
                   - entity: sensor.0x04cf8cdf3c75bca9_linkquality
@@ -700,6 +738,7 @@ views:
                     name: bat
               - entity: sensor.0x00158d000122cc7a_click
                 type: custom:multiple-entity-row
+                state_color: true
                 secondary_info: last-changed
                 entities:
                   - entity: sensor.0x00158d000122cc7a_linkquality
@@ -713,17 +752,18 @@ views:
             show_header_toggle: true
             state_color: true
             entities:
-              - entity: switch.0xec1bbdfffe68841d_switch
+              - entity: switch.bathroom_light_switch
                 toggle: true
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 entities:
-                  - entity: sensor.0xec1bbdfffe68841d_linkquality
+                  - entity: sensor.bathroom_light_linkquality
                     name: lqi
               - entity: group.kitchen_lights
+                type: custom:multiple-entity-row
+                state_color: true
                 toggle: true
                 secondary_info: last-changed
-                type: custom:multiple-entity-row
                 entities:
                   - entity: sensor.0xec1bbdfffe6c12f2_linkquality
                     name: lqi
@@ -741,7 +781,6 @@ views:
                       action: toggle
 
   - title: Cameras
-    id: cameras
     path: cameras
     icon: mdi:cctv
 
@@ -763,48 +802,71 @@ views:
       - type: vertical-stack
         cards:
           - type: picture-glance
-            state_filter:
-              - null
             title: Entrance
             entities: []
             camera_image: camera.entrance
           - type: picture-glance
-            state_filter:
-              - null
             title: Cars
             entities: []
             camera_image: camera.cars
       - type: vertical-stack
         cards:
           - type: picture-glance
-            state_filter:
-              - null
             title: Pavilion
             entities: []
             camera_image: camera.pavilion
           - type: picture-glance
-            state_filter:
-              - null
             title: Front
             entities: []
             camera_image: camera.front
       - type: vertical-stack
         cards:
           - type: picture-glance
-            state_filter:
-              - null
             title: Hall
             entities: []
             camera_image: camera.hall
-          - type: picture-glance
-            state_filter:
-              - null
-            title: Office
-            entities: []
-            camera_image: camera.office
+
+  - title: Workshop
+    path: workshop
+    icon: mdi:hammer-wrench
+  
+    cards:
+      - type: picture-glance
+        title: 3D Printer
+        entities: 
+          - entity: sensor.3d_printer_state
+            show_state: true
+          - entity: sensor.3d_printer_tool_temperature
+            show_state: true
+          - entity: sensor.3d_printer_bed_temperature
+            show_state: true
+        camera_image: camera.office
+        aspect_ratio: 16x9
+        camera_view: live
+      - type: custom:restriction-card
+        restrictions:
+          confirm: true
+          pin:
+            code: 1234
+        card:
+          type: button
+          entity: switch.bw3_switch
+      - type: entities
+        title: Filament Box
+        entities:
+          - entity: sensor.temperature_158d00054472d2
+            name: Temperature
+          - entity: sensor.humidity_158d00054472d2
+            name: Humidity
+      - type: entities
+        title: Workshop Room
+        state_color: true
+        entities:
+          - light.0x00158d0005433223_light
+          - binary_sensor.0x00158d0004200940_occupancy
+          - sensor.0x00158d0004200940_illuminance
 
   - title: Media
-    id: media
     path: 'media'
     icon: mdi:play-pause
 
@@ -821,7 +883,6 @@ views:
         entity: media_player.kitchen_speaker
 
   - title: Graphs
-    id: graphs
     path: 'graphs'
     icon: mdi:chart-areaspline
 
@@ -875,7 +936,6 @@ views:
           - entity: sensor.bw7_voltage
 
   - title: 'Tests'
-    id: tests
     path: tests
     icon: mdi:bug-check-outline
 
@@ -1043,7 +1103,6 @@ views:
           - state: "unavailable"    
 
   - title: 'Power'
-    id: power
     path: power
     icon: mdi:power-plug
 
@@ -1190,9 +1249,22 @@ views:
               - entity: sensor.power_monthly_bw6_total
                 name: total
                 unit: false
+          - entity: sensor.money_monthly_bw3
+            type: custom:multiple-entity-row
+            name: 3D Printer
+            state_header: cost
+            entities:
+              - entity: sensor.um_monthly_bw3_day
+                name: day
+                unit: false
+              - entity: sensor.um_monthly_bw3_night
+                name: night
+                unit: false
+              - entity: sensor.power_monthly_bw3_total
+                name: total
+                unit: false
 
   - title: 'Config'
-    id: config
     path: config
     icon: mdi:card-bulleted-settings
 
@@ -1254,7 +1326,6 @@ views:
           - input_number.sprinkler_zone6
 
   - title: 'Info'
-    id: info
     path: info
     icon: mdi:information-outline
 

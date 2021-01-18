@@ -1,0 +1,67 @@
+sensor:
+  - platform: rest
+    name: "3D Printer State"
+    resource: !secret octopi_url
+    headers:
+      'X-Api-Key': !secret octopi_key
+    scan_interval: 30
+    value_template: >
+      {% if value_json.state.flags.ready == true  %}
+        ready
+      {% elif value_json.state.flags.printing == true  %}
+        printing
+      {% elif value_json.state.flags.finishing == true  %}
+        finishing
+      {% else %}
+        unknown
+      {% endif %}
+
+  - platform: rest
+    name: "3D Printer Bed Temperature"
+    resource: !secret octopi_url
+    device_class: temperature
+    headers:
+      'X-Api-Key': !secret octopi_key
+    scan_interval: 30
+    value_template: "{{ value_json.temperature.bed.actual }}"
+    unit_of_measurement: "°C"
+
+  - platform: rest
+    name: "3D Printer Tool Temperature"
+    device_class: temperature
+    headers:
+      'X-Api-Key': !secret octopi_key
+    resource: !secret octopi_url
+    scan_interval: 30
+    value_template: "{{ value_json.temperature.tool0.actual }}"
+    unit_of_measurement: "°C"
+
+automation:
+  
+  # Workshop Motion light on
+  - alias: Workshop Motion Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d0004200940_occupancy
+      from: 'off'
+      to: 'on'
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.0x00158d0004200940_illuminance
+        below: 10
+    action:
+      - service: light.turn_on
+        entity_id: light.0x00158d0005433223_light
+
+  # Workshop Motion light off
+  - alias: Workshop Motion Light
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d0004200940_occupancy
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 2
+    action:
+      - service: light.turn_off
+        entity_id: light.0x00158d0005433223_light

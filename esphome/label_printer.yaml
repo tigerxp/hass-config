@@ -1,0 +1,103 @@
+esphome:
+  name: label_printer
+  platform: ESP8266
+  board: d1_mini
+  includes:
+    - printer_uart.h
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Label Printer Fallback Hotspot"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+  level: VERBOSE
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+  services:
+    - service: set_lcd
+      variables:
+        line1: string
+        line2: string
+      then:
+        # - lambda: |-
+        #   # id(lcd).print(0, 0, id(lcd_font), line1);
+        #   # id(lcd).print(0, 16, id(lcd_font), line2);
+        #   ESP_LOGD(TAG, "Global value is");
+        - lambda: 'id(lcd_line1) = line1.c_str();'
+        - lambda: 'id(lcd_line2) = line2.c_str();'
+        - component.update: lcd
+    - service: print_text
+      variables:
+        print_text: string
+      then:
+        # - uart.write: !lambda |-
+        #     std::vector<unsigned char> v(print_text.length());
+        #     std::copy(print_text.begin(), print_text.end(), v.begin());
+        #     return v;
+        - uart.write: "Hello!!"
+#        'return print_text;'
+        # - uart.write(text)
+        # - lambda: 'id(lcd_line1) = line1.c_str();'
+        # - lambda: 'id(lcd_line2) = line2.c_str();'
+  
+ota:
+  password: !secret ota_password
+
+font:
+  - file: "_fonts/FreeSans.ttf"
+    id: lcd_font
+    size: 16
+
+globals:
+  - id: lcd_line1
+    type: String
+    restore_value: no
+    initial_value: '"Hello!"'
+
+  - id: lcd_line2
+    type: String
+    restore_value: no
+
+i2c:
+  sda: D2
+  scl: D1
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x32"
+    address: 0x3C
+    id: lcd
+    lambda: |-
+      it.print(0, 0, id(lcd_font), id(lcd_line1).c_str());
+      it.print(0, 17, id(lcd_font), id(lcd_line2).c_str());
+
+uart:
+  id: uart_bus
+  tx_pin: GPIO1
+  rx_pin: GPIO3
+  baud_rate: 9600
+
+# custom_component:
+# - lambda: |-
+#     auto printer_uart = new PrinterUart(id(uart_bus));
+#     return {printer_uart};
+    
+text_sensor:
+  - platform: custom
+    lambda: |-
+      auto printer_uart = new PrinterUart(id(uart_bus));
+      App.register_component(printer_uart);
+      return {printer_uart};
+    text_sensors:
+      id: "uart_readline"
