@@ -1,0 +1,49 @@
+esphome:
+  name: esp32_ble_gate2
+  platform: ESP32
+  board: lolin32
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "BLE Gate2 Fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+esp32_ble_tracker:
+
+sensor:
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A1:A1:0F
+    temperature:
+      name: "Hall Temperature"
+    humidity:
+      name: "Hall Humidity"
+
+  - platform: xiaomi_lywsd02
+    mac_address: E7:2E:00:A0:8C:9F
+    temperature:
+      name: "Guestroom Temperature"
+    humidity:
+      name: "Guestroom Humidity"
+
+  - platform: xiaomi_lywsd02
+    mac_address: 3F:59:C8:82:78:A5
+    temperature:
+      name: "Bedside Temperature"
+    humidity:
+      name: "Bedside Humidity"

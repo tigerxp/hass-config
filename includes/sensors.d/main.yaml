@@ -20,15 +20,12 @@
   sensors:
     sunrise:
       friendly_name: 'Next Sunrize Time'
-      entity_id: sun.sun
       value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_rising'))| timestamp_custom('%H:%M') }}"
     sunset:
       friendly_name: 'Next Sunset Time'
-      entity_id: sun.sun
       value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_setting'))| timestamp_custom('%H:%M') }}"
     atmospheric_pressure_mmhg:
       friendly_name: "Atmospheric Pressure"
-      entity_id: sensor.atmospheric_pressure
       unit_of_measurement: mmHg
       value_template: "{{ (states('sensor.atmospheric_pressure')|float * 0.75)|round(1) }}"
 

@@ -64,6 +64,9 @@
 - alias: Water Leak
   trigger:
     platform: state
+    to: 
+      - "on"
+      - "unavailable"
     entity_id:
       - binary_sensor.0x00158d000405cec1_water_leak # Guest bathroom
       - binary_sensor.0x00158d00041f6a7a_water_leak # Basement
