@@ -75,6 +75,10 @@ google_assistant:
   entity_config:
     group.all_automations:
       expose: false
+    switch.neo2_relay:
+      expose: false
+    switch.0x00158d0001717a37_switch:
+      expose: false
 
 # mikrotik:
 #   - name: Mikrotik
