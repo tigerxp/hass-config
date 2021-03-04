@@ -35,7 +35,7 @@ sensor:
       name: "Kitchen Humidity"
 
   - platform: adc
-    name: "Pressure"
+    name: "Water Pressure"
     pin: GPIO35
     id: water_pressure
     update_interval: 30s

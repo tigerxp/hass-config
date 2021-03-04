@@ -37,13 +37,6 @@ esp32_ble_tracker:
 
 sensor:
   - platform: xiaomi_lywsd02
-    mac_address: E7:2E:00:A3:68:F7
-    temperature:
-      name: "Kitchen Temperature 2"
-    humidity:
-      name: "Kitchen Humidity 2"
-
-  - platform: xiaomi_lywsd02
     mac_address: E7:2E:00:92:50:E2
     temperature:
       name: "Masha's Room Temperature"

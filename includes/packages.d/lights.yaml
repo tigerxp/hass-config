@@ -29,3 +29,116 @@ light:
     entities:
       - light.downstairs
       - light.0x00158d00052100e1_light
+
+  - platform: switch
+    name: Office Lights
+    entity_id: switch.office_light_switch
+
+automation:
+  - alias: Office Lights On
+    trigger:
+      platform: state
+      entity_id: sensor.0x04cf8cdf3c75bca9_action
+      to: button_3_single
+    action:
+      - service: switch.turn_on
+        entity_id: switch.office_light_switch
+  - alias: Office Lights Off
+    trigger:
+      platform: state
+      entity_id: sensor.0x04cf8cdf3c75bca9_action
+      to: button_4_single
+    action:
+      - service: switch.turn_off
+        entity_id: switch.office_light_switch
+
+  - alias: Workshop Light Switch On
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d00062f8e05_contact
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.toggle
+        entity_id: light.0x00158d0005433223_light
+  - alias: Workshop Light Switch Off
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d00062f8e05_contact
+      from: 'on'
+      to: 'off'
+    action:
+      - service: light.toggle
+        entity_id: light.0x00158d0005433223_light
+
+  # Office Desk Lamp
+  - alias: Desk Lamp On
+    trigger:
+      platform: state
+      entity_id: sensor.0x04cf8cdf3c75bca9_action
+      to: button_1_single
+    action:
+      - service: switch.turn_on
+        entity_id: switch.bw6_switch
+  - alias: Desk Lamp Off
+    trigger:
+      platform: state
+      entity_id: sensor.0x04cf8cdf3c75bca9_action
+      to: button_2_single
+    action:
+      - service: switch.turn_off
+        entity_id: switch.bw6_switch
+
+  - alias: Office Motion - Main Lights On
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d000543a01e_occupancy
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.office_light_switch
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.dark_outside
+          state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id:
+          - switch.office_light_switch
+
+  - alias: Office No Motion
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00158d000543a01e_occupancy
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 20
+    condition:
+      condition: state
+      entity_id: switch.office_light_switch
+      state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id:
+          - switch.office_light_switch
+          - switch.bw6_switch
+
+  - alias: Kitchen No Motion
+    trigger:
+      platform: state
+      entity_id: binary_sensor.0x00124b002228d9be_occupancy
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 15
+    condition:
+      condition: state
+      entity_id: group.kitchen_lights
+      state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: group.kitchen_lights

@@ -1,0 +1,53 @@
+# Variables
+substitutions:
+  device_name: office_light
+
+esphome:
+  name: ${device_name}
+  platform: ESP8266
+  board: esp8285
+
+wifi:
+  ssid: "matrix"
+  password: !secret wifi_password
+  ap:
+    ssid: ${device_name} fallback"
+    password: !secret fallback_password
+
+captive_portal:
+
+# Disable USB logging
+logger:
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+# Button
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO0
+      inverted: True
+    name: ${device_name}_button
+    filters:
+      - delayed_on: 10ms
+    on_click:
+      - switch.toggle: relay
+
+# Relay and Red LED
+switch:
+  - platform: gpio
+    name: ${device_name}_switch
+    pin: GPIO12
+    id: relay
+
+# Blue LED
+status_led:
+  pin:
+    number: GPIO13
+    inverted: True

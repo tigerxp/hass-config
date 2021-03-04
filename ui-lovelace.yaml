@@ -158,10 +158,14 @@ views:
                 entity: sensor.atmospheric_pressure_mmhg
                 min: 720
                 max: 800
+                severity:
+                  green: 740
+                  yellow: 760
+                  red: 780
               - type: gauge
                 name: "Water, bar"
                 unit: ' '
-                entity: sensor.water_pressure_sensor_6_0
+                entity: sensor.water_pressure
                 min: 0
                 max: 5
                 severity:
@@ -422,6 +426,7 @@ views:
                 name: I
               - entity: sensor.pow1_power
                 name: P
+          - entity: switch.office_light_switch
 
 
       - type: entities
@@ -440,6 +445,10 @@ views:
           #   type: custom:multiple-entity-row
           #   entities:
           #     - entity: input_select.sprinkler_zone
+
+      - type: alarm-panel
+        name: House Alarm
+        entity: alarm_control_panel.house_alarm
 
   - title: 'Zigbee'
     path: zigbee
@@ -583,15 +592,15 @@ views:
                   name: lqi
                 - entity: sensor.0x00158d000405cec1_battery
                   name: bat
-            - entity: binary_sensor.0x00158d00041f6a7a_water_leak # Basement Leak
-              type: custom:multiple-entity-row
-              state_color: true
-              secondary_info: last-changed
-              entities:
-                - entity: sensor.0x00158d000405cec1_linkquality
-                  name: lqi
-                - entity: sensor.0x00158d000405cec1_battery
-                  name: bat
+            # - entity: binary_sensor.0x00158d00041f6a7a_water_leak # Basement Leak
+            #   type: custom:multiple-entity-row
+            #   state_color: true
+            #   secondary_info: last-changed
+            #   entities:
+            #     - entity: sensor.0x00158d000405cec1_linkquality
+            #       name: lqi
+            #     - entity: sensor.0x00158d000405cec1_battery
+            #       name: bat
             - entity: binary_sensor.0x00158d000484bffb_water_leak
               type: custom:multiple-entity-row
               state_color: true
@@ -637,7 +646,17 @@ views:
                   name: bat
                 - entity: sensor.0x00158d000421ccd1_illuminance
                   name: lum
-            # Kitchen Motion
+            # Office Motion
+            - entity: binary_sensor.0x00158d000543a01e_occupancy
+              type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00158d000543a01e_linkquality
+                  name: lqi
+                - entity: sensor.0x00158d000543a01e_battery
+                  name: bat
+            # Hall Motion
             - entity: binary_sensor.0x00158d00042024f3_occupancy
               type: custom:multiple-entity-row
               state_color: true
@@ -649,9 +668,16 @@ views:
                   name: bat
                 - entity: sensor.0x00158d00042024f3_illuminance
                   name: lum
-            # - entity: binary_sensor.motion_sensor_158d000420092b
-              # type: custom:multiple-entity-row
-              # secondary_info: last-changed
+            # Kitchen Motion
+            - entity: binary_sensor.0x00124b002228d9be_occupancy
+              type: custom:multiple-entity-row
+              state_color: true
+              secondary_info: last-changed
+              entities:
+                - entity: sensor.0x00124b002228d9be_linkquality
+                  name: lqi
+                - entity: sensor.0x00124b002228d9be_battery
+                  name: bat
             # Basement Motion
             - entity: binary_sensor.0x00158d000420092b_occupancy
               type: custom:multiple-entity-row
@@ -779,6 +805,17 @@ views:
                     icon: mdi:code-greater-than
                     tap_action:
                       action: toggle
+          - type: entities
+            title: Arm Home Motion
+            state_color: true
+            entities:
+              - binary_sensor.0x00124b002228d9be_occupancy # Kitchen
+              - binary_sensor.0x00124b002242e7db_occupancy # Entrance
+              - binary_sensor.0x00158d000420092b_occupancy # Basement
+              - binary_sensor.0x00158d000421ccd1_occupancy # Downstairs
+              - binary_sensor.0x00158d0005439ec6_occupancy # Lounge
+              - binary_sensor.0x00158d0005439ed2_occupancy # Zoo
+              - binary_sensor.0x00158d00042024f3_occupancy # Hall
 
   - title: Cameras
     path: cameras
@@ -825,6 +862,12 @@ views:
             title: Hall
             entities: []
             camera_image: camera.hall
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Office
+            entities: []
+            camera_image: camera.office
 
   - title: Workshop
     path: workshop
@@ -840,7 +883,7 @@ views:
             show_state: true
           - entity: sensor.3d_printer_bed_temperature
             show_state: true
-        camera_image: camera.office
+        camera_image: camera.3d_printer
         aspect_ratio: 16x9
         camera_view: live
       - type: custom:restriction-card
@@ -852,11 +895,25 @@ views:
           type: button
           entity: switch.bw3_switch
       - type: entities
-        title: Filament Box
+        title: "Filament Box #1"
         entities:
           - entity: sensor.temperature_158d00054472d2
             name: Temperature
           - entity: sensor.humidity_158d00054472d2
+            name: Humidity
+      - type: entities
+        title: "Filament Box #2"
+        entities:
+          - entity: sensor.0x00158d00041e2d09_temperature
+            name: Temperature
+          - entity: sensor.0x00158d00041e2d09_humidity
+            name: Humidity
+      - type: entities
+        title: "Filament Box #3"
+        entities:
+          - entity: sensor.0x00158d0003cd3c19_temperature
+            name: Temperature
+          - entity: sensor.0x00158d0003cd3c19_humidity
             name: Humidity
       - type: entities
         title: Workshop Room

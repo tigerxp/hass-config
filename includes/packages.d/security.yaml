@@ -12,6 +12,19 @@ binary_sensor:
     #   line_crossing:
     #     ignored: false
 
+alarm_control_panel:
+  - platform: manual
+    name: House Alarm
+    code: !secret house_alarm_code
+    arming_time: 20
+    delay_time: 20
+    trigger_time: 10
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 10
+
 script:
   set_upstairs_gw_color:
     sequence:
@@ -25,21 +38,87 @@ script:
               50
             {% endif %}
           color_name: >
-            {% if is_state("group.house_locks", "on") %}
-              {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
-                orangered
-              {% else %}
-                red
-              {% endif %}
+            {% if not is_state("alarm_control_panel.house_alarm", "disarmed") %}
+              fuchsia
             {% else %}
-              {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
-                yellow
+              {% if is_state("group.house_locks", "on") %}
+                {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                  orangered
+                {% else %}
+                  red
+                {% endif %}
               {% else %}
-                green
+                {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                  yellow
+                {% else %}
+                  green
+                {% endif %}
               {% endif %}
             {% endif %}
 
+group:
+  arm_home_motion:
+    name: Arm Home Motion Group
+    entities:
+#      - binary_sensor.0x00124b002228d9be_occupancy # Kitchen
+#      - binary_sensor.0x00124b002242e7db_occupancy # Entrance
+      - binary_sensor.0x00158d000420092b_occupancy # Basement
+      - binary_sensor.0x00158d000421ccd1_occupancy # Downstairs
+      - binary_sensor.0x00158d0005439ec6_occupancy # Lounge
+      - binary_sensor.0x00158d0005439ed2_occupancy # Zoo
+      - binary_sensor.0x00158d00042024f3_occupancy # Hall
+  arm_home_contacts:
+    name: Arm Home Doors Group
+    entities:
+      - binary_sensor.0x00158d0003031abc_contact # Entrance Door
+      - binary_sensor.0x00158d0003d481a6_contact # Entrance Lock
+      - binary_sensor.0x00158d0003d4434a_contact # Zoo Door
+      - binary_sensor.0x00158d0003d4a2b2_contact # Zoo Lock
+      - binary_sensor.0x00158d0003033e26_contact # Kitchen Shutter
+      - binary_sensor.0x00158d0003d41ce4_contact # Boiler Room Door
+      - binary_sensor.0x00158d0003031c30_contact # Garage Gate
+      - binary_sensor.0x00158d0003033ec6_contact # Garage Door
+
 automation:
+
+  - alias: Armed Home Trigger Alarm
+    trigger:
+      - platform: state
+        entity_id: group.arm_home_motion
+        to: "on"
+      - platform: state
+        entity_id: group.arm_home_contacts
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.house_alarm
+        state: armed_home
+    action:
+      - service: alarm_control_panel.alarm_trigger
+        entity_id: alarm_control_panel.house_alarm
+      - service: notify.telegram_tiger
+        data_template:
+          message: "Armed Home Alarm triggered by *{{ trigger.to_state.attributes.friendly_name }}*"
+
+  - alias: House Alarm triggered
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.house_alarm
+        to: "triggered"
+    action:
+      - service: notify.telegram_tiger
+        data_template:
+          message: "House alarm triggered!"
+      - service: xiaomi_aqara.play_ringtone
+        data:
+          gw_mac: !secret xiaomi_gw2_mac
+          ringtone_id: 0 # Police Car
+          ringtone_vol: 5
+      - service: xiaomi_aqara.play_ringtone
+        data:
+          gw_mac: !secret xiaomi_gw1_mac
+          ringtone_id: 0 # Police Car
+          ringtone_vol: 15
 
   # Upstairs movement - light
   - alias: Upstairs Motion Light
@@ -87,7 +166,10 @@ automation:
   - alias: Update Gateway color on changes
     trigger:
       platform: state
-      entity_id: group.house_locks, binary_sensor.0x00158d0003033e26_contact
+      entity_id: 
+        - group.house_locks
+        - binary_sensor.0x00158d0003033e26_contact
+        - alarm_control_panel.house_alarm
     condition:
       - condition: state
         entity_id: light.gateway_light_04cf8caa9813

@@ -45,3 +45,8 @@
     authentication: basic
     still_image_url: http://192.168.1.80/ISAPI/Streaming/channels/1001/picture
     stream_source: !secret cam_hall_stream
+
+  - platform: mjpeg
+    name: 3D Printer
+    still_image_url: http://192.168.1.6/webcam/?action=snapshot
+    mjpeg_url: http://192.168.1.6/webcam/?action=stream

@@ -1,0 +1,7 @@
+binary_sensor:
+  - platform: template
+    sensors:
+      dark_outside:
+        value_template: >
+          {{ state_attr("sun.sun","elevation")|float < 3 }}
+        # TODO: add clouds coverage

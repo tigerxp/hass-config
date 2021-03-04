@@ -9,10 +9,6 @@
     condition: state
     entity_id: automation.vacuum_charged
     state: 'off'
-  # condition:
-  #   condition: time
-  #   after: '8:00:00'
-  #   before: '22:00:00'
   action:
     - service: notify.telegram_group
       data_template:
@@ -71,6 +67,33 @@
       at: "03:00:00"
   action:
     - service: switch.turn_off
+      entity_id: switch.bw1_switch
+
+# Turn on heaters on Sunday for bath
+- alias: Turn on Kids Heater on Sunday for 1h
+  trigger:
+    - platform: time
+      at: "15:00:00"
+  condition:
+    condition: time
+    weekday:
+      - sun
+  action:
+    - service: switch.turn_on
+      entity_id: switch.bw2_switch
+    - delay: 1h
+    - service: switch.turn_off
+      entity_id: switch.bw2_switch
+- alias: Turn on Bedroom Heater on Sunday
+  trigger:
+    - platform: time
+      at: "16:30:00"
+  condition:
+    condition: time
+    weekday:
+      - sun
+  action:
+    - service: switch.turn_on
       entity_id: switch.bw1_switch
 
 # Enable Xiaomi plugs that should stay on

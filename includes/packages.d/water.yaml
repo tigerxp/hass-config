@@ -4,7 +4,7 @@ binary_sensor:
     sensors:
       water_pressure_falling:
         friendly_name: Water Pressure Falling
-        entity_id: sensor.water_pressure_sensor_6_0
+        entity_id: sensor.water_pressure
         invert: true
         max_samples: 30
         sample_duration: 60
@@ -119,7 +119,7 @@ automation:
     id: low_water_pressure
     trigger:
       - platform: numeric_state
-        entity_id: sensor.water_pressure_sensor_6_0
+        entity_id: sensor.water_pressure
         below: 1.4
         for: "00:00:10" # 10s
     condition:
@@ -133,7 +133,7 @@ automation:
     id: restore_tank_valve
     trigger:
       - platform: numeric_state
-        entity_id: sensor.water_pressure_sensor_6_0
+        entity_id: sensor.water_pressure
         above: 2
         for: "00:40:00" # Above 2ATM for 40m
     condition:

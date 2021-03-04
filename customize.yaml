@@ -31,6 +31,9 @@ switch.bw4_switch:
 switch.bw5_switch:
   friendly_name: Dehumidifier Plug
   icon: mdi:air-humidifier
+switch.bw6_switch:
+  friendly_name: Office Desk Lamp
+  icon: mdi:desk-lamp
 switch.bw7_switch:
   friendly_name: Philips Vacuum Plug
   icon: mdi:squeegee
@@ -70,6 +73,8 @@ light.0x00158d0005433223_light:
   friendly_name: Workshop Light
 light.0x00158d00052100e1_light:
   friendly_name: Basement Light
+switch.office_light_switch:
+  friendly_name: Office Light Switch
 
 # Gateways
 light.gateway_light_04cf8caa9813:
@@ -101,14 +106,39 @@ sensor.0x00158d000421ccd1_illuminance:
 sensor.0x00158d000421ccd1_battery:
   friendly_name: Downstairs Motion Battery
 
-# Kitchen Motion Sensor
+# Hall Motion Sensor
 binary_sensor.0x00158d00042024f3_occupancy:
-  friendly_name: Kitchen Motion
+  friendly_name: Hall Motion
 sensor.0x00158d00042024f3_illuminance:
-  friendly_name: Kitchen Illuminance
+  friendly_name: Hall Illuminance
   unit_of_measurement: lux
 sensor.0x00158d00042024f3_battery:
+  friendly_name: Hall Motion Battery
+# Kitchen Motion Sensor
+binary_sensor.0x00124b002228d9be_occupancy:
+  friendly_name: Kitchen Motion
+sensor.0x00124b002228d9be_battery:
   friendly_name: Kitchen Motion Battery
+sensor.0x00124b002228d9be_battery_low:
+  friendly_name: Kitchen Motion Battery Low
+# Office Motion Sensor
+binary_sensor.0x00158d000543a01e_occupancy:
+  friendly_name: Office Motion
+sensor.0x00158d000543a01e_battery:
+  friendly_name: Office Motion Battery
+sensor.0x00158d000543a01e_battery_low:
+  friendly_name: Office Motion Battery Low
+# Lounge Motion
+binary_sensor.0x00158d0005439ec6_occupancy:
+  friendly_name: Lounge Motion
+sensor.0x00158d0005439ec6_battery:
+  friendly_name: Lounge Motion Battery
+# Entrance Motion
+binary_sensor.0x00124b002242e7db_occupancy:
+  friendly_name: Entrance Motion
+# Zoo Motion
+binary_sensor.0x00158d0005439ed2_occupancy:
+  friendly_name: Zoo Motion
 
 # Basement Motion
 # binary_sensor.motion_sensor_158d000420092b:
@@ -209,6 +239,10 @@ sensor.3d_printer_state:
 sensor.water_pressure_sensor_6_0:
   unit_of_measurement: bar
   friendly_name: 'Water Pressure'
+sensor.water_pressure:
+  friendly_name: 'Water Pressure'
+  unit_of_measurement: bar
+  icon: mdi:gauge
 sensor.sunrise:
   icon: mdi:weather-sunset-up
 sensor.sunset:

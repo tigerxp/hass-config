@@ -17,8 +17,15 @@
     entity_id: sensor.0x00158d000122cc7a_click
     to: single
   action:
-    - service: light.toggle
-      entity_id: light.0x00158d0005433223_light
+    service: >
+      {% if is_state('alarm_control_panel.house_alarm', 'disarmed') %}
+        alarm_control_panel.alarm_arm_home
+      {% else %}
+        alarm_control_panel.alarm_disarm
+      {% endif %}
+    data:
+      entity_id: alarm_control_panel.house_alarm
+      code: !secret house_alarm_code
 
 #  Toggle indicators on double click
 # - alias: Bedroom Button Double Click
