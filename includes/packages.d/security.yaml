@@ -42,13 +42,13 @@ script:
               fuchsia
             {% else %}
               {% if is_state("group.house_locks", "on") %}
-                {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                {% if is_state("binary_sensor.kitchen_shutter_contact", "on") %}
                   orangered
                 {% else %}
                   red
                 {% endif %}
               {% else %}
-                {% if is_state("binary_sensor.0x00158d0003033e26_contact", "on") %}
+                {% if is_state("binary_sensor.kitchen_shutter_contact", "on") %}
                   yellow
                 {% else %}
                   green
@@ -62,22 +62,22 @@ group:
     entities:
 #      - binary_sensor.0x00124b002228d9be_occupancy # Kitchen
 #      - binary_sensor.0x00124b002242e7db_occupancy # Entrance
-      - binary_sensor.0x00158d000420092b_occupancy # Basement
-      - binary_sensor.0x00158d000421ccd1_occupancy # Downstairs
-      - binary_sensor.0x00158d0005439ec6_occupancy # Lounge
-      - binary_sensor.0x00158d0005439ed2_occupancy # Zoo
-      - binary_sensor.0x00158d00042024f3_occupancy # Hall
+      - binary_sensor.basement_motion_occupancy
+      - binary_sensor.downstairs_motion_occupancy
+      - binary_sensor.lounge_motion_occupancy
+      - binary_sensor.zoo_motion_occupancy
+      - binary_sensor.hall_motion_occupancy
   arm_home_contacts:
     name: Arm Home Doors Group
     entities:
-      - binary_sensor.0x00158d0003031abc_contact # Entrance Door
-      - binary_sensor.0x00158d0003d481a6_contact # Entrance Lock
-      - binary_sensor.0x00158d0003d4434a_contact # Zoo Door
-      - binary_sensor.0x00158d0003d4a2b2_contact # Zoo Lock
-      - binary_sensor.0x00158d0003033e26_contact # Kitchen Shutter
-      - binary_sensor.0x00158d0003d41ce4_contact # Boiler Room Door
-      - binary_sensor.0x00158d0003031c30_contact # Garage Gate
-      - binary_sensor.0x00158d0003033ec6_contact # Garage Door
+      - binary_sensor.entrance_door_contact
+      - binary_sensor.entrance_lock_contact
+      - binary_sensor.zoo_door_contact
+      - binary_sensor.zoo_lock_contact
+      - binary_sensor.kitchen_shutter_contact
+      - binary_sensor.boiler_room_door_contact
+      - binary_sensor.garage_gate_contact
+      - binary_sensor.garage_door_contact
 
 automation:
 
@@ -113,12 +113,12 @@ automation:
         data:
           gw_mac: !secret xiaomi_gw2_mac
           ringtone_id: 0 # Police Car
-          ringtone_vol: 5
+          ringtone_vol: 100
       - service: xiaomi_aqara.play_ringtone
         data:
           gw_mac: !secret xiaomi_gw1_mac
           ringtone_id: 0 # Police Car
-          ringtone_vol: 15
+          ringtone_vol: 100
 
   # Upstairs movement - light
   - alias: Upstairs Motion Light
@@ -154,7 +154,7 @@ automation:
   - alias: Upstairs motion off
     trigger:
       platform: state
-      entity_id: binary_sensor.motion_sensor_158d00042820c3
+      entity_id: binary_sensor.motion_sensor_158d00042820c3 # upstairs motion is connected to gateway
       from: 'on'
       to: 'off'
       for:
@@ -168,7 +168,7 @@ automation:
       platform: state
       entity_id: 
         - group.house_locks
-        - binary_sensor.0x00158d0003033e26_contact
+        - binary_sensor.kitchen_shutter_contact
         - alarm_control_panel.house_alarm
     condition:
       - condition: state

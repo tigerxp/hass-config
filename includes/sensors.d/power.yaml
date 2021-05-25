@@ -1,3 +1,4 @@
+# DO NOT EDIT this auto-generated file - edit template: shadow_config/power.yaml.jinja2
 # BlitzWolf #1 Totals
 - platform: template
   sensors:
@@ -132,14 +133,4 @@
       icon_template: mdi:counter
 
 # Xiaomi Zigbee load power
-- platform: template
-  sensors:
-    plug_158d000391fadc_power:
-      icon_template: mdi:flash-outline
-      value_template: "{{ state_attr('switch.plug_158d000391fadc', 'load_power')}}"
-      unit_of_measurement: 'W'
-
-    plug_158d00039fcce4_power:
-      icon_template: mdi:flash-outline
-      value_template: "{{ state_attr('switch.plug_158d00039fcce4', 'load_power')}}"
-      unit_of_measurement: 'W'
+# FIXME

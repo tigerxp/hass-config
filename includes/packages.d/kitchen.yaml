@@ -1,0 +1,8 @@
+group:
+
+  kitchen_lights:
+    name: Kitchen Lights
+    icon: mdi:lightbulb
+    entities:
+      - switch.kitchen_lights_left
+      - switch.kitchen_lights_right

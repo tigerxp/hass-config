@@ -22,12 +22,4 @@
 {% endfor -%}
 
 # Xiaomi Zigbee load power
-- platform: template
-  sensors:
-{%- set xiaomi_plugs = ['158d000391fadc', '158d00039fcce4'] -%}
-{%- for a in xiaomi_plugs %}
-    plug_{{ a }}_power:
-      icon_template: mdi:flash-outline
-      value_template: "{{ '{{' }} state_attr('switch.plug_{{ a }}', 'load_power'){{ '}}' }}"
-      unit_of_measurement: 'W'
-{% endfor -%}
+# FIXME

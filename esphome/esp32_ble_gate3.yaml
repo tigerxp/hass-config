@@ -38,7 +38,7 @@ sensor:
     name: "Water Pressure"
     pin: GPIO35
     id: water_pressure
-    update_interval: 30s
+    update_interval: 20s
     unit_of_measurement: "bar"
     accuracy_decimals: 2
     attenuation: 11db

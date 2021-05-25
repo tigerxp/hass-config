@@ -43,7 +43,7 @@
     to: 'on'
   condition:
     condition: numeric_state
-    entity_id: sensor.0x00158d000421ccd1_illuminance
+    entity_id: sensor.downstairs_motion_illuminance
     below: 50
   action:
     - service: light.turn_on

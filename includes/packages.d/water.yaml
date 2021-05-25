@@ -120,7 +120,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.water_pressure
-        below: 1.4
+        below: 1.0
         for: "00:00:10" # 10s
     condition:
       - condition: state
@@ -134,8 +134,8 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.water_pressure
-        above: 2
-        for: "00:40:00" # Above 2ATM for 40m
+        above: 1.6
+        for: "00:20:00" # Keeps pressure for 20m
     condition:
       - condition: state
         entity_id: switch.tank_valve

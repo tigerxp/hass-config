@@ -3,35 +3,40 @@
   name: "AirPM Rest Data"
   resource: !secret air_pollution_url
   scan_interval: 120
-  value_template: "{{ value_json[0].ts }}"
+  value_template: "{{ value_json[0] }}"
   json_attributes:
-    - 'pm1.0'
-    - 'pm2.5'
-    - 'pm10'
+    - 'aqi'
+    - 'dust_1_0'
+    - 'dust_2_5'
+    - 'dust_10_0'
     - temperature
     - humidity
-    - rssi
     - fw
     - ts
 
 # Outside Air Pollution Monitor (APM) sensors based on the REST above
 - platform: template
   sensors:
+    apm_aqi:
+      friendly_name: 'Outside Air Quality'
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'aqi') }}"
+      unit_of_measurement: 'AQI'
+      icon_template: mdi:smog
     apm_pm1_0:
       friendly_name: 'Outside PM 1.0'
-      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm1.0') }}"
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'dust_1_0') }}"
       unit_of_measurement: 'μg/m3'
-      icon_template: mdi:smog
+      icon_template: mdi:numeric-1-circle-outline
     apm_pm2_5:
       friendly_name: 'Outside PM 2.5'
-      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm2.5') }}"
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'dust_2_5') }}"
       unit_of_measurement: 'μg/m3'
-      icon_template: mdi:smog
+      icon_template: mdi:numeric-2-circle-outline
     apm_pm10:
       friendly_name: 'Outside PM 10'
-      value_template: "{{ state_attr('sensor.airpm_rest_data', 'pm10') }}"
+      value_template: "{{ state_attr('sensor.airpm_rest_data', 'dust_10_0') }}"
       unit_of_measurement: 'μg/m3'
-      icon_template: mdi:smog
+      icon_template: mdi:numeric-10-circle-outline
     apm_temperature:
       friendly_name: 'Outside Temperature'
       value_template: "{{ state_attr('sensor.airpm_rest_data', 'temperature')|round(1) }}"
@@ -42,8 +47,3 @@
       value_template: "{{ state_attr('sensor.airpm_rest_data', 'humidity')|round(1) }}"
       device_class: humidity
       unit_of_measurement: '%'
-    apm_wifi_level:
-      friendly_name: 'APM WiFi Strength (RSSI)'
-      value_template: "{{ state_attr('sensor.airpm_rest_data', 'rssi') }}"
-      icon_template: mdi:wifi-strength-3
-      unit_of_measurement: 'dBm'

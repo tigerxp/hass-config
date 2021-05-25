@@ -37,31 +37,51 @@ sensor:
     unit_of_measurement: "°C"
 
 automation:
+
+  - alias: Workshop Light Switch On
+    trigger:
+      platform: state
+      entity_id: binary_sensor.workshop_light_switch_contact
+      from: 'off'
+      to: 'on'
+    action:
+      - service: light.toggle
+        entity_id: light.workshop_light
+  - alias: Workshop Light Switch Off
+    trigger:
+      platform: state
+      entity_id: binary_sensor.workshop_light_switch_contact
+      from: 'on'
+      to: 'off'
+    action:
+      - service: light.toggle
+        entity_id: light.workshop_light
+
   
   # Workshop Motion light on
   - alias: Workshop Motion Light
     trigger:
       platform: state
-      entity_id: binary_sensor.0x00158d0004200940_occupancy
+      entity_id: binary_sensor.workshop_motion_occupancy
       from: 'off'
       to: 'on'
     condition:
       - condition: numeric_state
-        entity_id: sensor.0x00158d0004200940_illuminance
+        entity_id: sensor.workshop_motion_illuminance
         below: 10
     action:
       - service: light.turn_on
-        entity_id: light.0x00158d0005433223_light
+        entity_id: light.workshop_light
 
   # Workshop Motion light off
   - alias: Workshop Motion Light
     trigger:
       platform: state
-      entity_id: binary_sensor.0x00158d0004200940_occupancy
+      entity_id: binary_sensor.workshop_motion_occupancy
       from: 'on'
       to: 'off'
       for:
         minutes: 2
     action:
       - service: light.turn_off
-        entity_id: light.0x00158d0005433223_light
+        entity_id: light.workshop_light

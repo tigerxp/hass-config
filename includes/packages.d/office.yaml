@@ -1,0 +1,73 @@
+automation:
+
+  - alias: Office Lights On
+    trigger:
+      platform: state
+      entity_id: sensor.office_lights_switch_action
+      to: button_3_single
+    action:
+      - service: switch.turn_on
+        entity_id: switch.office_light_switch
+  - alias: Office Lights Off
+    trigger:
+      platform: state
+      entity_id: sensor.office_lights_switch_action
+      to: button_4_single
+    action:
+      - service: switch.turn_off
+        entity_id: switch.office_light_switch
+
+  - alias: Desk Lamp On
+    trigger:
+      platform: state
+      entity_id: sensor.office_lights_switch_action
+      to: button_1_single
+    action:
+      - service: switch.turn_on
+        entity_id: switch.bw6_switch
+  - alias: Desk Lamp Off
+    trigger:
+      platform: state
+      entity_id: sensor.office_lights_switch_action
+      to: button_2_single
+    action:
+      - service: switch.turn_off
+        entity_id: switch.bw6_switch
+
+  - alias: Office Motion - Main Lights On
+    trigger:
+      platform: state
+      entity_id: binary_sensor.office_motion_occupancy
+      from: 'off'
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.office_light_switch
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.dark_outside
+          state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id:
+          - switch.office_light_switch
+
+  - alias: Office No Motion
+    trigger:
+      platform: state
+      entity_id: binary_sensor.office_motion_occupancy
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 20
+    condition:
+      condition: state
+      entity_id: switch.office_light_switch
+      state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id:
+          - switch.office_light_switch
+          - switch.bw6_switch

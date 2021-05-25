@@ -48,3 +48,6 @@ sensor:
       name: "Bedside Temperature"
     humidity:
       name: "Bedside Humidity"
+      
+# Found device A4:C1:38:09:E0:C0 MHO-C401
+

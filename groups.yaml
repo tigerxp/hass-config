@@ -1,17 +1,17 @@
-# DO NOT EDIT this auto-generated file - edit template: config_templates/groups.yaml.jinja2
+# DO NOT EDIT this auto-generated file - edit template: shadow_config/groups.yaml.jinja2
 house_locks:
   name: House Locks
   icon: mdi:lock-reset
   entities:
-    - binary_sensor.0x00158d0003d481a6_contact
-    - binary_sensor.0x00158d0003d4a2b2_contact
+    - binary_sensor.entrance_lock_contact
+    - binary_sensor.zoo_lock_contact
 
 downstairs_motion:
   name: Downstairs Motion Group
   entities:
-    - binary_sensor.0x00158d000421ccd1_occupancy
-    - binary_sensor.motion_sensor_158d000420092b
-    - binary_sensor.0x00158d000420092b_occupancy
+    - binary_sensor.downstairs_motion_occupancy
+    - binary_sensor.basement_motion_occupancy
+    - binary_sensor.lounge_motion_occupancy
 
 utility_meters:
   name: Utility Meters
@@ -45,10 +45,3 @@ house_fans:
   entities:
     - switch.bedroom_fan
     - switch.kids_fan
-
-kitchen_lights:
-  name: Kitchen Lights
-  icon: mdi:lightbulb
-  entities:
-    - switch.0xec1bbdfffe6c12f2_switch_left
-    - switch.0xec1bbdfffe6c12f2_switch_right

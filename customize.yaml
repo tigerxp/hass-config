@@ -1,7 +1,7 @@
 # Air Quality
-air_quality.mi_air_monitor:
+air_quality.mi_air_monitor_2:
   friendly_name: Office PM 2.5
-  icon: mdi:smog
+  icon: mdi:numeric-2-circle-outline
 
 # Switches
 switch.bedroom_fan:
@@ -14,8 +14,8 @@ switch.neo1_relay:
   friendly_name: NEO1 Plug
   icon: mdi:power-socket-eu
 switch.neo2_relay:
-  friendly_name: Kitchen TV Plug
-  icon: mdi:television
+  friendly_name: NEO2 Plug
+  icon: mdi:power-socket-eu
 switch.bw1_switch:
   friendly_name: Bedroom Water Heater
   icon: mdi:water-boiler
@@ -98,94 +98,95 @@ binary_sensor.motion_sensor_158d00042820c3:
 #   friendly_name: Upstairs Motion Battery
 
 # Downstairs Motion Sensor
-binary_sensor.0x00158d000421ccd1_occupancy:
+binary_sensor.downstairs_motion_occupancy:
   friendly_name: Downstairs Motion
-sensor.0x00158d000421ccd1_illuminance:
+sensor.downstairs_motion_illuminance:
   friendly_name: Downstairs Illuminance
   unit_of_measurement: lux
-sensor.0x00158d000421ccd1_battery:
+sensor.downstairs_motion_battery:
   friendly_name: Downstairs Motion Battery
 
 # Hall Motion Sensor
-binary_sensor.0x00158d00042024f3_occupancy:
+binary_sensor.hall_motion_occupancy:
   friendly_name: Hall Motion
-sensor.0x00158d00042024f3_illuminance:
+sensor.hall_motion_illuminance:
   friendly_name: Hall Illuminance
   unit_of_measurement: lux
-sensor.0x00158d00042024f3_battery:
+sensor.hall_motion_battery:
   friendly_name: Hall Motion Battery
+
 # Kitchen Motion Sensor
-binary_sensor.0x00124b002228d9be_occupancy:
+binary_sensor.kitchen_motion_occupancy:
   friendly_name: Kitchen Motion
-sensor.0x00124b002228d9be_battery:
+sensor.kitchen_motion_battery:
   friendly_name: Kitchen Motion Battery
-sensor.0x00124b002228d9be_battery_low:
+sensor.kitchen_motion_battely_low:
   friendly_name: Kitchen Motion Battery Low
+
 # Office Motion Sensor
-binary_sensor.0x00158d000543a01e_occupancy:
+binary_sensor.office_motion_occupancy:
   friendly_name: Office Motion
-sensor.0x00158d000543a01e_battery:
+sensor.office_motion_battery:
   friendly_name: Office Motion Battery
-sensor.0x00158d000543a01e_battery_low:
+sensor.office_motion_battery_low:
   friendly_name: Office Motion Battery Low
+
 # Lounge Motion
-binary_sensor.0x00158d0005439ec6_occupancy:
+binary_sensor.lounge_motion_occupancy:
   friendly_name: Lounge Motion
-sensor.0x00158d0005439ec6_battery:
+sensor.lounge_motion_battery:
   friendly_name: Lounge Motion Battery
+
 # Entrance Motion
-binary_sensor.0x00124b002242e7db_occupancy:
+binary_sensor.entrance_motion_occupancy:
   friendly_name: Entrance Motion
+
 # Zoo Motion
-binary_sensor.0x00158d0005439ed2_occupancy:
+binary_sensor.zoo_motion_occupancy:
   friendly_name: Zoo Motion
 
-# Basement Motion
-# binary_sensor.motion_sensor_158d000420092b:
-#   friendly_name: Basement Motion
-
 # Workshop Motion Sensor
-binary_sensor.0x00158d0004200940_occupancy:
+binary_sensor.workshop_motion_occupancy:
   friendly_name: Workshop Motion
-sensor.0x00158d0004200940_illuminance:
+sensor.workshop_motion_illuminance:
   friendly_name: Workshop Illuminance
   unit_of_measurement: lux
-sensor.0x00158d0004200940_battery:
+sensor.workshop_motion_battery:
   friendly_name: Workshop Motion Battery
 
 # Basement Motion Sensor
-binary_sensor.0x00158d000420092b_occupancy:
+binary_sensor.basement_motion_occupancy:
   friendly_name: Basement Motion
-sensor.0x00158d000420092b_illuminance:
+sensor.basement_motion_illuminance:
   friendly_name: Basement Illuminance  
   unit_of_measurement: lux
-sensor.0x00158d000420092b_battery:
+sensor.basement_motion_battery:
   friendly_name: Basement Motion Battery
 
 # Doors/Locks
-binary_sensor.0x00158d0003d4434a_contact:
+binary_sensor.zoo_door_contact:
   friendly_name: Zoo Door
   device_class: door
-binary_sensor.0x00158d0003d481a6_contact:
+binary_sensor.entrance_lock_contact:
   friendly_name: Entrance Lock
   device_class: lock
-binary_sensor.0x00158d0003d4a2b2_contact:
+binary_sensor.zoo_lock_contact:
   friendly_name: Zoo Lock
   device_class: lock
-binary_sensor.0x00158d0003d41ce4_contact:
+binary_sensor.boiler_room_door_contact:
   friendly_name: Boiler Room Door
   device_class: door
-binary_sensor.0x00158d0003031abc_contact:
+binary_sensor.entrance_door_contact:
   friendly_name: Entrance Door
-binary_sensor.0x00158d0003d41c27_contact:
+binary_sensor.wardrobe_door_contact:
   friendly_name: Wardrobe Door
-binary_sensor.0x00158d0003031c30_contact:
+binary_sensor.garage_gate_contact:
   friendly_name: Garage Gate
   icon: mdi:garage
-binary_sensor.0x00158d0003033e26_contact:
+binary_sensor.kitchen_shutter_contact:
   friendly_name: Kitchen Shutter
   icon: mdi:garage
-binary_sensor.0x00158d0003033ec6_contact:
+binary_sensor.garage_door_contact:
   friendly_name: Garage Door
 
 
@@ -194,8 +195,8 @@ binary_sensor.0x00158d000405cec1_water_leak:
   friendly_name: Guest Bathroom Leak
 binary_sensor.water_leak_sensor_158d00041f6a7a:
   friendly_name: Basement Leak
-binary_sensor.water_leak_sensor_158d000484bff9:
-  friendly_name: Water Entrance Leak
+# binary_sensor.water_leak_sensor_158d000484bff9:
+#   friendly_name: Water Entrance Leak
 
 # Controllers
 sensor.0x00158d0002a71f01_action:

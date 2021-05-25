@@ -4,13 +4,38 @@ binary_sensor:
     name: Ping MS Gateway
     count: 2
     scan_interval: 60
+  - platform: ping
+    host: !secret zb_coordinator_ip
+    name: Ping Zigbee Coordinator
+    count: 2
+    scan_interval: 60
+
+# automation:
+#   # Restart MySensors gateway if hang
+#   - alias: MS Gateway unavailable
+#     trigger:
+#       platform: state
+#       entity_id: binary_sensor.ping_ms_gateway
+#       from: 'on'
+#       to: 'off'
+#       for:
+#         minutes: 2
+#     action:
+#       - service: notify.telegram_tiger
+#         data_template:
+#           message: "MS Gateway is down - restarting"
+#       - service: switch.turn_off
+#         entity_id: switch.neo1_relay
+#       - delay: '00:00:10'
+#       - service: switch.turn_on
+#         entity_id: switch.neo1_relay
 
 automation:
   # Restart MySensors gateway if hang
-  - alias: MS Gateway unavailable
+  - alias: ZB Coordinator unavailable
     trigger:
       platform: state
-      entity_id: binary_sensor.ping_ms_gateway
+      entity_id: binary_sensor.ping_zigbee_coordinator
       from: 'on'
       to: 'off'
       for:
@@ -18,9 +43,9 @@ automation:
     action:
       - service: notify.telegram_tiger
         data_template:
-          message: "MS Gateway is down - restarting"
+          message: "ZB Coordinator is down - restarting"
       - service: switch.turn_off
         entity_id: switch.neo1_relay
-      - delay: '00:00:10'
+      - delay: '00:00:20'
       - service: switch.turn_on
         entity_id: switch.neo1_relay

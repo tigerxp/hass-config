@@ -1,3 +1,4 @@
+# DO NOT EDIT this auto-generated file - edit template: shadow_config/utility_meters.yaml.jinja2
 # BlitzWolf #1
 um_daily_bw1:
   source: sensor.int_bw1_power
@@ -151,3 +152,5 @@ um_yearly_bw7:
   tariffs:
     - day
     - night
+
+

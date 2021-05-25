@@ -39,9 +39,12 @@ views:
             title: Air Quality
             show_header_toggle: false
             entities:
+              - sensor.apm_aqi
               - sensor.apm_pm2_5
+              - sensor.apm_pm1_0
+              - sensor.apm_pm10
               - type: section
-              - air_quality.mi_air_monitor
+              - air_quality.mi_air_monitor_2
               - sensor.aq_office_tvoc
               - sensor.aq_office_co2a
 
@@ -224,20 +227,20 @@ views:
                   - entity: light.upstairs
                     toggle: true
                     name: upstairs
-              - entity: light.0x00158d00052100e1_light
+              - entity: light.basement_light
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 state_color: true
                 name: Basement Light
                 toggle: true
               - type: section
-              - entity: switch.0x00158d0001717a37_switch
+              - entity: switch.bedroom_tv_plug
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 toggle: true
                 entities:
-                  - entity: sensor.0x00158d0001717a37_power
+                  - entity: sensor.bedroom_tv_plug_power
                     name: current power
               - entity: switch.bw1_switch
                 secondary_info: last-changed
@@ -257,13 +260,13 @@ views:
                   - entity: sensor.bw2_power
                     name: current power
               - type: section
-              - entity: switch.0x00158d000391fadc_switch
+              - entity: switch.wifi_repeater_plug
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
                 state_color: true
                 toggle: true
                 entities:
-                  - entity: sensor.0x00158d000391fadc_power
+                  - entity: sensor.wifi_repeater_plug_power
                     name: current power
               - entity: switch.plug_158d00039fcce4
                 secondary_info: last-changed
@@ -295,7 +298,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: light
-                entity: light.0x00158d00052100e1_light
+                entity: light.basement_light
               - type: light
                 entity: light.office
 
@@ -312,9 +315,9 @@ views:
         show_header_toggle: false
         state_color: true
         entities:
-          - switch.0xec1bbdfffe6c12f2_switch_left
-          - switch.0xec1bbdfffe6c12f2_switch_right
-          - switch.bathroom_light_switch
+          - switch.kitchen_lights_left
+          - switch.kitchen_lights_right
+          - switch.bathroom_light
 
       - type: entities
         title: Switches
@@ -323,9 +326,9 @@ views:
         entities:
           - switch.neo1_relay
           - switch.neo2_relay
-          - switch.0x00158d000391fadc_switch
-          - switch.0x00158d0001717a37_switch
-          - switch.0x00158d00035341d7_switch
+          - switch.wifi_repeater_plug
+          - switch.bedroom_tv_plug
+          - switch.hall_tv_plug
           - switch.plug_158d00039fcce4
           - entity: switch.bw1_switch
             type: custom:multiple-entity-row
@@ -483,94 +486,94 @@ views:
           state_color: true
           entities:
             # Wardrobe Door
-            - entity: binary_sensor.0x00158d0003d41c27_contact
+            - entity: binary_sensor.wardrobe_door_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003d41c27_linkquality
+                - entity: sensor.wardrobe_door_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003d41c27_battery
+                - entity: sensor.wardrobe_door_battery
                   name: bat
             # Entrance Lock
-            - entity: binary_sensor.0x00158d0003d481a6_contact
+            - entity: binary_sensor.entrance_lock_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003d481a6_linkquality
+                - entity: sensor.entrance_lock_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003d481a6_battery
+                - entity: sensor.entrance_lock_battery
                   name: bat
             # Entrance Door
-            - entity: binary_sensor.0x00158d0003031abc_contact
+            - entity: binary_sensor.entrance_door_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003031abc_linkquality
+                - entity: sensor.entrance_door_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003031abc_battery
+                - entity: sensor.entrance_door_battery
                   name: bat
             # Zoo Lock
-            - entity: binary_sensor.0x00158d0003d4a2b2_contact
+            - entity: binary_sensor.zoo_lock_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003d4a2b2_linkquality
+                - entity: sensor.zoo_lock_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003d4a2b2_battery
+                - entity: sensor.zoo_lock_battery
                   name: bat
             # Zoo Door
-            - entity: binary_sensor.0x00158d0003d4434a_contact
+            - entity: binary_sensor.zoo_door_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003d4434a_linkquality
+                - entity: sensor.zoo_door_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003d4434a_battery
+                - entity: sensor.zoo_door_battery
                   name: bat
             # Boiler Room Door
-            - entity: binary_sensor.0x00158d0003d41ce4_contact
+            - entity: binary_sensor.boiler_room_door_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003d41ce4_linkquality
+                - entity: sensor.boiler_room_door_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003d41ce4_battery
+                - entity: sensor.boiler_room_door_battery
                   name: bat
             # Garage Door
-            - entity: binary_sensor.0x00158d0003033ec6_contact
+            - entity: binary_sensor.garage_door_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003033ec6_linkquality
+                - entity: sensor.garage_door_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003033ec6_battery
+                - entity: sensor.garage_door_battery
                   name: bat
             # Garage Gate
-            - entity: binary_sensor.0x00158d0003031c30_contact
+            - entity: binary_sensor.garage_gate_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003031c30_linkquality
+                - entity: sensor.garage_gate_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003031c30_battery
+                - entity: sensor.garage_gate_battery
                   name: bat
             # Kitchen Shutter
-            - entity: binary_sensor.0x00158d0003033e26_contact
+            - entity: binary_sensor.kitchen_shutter_contact
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0003033e26_linkquality
+                - entity: sensor.kitchen_shutter_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0003033e26_battery
+                - entity: sensor.kitchen_shutter_battery
                   name: bat
 
       - type: vertical-stack
@@ -583,38 +586,35 @@ views:
           state_color: true
           entities:
             # Z2M entities have details
-            - entity: binary_sensor.0x00158d000405cec1_water_leak # Guest room leak
+            # Guest room leak
+            - entity: binary_sensor.guest_bathroom_leak_water_leak
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d000405cec1_linkquality
+                - entity: sensor.guest_bathroom_leak_linkquality
                   name: lqi
-                - entity: sensor.0x00158d000405cec1_battery
+                - entity: sensor.guest_bathroom_leak_battery
                   name: bat
-            # - entity: binary_sensor.0x00158d00041f6a7a_water_leak # Basement Leak
-            #   type: custom:multiple-entity-row
-            #   state_color: true
-            #   secondary_info: last-changed
-            #   entities:
-            #     - entity: sensor.0x00158d000405cec1_linkquality
-            #       name: lqi
-            #     - entity: sensor.0x00158d000405cec1_battery
-            #       name: bat
-            - entity: binary_sensor.0x00158d000484bffb_water_leak
+            # Basement (Water Pump) Leak
+            - entity: binary_sensor.water_pump_leak_water_leak
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d000405cec1_linkquality
+                - entity: sensor.water_pump_leak_linkquality
                   name: lqi
-                - entity: sensor.0x00158d000405cec1_battery
+                - entity: sensor.water_pump_leak_battery
                   name: bat
-            # No details for Xiaomi GW items
-            - entity: binary_sensor.water_leak_sensor_158d000484bff9
+            - entity: binary_sensor.bathroom_leak_water_leak
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
+              entities:
+                - entity: sensor.bathroom_leak_linkquality
+                  name: lqi
+                - entity: sensor.bathroom_leak_battery
+                  name: bat
 
         # Motion
         - type: entities
@@ -627,6 +627,7 @@ views:
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
+            # Upstairs motion
             #   entities:
             #     - entity: sensor.0x00158d00042820c3_linkquality
             #       name: lqi
@@ -635,72 +636,72 @@ views:
             #     - entity: sensor.0x00158d00042820c3_illuminance
             #       name: lum
             # Downstairs Motion
-            - entity: binary_sensor.0x00158d000421ccd1_occupancy
+            - entity: binary_sensor.downstairs_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d000421ccd1_linkquality
+                - entity: sensor.downstairs_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00158d000421ccd1_battery
+                - entity: sensor.downstairs_motion_battery
                   name: bat
-                - entity: sensor.0x00158d000421ccd1_illuminance
+                - entity: sensor.downstairs_motion_illuminance
                   name: lum
             # Office Motion
-            - entity: binary_sensor.0x00158d000543a01e_occupancy
+            - entity: binary_sensor.office_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d000543a01e_linkquality
+                - entity: sensor.office_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00158d000543a01e_battery
+                - entity: sensor.office_motion_battery
                   name: bat
             # Hall Motion
-            - entity: binary_sensor.0x00158d00042024f3_occupancy
+            - entity: binary_sensor.hall_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d00042024f3_linkquality
+                - entity: sensor.hall_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00158d00042024f3_battery
+                - entity: sensor.hall_motion_battery
                   name: bat
-                - entity: sensor.0x00158d00042024f3_illuminance
+                - entity: sensor.hall_motion_illuminance
                   name: lum
             # Kitchen Motion
-            - entity: binary_sensor.0x00124b002228d9be_occupancy
+            - entity: binary_sensor.kitchen_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00124b002228d9be_linkquality
+                - entity: sensor.kitchen_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00124b002228d9be_battery
+                - entity: sensor.kitchen_motion_battery
                   name: bat
             # Basement Motion
-            - entity: binary_sensor.0x00158d000420092b_occupancy
+            - entity: binary_sensor.basement_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d000420092b_linkquality
+                - entity: sensor.basement_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00158d000420092b_battery
+                - entity: sensor.basement_motion_battery
                   name: bat
-                - entity: sensor.0x00158d000420092b_illuminance
+                - entity: sensor.basement_motion_illuminance
                   name: lum
             # Workshop Motion
-            - entity: binary_sensor.0x00158d0004200940_occupancy
+            - entity: binary_sensor.workshop_motion_occupancy
               type: custom:multiple-entity-row
               state_color: true
               secondary_info: last-changed
               entities:
-                - entity: sensor.0x00158d0004200940_linkquality
+                - entity: sensor.workshop_motion_linkquality
                   name: lqi
-                - entity: sensor.0x00158d0004200940_battery
+                - entity: sensor.workshop_motion_battery
                   name: bat
-                - entity: sensor.0x00158d0004200940_illuminance
+                - entity: sensor.workshop_motion_illuminance
                   name: lum
             # - entity: binary_sensor.motion_sensor_158d0004200940
             #   type: custom:multiple-entity-row
@@ -715,24 +716,24 @@ views:
             show_header_toggle: false
             state_color: true
             entities:
-              - entity: switch.0x00158d0001717a37_switch
+              - entity: switch.bedroom_tv_plug
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0x00158d0001717a37_linkquality
+                  - entity: sensor.bedroom_tv_plug_linkquality
                     name: lqi
-                  - entity: sensor.0x00158d0001717a37_power
+                  - entity: sensor.bedroom_tv_plug_power
                     name: power
 
-              - entity: switch.0x00158d000391fadc_switch
+              - entity: switch.wifi_repeater_plug
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0x00158d000391fadc_linkquality
+                  - entity: sensor.wifi_repeater_plug_linkquality
                     name: lqi
-                  - entity: sensor.0x00158d000391fadc_power
+                  - entity: sensor.wifi_repeater_plug_power
                     name: power
 
               - switch.plug_158d00039fcce4
@@ -744,32 +745,35 @@ views:
             show_header_toggle: false
             state_color: true
             entities:
-              - entity: sensor.0x00158d0002a71f01_action
+              # Aqara Cube
+              - entity: sensor.aqara_cube_action
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0x00158d0002a71f01_linkquality
+                  - entity: sensor.aqara_cube_linkquality
                     name: lqi
-                  - entity: sensor.0x00158d0002a71f01_battery
+                  - entity: sensor.aqara_cube_battery
                     name: bat
-              - entity: sensor.0x04cf8cdf3c75bca9_action
+              # Aqara Logic Switch (Office)
+              - entity: sensor.office_lights_switch_action
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0x04cf8cdf3c75bca9_linkquality
+                  - entity: sensor.office_lights_switch_linkquality
                     name: lqi
-                  - entity: sensor.0x04cf8cdf3c75bca9_battery
+                  - entity: sensor.office_lights_switch_battery
                     name: bat
-              - entity: sensor.0x00158d000122cc7a_click
+              # Mijia button
+              - entity: sensor.mijia_button_click
                 type: custom:multiple-entity-row
                 state_color: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0x00158d000122cc7a_linkquality
+                  - entity: sensor.mijia_button_linkquality
                     name: lqi
-                  - entity: sensor.0x00158d000122cc7a_battery
+                  - entity: sensor.mijia_button_battery
                     name: bat
 
           # Switches
@@ -778,7 +782,7 @@ views:
             show_header_toggle: true
             state_color: true
             entities:
-              - entity: switch.bathroom_light_switch
+              - entity: switch.bathroom_light
                 toggle: true
                 secondary_info: last-changed
                 type: custom:multiple-entity-row
@@ -791,15 +795,15 @@ views:
                 toggle: true
                 secondary_info: last-changed
                 entities:
-                  - entity: sensor.0xec1bbdfffe6c12f2_linkquality
+                  - entity: sensor.kitchen_lights_linkquality
                     name: lqi
-                  - entity: switch.0xec1bbdfffe6c12f2_switch_left
+                  - entity: switch.kitchen_lights_left
                     name: false
                     state_color: true
                     icon: mdi:code-less-than
                     tap_action:
                       action: toggle
-                  - entity: switch.0xec1bbdfffe6c12f2_switch_right
+                  - entity: switch.kitchen_lights_right
                     name: false
                     state_color: true
                     icon: mdi:code-greater-than
@@ -809,13 +813,13 @@ views:
             title: Arm Home Motion
             state_color: true
             entities:
-              - binary_sensor.0x00124b002228d9be_occupancy # Kitchen
-              - binary_sensor.0x00124b002242e7db_occupancy # Entrance
-              - binary_sensor.0x00158d000420092b_occupancy # Basement
-              - binary_sensor.0x00158d000421ccd1_occupancy # Downstairs
-              - binary_sensor.0x00158d0005439ec6_occupancy # Lounge
-              - binary_sensor.0x00158d0005439ed2_occupancy # Zoo
-              - binary_sensor.0x00158d00042024f3_occupancy # Hall
+              - binary_sensor.kitchen_motion_occupancy # Kitchen
+              - binary_sensor.entrance_motion_occupancy # Entrance
+              - binary_sensor.basement_motion_occupancy # Basement
+              - binary_sensor.downstairs_motion_occupancy # Downstairs
+              - binary_sensor.lounge_motion_occupancy # Lounge
+              - binary_sensor.zoo_motion_occupancy # Zoo
+              - binary_sensor.hall_motion_occupancy # Hall
 
   - title: Cameras
     path: cameras
@@ -897,31 +901,31 @@ views:
       - type: entities
         title: "Filament Box #1"
         entities:
-          - entity: sensor.temperature_158d00054472d2
+          - entity: sensor.0x00158d00054472d2_temperature
             name: Temperature
-          - entity: sensor.humidity_158d00054472d2
+          - entity: sensor.0x00158d00054472d2_humidity
             name: Humidity
       - type: entities
         title: "Filament Box #2"
         entities:
-          - entity: sensor.0x00158d00041e2d09_temperature
+          - entity: sensor.filabox_2_temperature
             name: Temperature
-          - entity: sensor.0x00158d00041e2d09_humidity
+          - entity: sensor.filabox_2_humidity
             name: Humidity
       - type: entities
         title: "Filament Box #3"
         entities:
-          - entity: sensor.0x00158d0003cd3c19_temperature
+          - entity: sensor.filabox_3_temperature
             name: Temperature
-          - entity: sensor.0x00158d0003cd3c19_humidity
+          - entity: sensor.filabox_3_humidity
             name: Humidity
       - type: entities
         title: Workshop Room
         state_color: true
         entities:
-          - light.0x00158d0005433223_light
-          - binary_sensor.0x00158d0004200940_occupancy
-          - sensor.0x00158d0004200940_illuminance
+          - light.workshop_light
+          - binary_sensor.workshop_motion_occupancy
+          - sensor.workshop_motion_illuminance
 
   - title: Media
     path: 'media'
