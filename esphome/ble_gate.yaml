@@ -1,5 +1,5 @@
 esphome:
-  name: esp32_ble_gate
+  name: esp32-ble-gate
   platform: ESP32
   board: lolin32
 
@@ -48,6 +48,6 @@ sensor:
       name: "Bedside Temperature"
     humidity:
       name: "Bedside Humidity"
-      
+
 # Found device A4:C1:38:09:E0:C0 MHO-C401
 

@@ -32,7 +32,6 @@ light: !include includes/lights.yaml
 camera: !include includes/cameras.yaml
 group: !include groups.yaml
 zone: !include includes/zones.yaml
-climate: !include includes/climate.yaml
 utility_meter: !include includes/utility_meter.yaml
 input_number: !include includes/input_number.yaml
 input_datetime: !include includes/input_datetime.yaml

@@ -23,7 +23,7 @@
         - sensor.klim_s_room_temperature
         - sensor.office_temperature
         - sensor.kitchen_temperature
-      above: 30
+      above: 35
   action:
     - service: notify.telegram_group
       data_template:

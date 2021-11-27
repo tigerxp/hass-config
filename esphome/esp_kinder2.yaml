@@ -53,6 +53,17 @@ sensor:
       name: "Klim's Room Humidity"
       accuracy_decimals: 1
     update_interval: 60s
+    
+  - platform: xiaomi_mhoc401
+    mac_address: "A4:C1:38:09:E0:C0"
+    bindkey: eef418daf699a0c188f3bfd17e4565d9
+    temperature:
+      name: "Corridor Temperature"
+    humidity:
+      name: "Corridor Humidity"
+    battery_level:
+      name: "Corridor HT Battery Level"
+    
 
 remote_transmitter:
   pin: GPIO21

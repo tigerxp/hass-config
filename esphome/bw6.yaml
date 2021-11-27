@@ -11,8 +11,11 @@ esphome:
   esp8266_restore_from_flash: true
 
 wifi:
-  ssid: "matrix"
-  password: !secret wifi_password
+  networks:
+  - ssid: "matrix"
+    password: !secret wifi_password
+  - ssid: office-ap
+    password: !secret office_wifi_password
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${plug_name} Fallback"

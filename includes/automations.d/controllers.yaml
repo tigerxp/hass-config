@@ -1,20 +1,10 @@
 # Mijia button automations
 
-# Turn off workshop light
-- alias: Mijia Button Long Click
-  trigger:
-    platform: state
-    entity_id: sensor.0x00158d000122cc7a_click
-    to: long
-  action:
-    - service: light.turn_off
-      entity_id: light.0x00158d0005433223_light
-
 # Toggle Alarm System
 - alias: Mijia Button Click
   trigger:
     platform: state
-    entity_id: sensor.0x00158d000122cc7a_click
+    entity_id: sensor.mijia_button_action
     to: single
   action:
     service: >
@@ -27,14 +17,21 @@
       entity_id: alarm_control_panel.house_alarm
       code: !secret house_alarm_code
 
-#  Toggle indicators on double click
-# - alias: Bedroom Button Double Click
-#   trigger:
-#     platform: state
-#     entity_id: sensor.0x00158d000122cc7a_click
-#     to: double
-#   action:
-#     - service: switch.toggle
-#       entity_id: 
-#         - switch.bedroom_indicator
-#         - switch.kids_indicator
+# Toggle Recuperators
+- alias: ZB Remote Button 1 
+  trigger:
+    platform: state
+    entity_id: sensor.zb_remote_action
+    to: 1_single
+  action:
+    service: switch.toggle
+    entity_id: switch.bedroom_fan
+
+- alias: ZB Remote Button 2
+  trigger:
+    platform: state
+    entity_id: sensor.zb_remote_action
+    to: 2_single
+  action:
+    service: switch.toggle
+    entity_id: switch.kids_fan

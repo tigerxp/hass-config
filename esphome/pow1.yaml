@@ -60,7 +60,7 @@ uart:
 
 sensor:
   - platform: cse7766
-    update_interval: 30s
+    update_interval: 20s
     current:
       name: ${pow_name}_current
     voltage:

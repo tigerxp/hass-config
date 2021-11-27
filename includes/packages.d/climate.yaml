@@ -1,0 +1,60 @@
+climate:
+  - platform: generic_thermostat
+    name: Thermostat
+    heater: switch.electric_boiler
+    target_sensor: sensor.house_average_temperature
+    min_temp: 14
+    max_temp: 25
+    ac_mode: false
+    target_temp: 19.0
+    cold_tolerance: 0.3
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      seconds: 300
+    initial_hvac_mode: "off"
+    away_temp: 16
+    precision: 0.1
+
+input_number:
+  night_temperature:
+    name: Night Temperature
+    icon: mdi:thermometer
+    initial: 20
+    min: 12
+    max: 30
+    step: 1
+    mode: slider
+  day_temperature:
+    name: Day Temperature
+    icon: mdi:thermometer
+    initial: 18
+    min: 12
+    max: 30
+    step: 1
+    mode: slider
+
+
+automation:
+  # Main heater night temperature
+  - alias: Set night temperature
+    trigger:
+      - platform: time
+        at: "23:20:00" # Todo: use night tariff state
+    action:
+      - service: climate.set_temperature
+        target:
+          entity_id: climate.thermostat
+        data:
+          temperature: "{{ states('input_number.night_temperature') | float }}"
+
+  # Main heater day temperature
+  - alias: Set day temperature
+    trigger:
+      - platform: time
+        at: "06:45:00"
+    action:
+      - service: climate.set_temperature
+        target:
+          entity_id: climate.thermostat
+        data:
+          temperature: "{{ states('input_number.day_temperature') | float }}"

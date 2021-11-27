@@ -1,5 +1,5 @@
 esphome:
-  name: esp_office
+  name: esp-office
   platform: ESP8266
   board: d1_mini
 

@@ -5,3 +5,9 @@ binary_sensor:
         value_template: >
           {{ state_attr("sun.sun","elevation")|float < 3 }}
         # TODO: add clouds coverage
+
+sensor:
+  - platform: scrape
+    resource: https://air-pollution.ml/passport.php?id=272
+    name: Outside AQI
+    select: 'ul.values > li:nth-child(0) > div > span'

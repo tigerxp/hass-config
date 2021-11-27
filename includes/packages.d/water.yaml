@@ -120,7 +120,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.water_pressure
-        below: 1.0
+        below: 1.2
         for: "00:00:10" # 10s
     condition:
       - condition: state
@@ -129,6 +129,41 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.tank_valve
+        
+  - alias: Air in Pump
+    id: air_in_pump
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.pow1_power
+        below: 1400
+        for: "00:00:20" # 20s
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.pow1_power
+        above: 500
+      - condition: state
+        entity_id: switch.tank_valve
+        state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.tank_valve
+
+  - alias: No water notify
+    id: no_water_notify
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.pow1_power
+        below: 1400
+        for: "00:00:20" # 20s
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.pow1_power
+        above: 500 # the pump is enabled
+    action:
+      - service: notify.telegram_tiger
+        data_template:
+          message: 'Скінчилась вода в скважині :('
+
   - alias: Restore Tank Valve
     id: restore_tank_valve
     trigger:
@@ -173,14 +208,14 @@ script:
     alias: "Morning Sprinkling"
     sequence:
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_1
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_3
+      - delay: '00:7'
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_2
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_4
+      - delay: '00:7'
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_6
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_5
+      - delay: '00:7'
       - service: switch.turn_off
         entity_id: group.all_sprinklers
 
@@ -188,14 +223,14 @@ script:
     alias: "Evening Sprinkling"
     sequence:
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_3
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_1
+      - delay: '00:10'
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_4
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_2
+      - delay: '00:10'
       - service: switch.turn_on
-        entity_id: switch.sprinkler_zone_5
-      - delay: '00:15'
+        entity_id: switch.sprinkler_zone_6
+      - delay: '00:10'
       - service: switch.turn_off
         entity_id: group.all_sprinklers
 

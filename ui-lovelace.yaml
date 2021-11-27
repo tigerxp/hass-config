@@ -134,14 +134,14 @@ views:
                 icon: mdi:home-thermometer-outline
                 secondary_info: last-changed
               - type: section
-              - entity: sensor.gym_temperature
-                type: custom:multiple-entity-row
-                name: Gym
-                icon: mdi:home-thermometer-outline
-                secondary_info: last-changed
-                entities:
-                  - entity: sensor.gym_humidity
-                    name: false
+              # - entity: sensor.gym_temperature
+              #   type: custom:multiple-entity-row
+              #   name: Gym
+              #   icon: mdi:home-thermometer-outline
+              #   secondary_info: last-changed
+              #   entities:
+              #     - entity: sensor.gym_humidity
+              #       name: false
               - entity: sensor.boiler_room_temperature
                 type: custom:multiple-entity-row
                 name: Boiler room
@@ -175,6 +175,16 @@ views:
                   green: 1
                   yellow: 3
                   red: 4
+
+          - type: entities
+            show_header_toggle: false
+            state_color: true
+            entities:
+              - entity: switch.tank_valve
+              - entity: binary_sensor.water_pressure_falling
+              - entity: sensor.pow1_power
+              - entity: switch.pow1_switch
+
           # Devices
           - type: entities
             title: Devices
@@ -284,7 +294,17 @@ views:
     cards:
       - type: thermostat
         entity: climate.thermostat
-        name: House
+        name: Main
+      - type: thermostat
+        entity: climate.bedroom_thermostat
+        name: Bedroom
+      - type: thermostat
+        entity: climate.masha_thermostat
+        name: Masha
+      - type: thermostat
+        entity: climate.klim_s_thermostat
+        name: Klim
+
 
       - type: vertical-stack
         cards:
@@ -329,6 +349,7 @@ views:
           - switch.wifi_repeater_plug
           - switch.bedroom_tv_plug
           - switch.hall_tv_plug
+          - switch.kitchen_tv
           - switch.plug_158d00039fcce4
           - entity: switch.bw1_switch
             type: custom:multiple-entity-row
@@ -390,30 +411,30 @@ views:
                 name: I
               - entity: sensor.bw5_power
                 name: P
-          - entity: switch.bw6_switch
-            type: custom:multiple-entity-row
-            state_color: true
-            secondary_info: last-changed
-            toggle: true
-            entities:
-              - entity: sensor.bw6_voltage
-                name: U
-              - entity: sensor.bw6_current
-                name: I
-              - entity: sensor.bw6_power
-                name: P
-          - entity: switch.bw7_switch
-            type: custom:multiple-entity-row
-            state_color: true
-            secondary_info: last-changed
-            toggle: true
-            entities:
-              - entity: sensor.bw7_voltage
-                name: U
-              - entity: sensor.bw7_current
-                name: I
-              - entity: sensor.bw7_power
-                name: P
+          # - entity: switch.bw6_switch
+          #   type: custom:multiple-entity-row
+          #   state_color: true
+          #   secondary_info: last-changed
+          #   toggle: true
+          #   entities:
+          #     - entity: sensor.bw6_voltage
+          #       name: U
+          #     - entity: sensor.bw6_current
+          #       name: I
+          #     - entity: sensor.bw6_power
+          #       name: P
+          # - entity: switch.bw7_switch
+          #   type: custom:multiple-entity-row
+          #   state_color: true
+          #   secondary_info: last-changed
+          #   toggle: true
+          #   entities:
+          #     - entity: sensor.bw7_voltage
+          #       name: U
+          #     - entity: sensor.bw7_current
+          #       name: I
+          #     - entity: sensor.bw7_power
+          #       name: P
           - switch.esp_01_relay_1
           - switch.esp_01_relay_2
           - switch.tank_valve
@@ -899,14 +920,14 @@ views:
           type: button
           entity: switch.bw3_switch
       - type: entities
-        title: "Filament Box #1"
+        title: "Filament Box #1 (Tall)"
         entities:
           - entity: sensor.0x00158d00054472d2_temperature
             name: Temperature
           - entity: sensor.0x00158d00054472d2_humidity
             name: Humidity
       - type: entities
-        title: "Filament Box #2"
+        title: "Filament Box #2 (Blue)"
         entities:
           - entity: sensor.filabox_2_temperature
             name: Temperature
@@ -993,8 +1014,8 @@ views:
           - entity: sensor.bw3_voltage
           - entity: sensor.bw4_voltage
           - entity: sensor.bw5_voltage
-          - entity: sensor.bw6_voltage
-          - entity: sensor.bw7_voltage
+          # - entity: sensor.bw6_voltage
+          # - entity: sensor.bw7_voltage
 
   - title: 'Tests'
     path: tests
@@ -1385,6 +1406,12 @@ views:
           - input_number.sprinkler_zone4
           - input_number.sprinkler_zone5
           - input_number.sprinkler_zone6
+
+      - type: entities
+        title: Temperature Settings
+        entities:
+          - input_number.day_temperature
+          - input_number.night_temperature
 
   - title: 'Info'
     path: info

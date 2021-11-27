@@ -33,6 +33,16 @@ sensor:
       name: "Kitchen Temperature"
     humidity:
       name: "Kitchen Humidity"
+      
+  - platform: xiaomi_mhoc401
+    mac_address: "A4:C1:38:D0:D9:42"
+    bindkey: eef418daf699a0c188f3bfd17e4565d9
+    temperature:
+      name: "Basement Temperature"
+    humidity:
+      name: "Basement Humidity"
+    battery_level:
+      name: "Basement HT Battery Level"
 
   - platform: adc
     name: "Water Pressure"
